@@ -3,5 +3,7 @@
 use esmith::Build::CreateLinks qw(:all);
 
 my $event = 'nethserver-clamscan-update';
+    event_actions($event,
+'initialize-default-databases' => '00');
 #templates to do
 templates2events('/etc/cron.d/clamscan', $event);
