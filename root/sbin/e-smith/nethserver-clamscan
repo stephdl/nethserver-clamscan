@@ -25,17 +25,17 @@ use esmith::ConfigDB;
 
 my $db = esmith::ConfigDB->open_ro or die "Couldn't open ConfigDB";
 
-my $filesystems = $db->get_prop("clamav", "FilesystemScanFilesystems") || '/';
+my $filesystems = $db->get_prop("clamscan", "FilesystemScanFilesystems") || '/';
 
-my $MailReport = $db->get_prop("clamav", "FilesystemScanReportTo") || 'root';
+my $MailReport = $db->get_prop("clamscan", "FilesystemScanReportTo") || 'root';
 
 my $clamscan_opts = " --recursive --infected --stdout" .
-		    " --log /var/log/clamav/clamscan.log";
+		    " --log /var/log/clamscan/clamscan.log";
 
-my $quarantine_dir = $db->get_prop("clamav", "QuarantineDirectory") ||
+my $quarantine_dir = $db->get_prop("clamscan", "QuarantineDirectory") ||
 		"/var/spool/clamav/quarantine";
 
-my @exclude = split /,/, ($db->get_prop("clamav", "FilesystemScanExclude") ||
+my @exclude = split /,/, ($db->get_prop("clamscan", "FilesystemScanExclude") ||
 			  "/proc,/sys,/usr/share/doc");
 
 push @exclude, $quarantine_dir;
@@ -43,17 +43,52 @@ push @exclude, $quarantine_dir;
 $clamscan_opts .= " --exclude=$_" for (@exclude);
 
 $clamscan_opts .= " --no-html"
-      if ($db->get_prop("clamav", "ScanHTML") || "enabled") eq "disabled";
+      if ($db->get_prop("clamscan", "ScanHTML") || "enabled") eq "disabled";
 
 $clamscan_opts .= " --no-mail"
-        if ($db->get_prop("clamav", "ScanMail") || "enabled") eq "disabled";
+        if ($db->get_prop("clamscan", "ScanMail") || "enabled") eq "disabled";
 
 $clamscan_opts .= " --move=$quarantine_dir"
-	if ($db->get_prop("clamav", "Quarantine") || "disabled") eq "enabled";
+if ($db->get_prop("clamscan", "Quarantine") || "disabled") eq "enabled";
 
 $clamscan_opts .= " --official-db-only=yes"
-        if ($db->get_prop("clamav", "FilesystemScanUnofficialSigs") || 'disabled') ne "enabled";
+        if ($db->get_prop("clamscan", "FilesystemScanUnofficialSigs") || 'disabled') ne "enabled";
 
+## detect PUA
+##see complete list at http://www.clamav.net/documents/potentially-unwanted-applications-pua
+
+$clamscan_opts .= " --detect-pua=yes"
+        if ($db->get_prop("clamscan", "DetectPua") || 'disabled') eq "enabled";
+
+my @puaexclude = split /,/, ($db->get_prop("clamscan", "PuaExclude") || '');
+
+$clamscan_opts .= " --exclude-pua=$_" for (@puaexclude)
+        if ($db->get_prop("clamscan", "DetectPua") || 'disabled') eq "enabled";
+
+### optional Scanning
+
+$clamscan_opts .= " --scan-archive=yes"
+        if ($db->get_prop("clamscan", "ScanArchive") || "disabled") eq "enabled";
+
+$clamscan_opts .= " --scan-pdf=yes"
+        if ($db->get_prop("clamscan", "ScanPdf") || "disabled") eq "enabled";
+
+$clamscan_opts .= " --scan-ole2=yes"
+        if ($db->get_prop("clamscan", "ScanOle2") || "disabled") eq "enabled";
+
+$clamscan_opts .= " --scan-elf=yes"
+        if ($db->get_prop("clamscan", "ScanElf") || "disabled") eq "enabled";
+
+$clamscan_opts .= " --scan-pe=yes"
+        if ($db->get_prop("clamscan", "ScanPe") || "disabled") eq "enabled";
+
+$clamscan_opts .= " --detect-broken=yes"
+        if ($db->get_prop("clamscan", "DetectBroken") || "disabled") eq "enabled";
+
+$clamscan_opts .= " --block-encrypted=yes"
+        if ($db->get_prop("clamscan", "BlockEncrypted") || "disabled") eq "enabled";
+
+#launch clamscan and email the rapport
 open CLAMSCAN, "-|", "nice /usr/bin/clamscan $clamscan_opts $filesystems 2> /var/log/clamav/clamscan-errors.log";
 
 my @report = <CLAMSCAN>;
