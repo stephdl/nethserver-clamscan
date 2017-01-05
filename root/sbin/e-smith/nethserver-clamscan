@@ -30,7 +30,7 @@ my $filesystems = $db->get_prop("clamscan", "FilesystemScanFilesystems") || '/';
 my $MailReport = $db->get_prop("clamscan", "FilesystemScanReportTo") || 'root';
 
 my $clamscan_opts = " --recursive --infected --stdout" .
-		    " --log /var/log/clamscan/clamscan.log";
+		    " --log /var/log/clamav/clamscan.log";
 
 my $quarantine_dir = $db->get_prop("clamscan", "QuarantineDirectory") ||
 		"/var/spool/clamav/quarantine";
