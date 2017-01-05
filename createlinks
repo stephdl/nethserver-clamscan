@@ -1,0 +1,7 @@
+#!/usr/bin/perl -w
+
+use esmith::Build::CreateLinks qw(:all);
+
+my $event = 'nethserver-clamscan-update';
+#templates to do
+templates2events('/etc/cron.d/clamscan', $event);

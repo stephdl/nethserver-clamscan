@@ -1,0 +1,14 @@
+{
+    my $min = substr(gmtime,14,2);
+
+    $OUT .= "\n";
+    $OUT .= "# nethserver-clamscan filesystem scan\n";
+    my $ScanFreq = $clamav{FilesystemScan} || 'disabled';
+    if ($ScanFreq eq 'daily') {
+        $OUT .= $min."\t0\t*\t*\t*\troot\t/sbin/e-smith/nethserver-clamscan\n";
+    } elsif ($ScanFreq eq 'weekly') {
+        $OUT .= $min."\t0\t*\t*\t6\troot\t/sbin/e-smith/nethserver-clamscan\n";
+    } else {
+        $OUT .= "# disabled\n";
+    }
+}

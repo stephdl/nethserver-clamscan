@@ -1,0 +1,15 @@
+/var/log/clamav/clamscan-errors.log {
+    missingok
+    notifempty
+    rotate 4
+    monthly
+    compress
+}
+
+/var/log/clamav/clamscan.log {
+    missingok
+    notifempty
+    rotate 4
+    monthly
+    compress
+}
