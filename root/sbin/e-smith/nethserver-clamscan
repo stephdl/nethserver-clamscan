@@ -60,7 +60,7 @@ $clamscan_opts .= " --official-db-only=yes"
 $clamscan_opts .= " --detect-pua=yes"
         if ($db->get_prop("clamscan", "DetectPua") || 'disabled') eq "enabled";
 
-my @puaexclude = split /,/, ($db->get_prop("clamscan", "PuaExclude") || '');
+my @puaexclude = split /,/, ($db->get_prop("clamscan", "ExcludePua") || '');
 
 $clamscan_opts .= " --exclude-pua=$_" for (@puaexclude)
         if ($db->get_prop("clamscan", "DetectPua") || 'disabled') eq "enabled";
