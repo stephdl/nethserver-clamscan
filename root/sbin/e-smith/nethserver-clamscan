@@ -62,8 +62,9 @@ $clamscan_opts .= " --detect-pua=yes"
 
 my @puaexclude = split /,/, ($db->get_prop("clamscan", "ExcludePua") || '');
 
+if (($db->get_prop("clamscan", "DetectPua") || 'disabled') eq "enabled") {
 $clamscan_opts .= " --exclude-pua=$_" for (@puaexclude)
-        if ($db->get_prop("clamscan", "DetectPua") || 'disabled') eq "enabled";
+}
 
 ### optional Scanning
 
