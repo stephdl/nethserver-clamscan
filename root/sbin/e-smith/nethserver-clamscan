@@ -32,7 +32,7 @@ my $MailReport = $db->get_prop("clamscan", "FilesystemScanReportTo") || 'root';
 my $clamscan_opts = " --recursive --infected --stdout" .
 		    " --log /var/log/clamav/clamscan.log";
 
-my $clamscan_opts = " --max-files=10000 --max-filesize=30M " .
+$clamscan_opts = " --max-files=10000 --max-filesize=30M " .
 		    " --max-scansize=100M --max-recursion=16 --max-dir-recursion=15";
 
 my $quarantine_dir = $db->get_prop("clamscan", "QuarantineDirectory") ||
