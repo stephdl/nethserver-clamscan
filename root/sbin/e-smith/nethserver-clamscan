@@ -42,17 +42,25 @@ push @exclude, $quarantine_dir;
 
 $clamscan_opts .= " --exclude=$_" for (@exclude);
 
-$clamscan_opts .= " --no-html"
-      if ($db->get_prop("clamscan", "ScanHTML") || "enabled") eq "disabled";
-
-$clamscan_opts .= " --no-mail"
-        if ($db->get_prop("clamscan", "ScanMail") || "enabled") eq "disabled";
-
 $clamscan_opts .= " --move=$quarantine_dir"
 if ($db->get_prop("clamscan", "Quarantine") || "disabled") eq "enabled";
 
 $clamscan_opts .= " --official-db-only=yes"
         if ($db->get_prop("clamscan", "FilesystemScanUnofficialSigs") || 'disabled') ne "enabled";
+
+## use Bytecode
+## http://blog.clamav.net/2014/11/brief-re-introduction-to-clamav.html
+$clamscan_opts .= " --bytecode=yes"
+        if ($db->get_prop("clamscan", "Bytecode") || 'enabled') eq "enabled";
+
+if ($db->get_prop("clamscan", "Bytecode") || 'enabled') eq "enabled") {
+	my $bytecodetimeout = $db->get_prop("clamscan", "BytecodeTimout") ||
+		"120000";
+	$clamscan_opts .= " --bytecode-timeout=$bytecodetimeout";
+
+$clamscan_opts .= " --bytecode-unsigned=yes"
+        if ($db->get_prop("clamscan", "BytecodeUnsigned") || 'disabled') eq "enabled";
+}
 
 ## detect PUA
 ##see complete list at http://www.clamav.net/documents/potentially-unwanted-applications-pua
@@ -66,22 +74,27 @@ if (($db->get_prop("clamscan", "DetectPua") || 'disabled') eq "enabled") {
 $clamscan_opts .= " --exclude-pua=$_" for (@puaexclude)
 }
 
-### optional Scanning
+###  Scanning
+$clamscan_opts .= " --scan-html=yes"
+      if ($db->get_prop("clamscan", "ScanHTML") || "enabled") eq "enabled";
+
+$clamscan_opts .= " --scan-mail=yes"
+        if ($db->get_prop("clamscan", "ScanMail") || "enabled") eq "enabled";
 
 $clamscan_opts .= " --scan-archive=yes"
-        if ($db->get_prop("clamscan", "ScanArchive") || "disabled") eq "enabled";
+        if ($db->get_prop("clamscan", "ScanArchive") || "enabled") eq "enabled";
 
 $clamscan_opts .= " --scan-pdf=yes"
-        if ($db->get_prop("clamscan", "ScanPdf") || "disabled") eq "enabled";
+        if ($db->get_prop("clamscan", "ScanPdf") || "enabled") eq "enabled";
 
 $clamscan_opts .= " --scan-ole2=yes"
-        if ($db->get_prop("clamscan", "ScanOle2") || "disabled") eq "enabled";
+        if ($db->get_prop("clamscan", "ScanOle2") || "enabled") eq "enabled";
 
 $clamscan_opts .= " --scan-elf=yes"
-        if ($db->get_prop("clamscan", "ScanElf") || "disabled") eq "enabled";
+        if ($db->get_prop("clamscan", "ScanElf") || "enabled") eq "enabled";
 
 $clamscan_opts .= " --scan-pe=yes"
-        if ($db->get_prop("clamscan", "ScanPe") || "disabled") eq "enabled";
+        if ($db->get_prop("clamscan", "ScanPe") || "enabled") eq "enabled";
 
 $clamscan_opts .= " --detect-broken=yes"
         if ($db->get_prop("clamscan", "DetectBroken") || "disabled") eq "enabled";
