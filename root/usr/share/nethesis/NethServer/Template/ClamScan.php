@@ -20,7 +20,7 @@ echo $view->panel()
 
 ->insert($view->fieldsetSwitch('DetectPua', 'enabled',$view::FIELDSETSWITCH_CHECKBOX | $view::FIELDSETSWITCH_EXPANDABLE)->setAttribute('uncheckedValue', 'disabled')
     ->insert($view->textInput('ExcludePua'))
-);
+)
 ->insert($view->checkbox('Bytecode', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
 
 ->insert($view->textInput('FilesystemScanExclude'))
