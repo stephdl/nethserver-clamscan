@@ -14,7 +14,7 @@ class ClamScan extends \Nethgui\Controller\AbstractController
 
     protected function initializeAttributes(\Nethgui\Module\ModuleAttributesInterface $base)
     {
-        return \Nethgui\Module\SimpleModuleAttributesProvider::extendModuleAttributes($base, 'Security', 6);
+        return \Nethgui\Module\SimpleModuleAttributesProvider::extendModuleAttributes($base, 'Configuration', 6);
     }
 
     public function initialize()
@@ -37,11 +37,8 @@ class ClamScan extends \Nethgui\Controller\AbstractController
         $this->declareParameter('ScanOle2', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'ScanOle2'));
         $this->declareParameter('ScanPdf', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'ScanPdf'));
         $this->declareParameter('ScanPe', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'ScanPe'));
+        $this->declareParameter('status', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'status'));
 
-
-        $this->declareParameter('WebAuth', Validate::SERVICESTATUS, array('configuration', 'shellinaboxd', 'WebAuth'));
-        $this->declareParameter('ShellUsers', Validate::ANYTHING, array('configuration', 'shellinaboxd', 'ShellUsers'));
-        $this->declareParameter('PublicAccess', $this->createValidator()->memberOf('private','public','IP'), array('configuration', 'shellinaboxd', 'PublicAccess'));
     }
 
     protected function onParametersSaved($changedParameters)
