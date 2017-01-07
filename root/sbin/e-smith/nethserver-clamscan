@@ -53,7 +53,7 @@ $clamscan_opts .= " --official-db-only=yes"
 $clamscan_opts .= " --bytecode=yes"
         if ($db->get_prop("clamscan", "Bytecode") || 'enabled') eq "enabled";
 
-if (($db->get_prop("clamscan", "Bytecode") || 'enabled') eq "enabled")) {
+if (($db->get_prop("clamscan", "Bytecode") || 'enabled') eq "enabled") {
 	my $bytecodetimeout = $db->get_prop("clamscan", "BytecodeTimout") ||
 		"120000";
 	$clamscan_opts .= " --bytecode-timeout=$bytecodetimeout";
