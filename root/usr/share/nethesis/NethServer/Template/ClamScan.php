@@ -27,9 +27,10 @@ echo $view->panel()
 
             ->insert($view->fieldset('', $view::FIELDSET_EXPANDABLE)->setAttribute('template', $T('ClamScanAdvanced_label'))
 //                ->insert($view->columns()
-
+                ->insert($view->columns()
 ->insert($view->checkbox('Quarantine', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
-
+->insert($view->checkbox('reallyWantToMove', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
+)
 ->insert($view->textInput('FilesystemScanExclude'))
 
 ->insert($view->textLabel('FalsePositif Warning_label')->setAttribute('template', $T('FalsePositif Warning_label')))

@@ -46,7 +46,8 @@ push @exclude, $quarantine_dir;
 $clamscan_opts .= " --exclude=$_" for (@exclude);
 
 $clamscan_opts .= " --move=$quarantine_dir"
-if ($db->get_prop("clamscan", "Quarantine") || "disabled") eq "enabled";
+if (($db->get_prop("clamscan", "Quarantine") || "disabled")
+  && ($db->get_prop("clamscan", "reallyWantToMove") || "disabled")) eq "enabled";
 
 $clamscan_opts .= " --official-db-only=yes"
         if ($db->get_prop("clamscan", "FilesystemScanUnofficialSigs") || 'disabled') ne "enabled";
