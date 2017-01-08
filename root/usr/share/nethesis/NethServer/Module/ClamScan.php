@@ -39,7 +39,7 @@ class ClamScan extends \Nethgui\Controller\AbstractController
         $this->declareParameter('ScanPe', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'ScanPe'));
         $this->declareParameter('status', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'status'));
         $this->declareParameter('reallyWantToMove', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'reallyWantToMove'));
-        $this->declareParameter('JobHour', Validate::POSITIVE_INTEGER, array('configuration', 'clamscan', 'JobHour'));
+        $this->declareParameter('JobHour', Validate::NONNEGATIVE_INTEGER, array('configuration', 'clamscan', 'JobHour'));
         $this->declareParameter('JobDay', Validate::POSITIVE_INTEGER, array('configuration', 'clamscan', 'JobDay'));
     }
 
