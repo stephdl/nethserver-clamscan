@@ -26,3 +26,4 @@ $L['ScanPe_label'] = 'Microsoft Portable Executables';
 $L['ScanMail_label'] = 'mail files';
 $L['BlockEncrypted_label'] = 'Mark encrypted archives as viruses';
 $L['QuarantineText_label'] = 'Test first your settings without the move to quarantine. The folder is : /var/spool/clamav/quarantine/';
+$L['BytecodeText_label'] = 'Bytecode signatures allow for more robust detections';
