@@ -5,8 +5,14 @@ echo $view->panel()
 
 ->insert($view->fieldsetSwitch('status', 'enabled',$view::FIELDSETSWITCH_CHECKBOX | $view::FIELDSETSWITCH_EXPANDABLE)->setAttribute('uncheckedValue', 'disabled')
 
-    ->insert($view->radioButton('FilesystemScan', 'daily'))
-    ->insert($view->radioButton('FilesystemScan', 'weekly'))
+    ->insert($view->fieldsetSwitch('FilesystemScan', 'daily', $view::FIELDSETSWITCH_EXPANDABLE)
+        ->insert($view->selector('JobHour', $view::SELECTOR_DROPDOWN)))
+
+
+    ->insert($view->fieldsetSwitch('FilesystemScan', 'weekly', $view::FIELDSETSWITCH_EXPANDABLE)
+        ->insert($view->columns()
+            ->insert($view->selector('JobDay', $view::SELECTOR_DROPDOWN))
+            ->insert($view->selector('JobHour', $view::SELECTOR_DROPDOWN))))
 
     ->insert($view->textArea('FilesystemScanExclude', $view::LABEL_ABOVE)->setAttribute('dimensions', '6x25'))
 
