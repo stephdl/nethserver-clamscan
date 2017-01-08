@@ -20,13 +20,13 @@ class ClamScan extends \Nethgui\Controller\AbstractController
     public function initialize()
     {
         parent::initialize();
-        $weekdays = $this->createValidator()->memberOf(array('1d','2d','3d',
+/*        $weekdays = $this->createValidator()->memberOf(array('1d','2d','3d',
                 '4d','5d','6d','7d'));
         $hour = $this->createValidator()->memberOf(array('1h','2h','3h',
                 '4h','5h','6h','7h','8h','9h','10h',
                         '11h','12h','13h','14h','15h','16h','17h',
                                 '18h','19h','20h','21h','22h','23h'));
-
+*/
         $this->declareParameter('BlockEncrypted', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'BlockEncrypted'));
         $this->declareParameter('Bytecode', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'Bytecode'));
         $this->declareParameter('DetectBroken', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'DetectBroken'));
@@ -45,8 +45,8 @@ class ClamScan extends \Nethgui\Controller\AbstractController
         $this->declareParameter('ScanPe', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'ScanPe'));
         $this->declareParameter('status', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'status'));
         $this->declareParameter('reallyWantToMove', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'reallyWantToMove'));
-        $this->declareParameter('JobHour', $hour, array('configuration', 'clamscan', 'JobHour'));
-        $this->declareParameter('JobDay', $weekday, array('configuration', 'clamscan', 'JobDay'));
+        $this->declareParameter('JobHour', Validate::ANYTHING, array('configuration', 'clamscan', 'JobHour'));
+        $this->declareParameter('JobDay', Validate::ANYTHING, array('configuration', 'clamscan', 'JobDay'));
     }
 
     public function prepareView(\Nethgui\View\ViewInterface $view)
