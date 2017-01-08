@@ -10,14 +10,14 @@ echo $view->panel()
 
     ->insert($view->checkbox('Bytecode', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
 
+    ->insert($view->textArea('FilesystemScanExclude', $view::LABEL_ABOVE)->setAttribute('dimensions', '6x25'))
+
     ->insert($view->fieldset('', $view::FIELDSET_EXPANDABLE)->setAttribute('template', $T('ClamScanAdvanced_label'))
         ->insert($view->fieldset('')->setAttribute('template', $T('QuarantineText_label'))
             ->insert($view->columns()
                 ->insert($view->checkbox('Quarantine', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
                 ->insert($view->checkbox('reallyWantToMove', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
         ))
-
-        ->insert($view->textArea('FilesystemScanExclude', $view::LABEL_ABOVE)->setAttribute('dimensions', '10x25'))
 
         ->insert($view->fieldset('')->setAttribute('template', $T('FalsePositif Warning_label')))
             ->insert($view->columns()
