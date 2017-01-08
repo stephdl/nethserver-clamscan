@@ -1,1 +1,4 @@
-/proc,/sys,/usr/share/doc
+/boot
+/proc
+/sys
+/usr/share/doc

@@ -17,7 +17,7 @@ echo $view->panel()
                 ->insert($view->checkbox('reallyWantToMove', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
         ))
 
-        ->insert($view->textInput('FilesystemScanExclude'))
+        ->insert($view->textArea('FilesystemScanExclude', $view::LABEL_ABOVE)->setAttribute('dimensions', '10x25'))
 
         ->insert($view->fieldset('')->setAttribute('template', $T('FalsePositif Warning_label')))
             ->insert($view->columns()

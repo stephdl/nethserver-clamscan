@@ -38,8 +38,8 @@ $clamscan_opts .= " --max-files=10000 --max-filesize=30M " .
 my $quarantine_dir = $db->get_prop("clamscan", "QuarantineDirectory") ||
 		"/var/spool/clamav/quarantine";
 
-my @exclude = split /,/, ($db->get_prop("clamscan", "FilesystemScanExclude") ||
-			  "/proc,/sys,/usr/share/doc");
+my @exclude = split /\s+/, ($db->get_prop("clamscan", "FilesystemScanExclude") ||
+			  "");
 
 push @exclude, $quarantine_dir;
 
