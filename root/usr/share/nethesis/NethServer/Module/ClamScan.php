@@ -41,6 +41,7 @@ class ClamScan extends \Nethgui\Controller\AbstractController
         $this->declareParameter('reallyWantToMove', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'reallyWantToMove'));
         $this->declareParameter('JobHour', Validate::POSITIVE_INTEGER, array('configuration', 'clamscan', 'JobHour'));
         $this->declareParameter('JobDay', Validate::POSITIVE_INTEGER, array('configuration', 'clamscan', 'JobDay'));
+    }
 
     public function prepareView(\Nethgui\View\ViewInterface $view)
     {
