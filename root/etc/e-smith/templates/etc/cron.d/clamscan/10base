@@ -9,8 +9,10 @@
 
     my $ScanFreq = $clamscan{FilesystemScan} || 'disabled';
     my $Hour = $clamscan{JobHour} || '0';
+    $Hour =~ s/h//;
     my $Day = $clamscan{JobDay} || '6';
-    
+    $Day =~ s/d//;
+
     if ($ScanFreq eq 'daily') {
         $OUT .= $min."\t$Hour\t*\t*\t*\troot\t/sbin/e-smith/nethserver-clamscan\n";
     } elsif ($ScanFreq eq 'weekly') {
