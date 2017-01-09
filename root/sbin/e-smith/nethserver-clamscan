@@ -29,11 +29,15 @@ my $filesystems = $db->get_prop("clamscan", "FilesystemScanFilesystems") || '/';
 
 my $MailReport = $db->get_prop("clamscan", "FilesystemScanReportTo") || 'root';
 
+my $Custom = $db->get_prop("clamscan", "customSettings") || '';
+
+my $maxscanfile = $db->get_prop("clamscan", "MaxScanFile") || '100M';
+
 my $clamscan_opts = " --recursive --infected --stdout" .
 		    " --log /var/log/clamav/clamscan.log";
 
-$clamscan_opts .= " --max-files=10000 --max-filesize=30M " .
-		    " --max-scansize=100M --max-recursion=16 --max-dir-recursion=15";
+$clamscan_opts .= " --max-files=10000 --max-filesize=$maxscanfile " .
+		    " --max-scansize=$maxscanfile --max-recursion=16 --max-dir-recursion=15";
 
 my $quarantine_dir = $db->get_prop("clamscan", "QuarantineDirectory") ||
 		"/var/spool/clamav/quarantine";
@@ -79,7 +83,7 @@ $clamscan_opts .= " --exclude-pua=$_" for (@puaexclude)
 }
 
 ###  Scanning
-$clamscan_opts .= " --scan-html=yes"
+$clamscan_opts .= " --scan-html=yes --max-htmlnormalize=$maxscanfile --max-htmlnotags=$maxscanfile --max-scriptnormalize=$maxscanfile"
       if ($db->get_prop("clamscan", "ScanHTML") || "enabled") eq "enabled";
 
 $clamscan_opts .= " --scan-mail=yes"
@@ -97,17 +101,40 @@ $clamscan_opts .= " --scan-ole2=yes"
 $clamscan_opts .= " --scan-elf=yes"
         if ($db->get_prop("clamscan", "ScanElf") || "enabled") eq "enabled";
 
-$clamscan_opts .= " --scan-pe=yes"
+$clamscan_opts .= " --scan-pe=yes --max-embeddedpe=$maxscanfile --max-iconspe=100"
         if ($db->get_prop("clamscan", "ScanPe") || "enabled") eq "enabled";
 
+$clamscan_opts .= " --scan-swf=yes"
+		        if ($db->get_prop("clamscan", "ScanSwf") || "enabled") eq "enabled";
+
+##enhance detection
 $clamscan_opts .= " --detect-broken=yes"
         if ($db->get_prop("clamscan", "DetectBroken") || "disabled") eq "enabled";
 
 $clamscan_opts .= " --block-encrypted=yes"
         if ($db->get_prop("clamscan", "BlockEncrypted") || "disabled") eq "enabled";
 
+$clamscan_opts .= " --algorithmic-detection=yes"
+        if ($db->get_prop("clamscan", "AlgoDetection") || "disabled") eq "enabled";
+
+$clamscan_opts .= " --detect-structured=yes"
+        if ($db->get_prop("clamscan", "DetectStructured") || "disabled") eq "enabled";
+
+$clamscan_opts .= " --partition-intersection=yes --max-partitions=50"
+        if ($db->get_prop("clamscan", "PartInstersection") || "disabled") eq "enabled";
+
+$clamscan_opts .= " --phishing-sigs=yes"
+        if ($db->get_prop("clamscan", "PhishingSigs") || "disabled") eq "enabled";
+
+$clamscan_opts .= " --phishing-scan-urls=yes"
+        if ($db->get_prop("clamscan", "PhishingScanUrl") || "disabled") eq "enabled";
+
+
+
+
+
 #launch clamscan and email the rapport
-open CLAMSCAN, "-|", "nice /usr/bin/clamscan $clamscan_opts $filesystems 2> /var/log/clamav/clamscan-errors.log";
+open CLAMSCAN, "-|", "nice /usr/bin/clamscan $clamscan_opts $Custom $filesystems 2> /var/log/clamav/clamscan-errors.log";
 
 my @report = <CLAMSCAN>;
 close CLAMSCAN;

@@ -47,6 +47,12 @@ class ClamScan extends \Nethgui\Controller\AbstractController
         $this->declareParameter('reallyWantToMove', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'reallyWantToMove'));
         $this->declareParameter('JobHour', Validate::ANYTHING, array('configuration', 'clamscan', 'JobHour'));
         $this->declareParameter('JobDay', Validate::ANYTHING, array('configuration', 'clamscan', 'JobDay'));
+        $this->declareParameter('AlgoDetection', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'AlgoDetection'));
+        $this->declareParameter('DetectStructured', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'DetectStructured'));
+        $this->declareParameter('PartInstersection', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'PartInstersection'));
+        $this->declareParameter('PhishingSigs', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'PhishingSigs'));
+        $this->declareParameter('PhishingScanUrl', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'PhishingScanUrl'));
+        $this->declareParameter('ScanSwf', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'ScanSwf'));
     }
 
     public function prepareView(\Nethgui\View\ViewInterface $view)
