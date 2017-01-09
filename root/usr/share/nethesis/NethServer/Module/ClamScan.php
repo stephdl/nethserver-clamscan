@@ -54,7 +54,7 @@ class ClamScan extends \Nethgui\Controller\AbstractController
         $this->declareParameter('PhishingScanUrl', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'PhishingScanUrl'));
         $this->declareParameter('ScanSwf', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'ScanSwf'));
         $this->declareParameter('BytecodeUnsigned', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'BytecodeUnsigned'));
-
+        $this->declareParameter('MaxScanFile', Validate::POSITIVE_INTEGER, array('configuration', 'clamscan', 'MaxScanFile'));
     }
 
     public function prepareView(\Nethgui\View\ViewInterface $view)
