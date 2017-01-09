@@ -14,8 +14,8 @@ echo $view->panel()
             ->insert($view->selector('JobDay', $view::SELECTOR_DROPDOWN))
             ->insert($view->selector('JobHour', $view::SELECTOR_DROPDOWN))))
     ->insert($view->columns()
-        ->insert($view->textArea('FilesystemScanExclude', $view::LABEL_ABOVE)->setAttribute('dimensions', '6x25'))
-        ->insert($view->textInput('MaxScanFile', $view::LABEL_ABOVE)))
+        ->insert($view->textInput('MaxScanFile', $view::LABEL_ABOVE))
+        ->insert($view->textArea('FilesystemScanExclude', $view::LABEL_ABOVE)->setAttribute('dimensions', '6x25')))
 
     ->insert($view->fieldset('', $view::FIELDSET_EXPANDABLE)->setAttribute('template', $T('ClamScanAdvanced_label'))
 
