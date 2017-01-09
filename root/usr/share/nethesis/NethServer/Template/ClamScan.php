@@ -23,10 +23,6 @@ echo $view->panel()
                 ->insert($view->checkbox('Quarantine', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
                 ->insert($view->checkbox('reallyWantToMove', 'enabled')->setAttribute('uncheckedValue', 'disabled')))
 
-        ->insert($view->fieldset('')->setAttribute('template', $T('MethodOfDetection_label')))
-            ->insert($view->columns()
-            ->insert($view->checkbox('AlgoDetection', 'enabled')->setAttribute('uncheckedValue', 'disabled')))
-
         ->insert($view->fieldset('')->setAttribute('template', $T('ScanElements_label')))
             ->insert($view->columns()
                 ->insert($view->checkbox('ScanArchive', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
@@ -47,6 +43,9 @@ echo $view->panel()
                 ->insert($view->checkbox('DetectBroken', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
                 ->insert($view->checkbox('BlockEncrypted', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
                 ->insert($view->checkbox('PartInstersection', 'enabled')->setAttribute('uncheckedValue', 'disabled')))
+
+            ->insert($view->columns()
+                ->insert($view->checkbox('AlgoDetection', 'enabled')->setAttribute('uncheckedValue', 'disabled')))
 
        ->insert($view->fieldset('')->setAttribute('template', $T('PuaText_label')))
            ->insert($view->fieldsetSwitch('DetectPua', 'enabled',$view::FIELDSETSWITCH_CHECKBOX | $view::FIELDSETSWITCH_EXPANDABLE)->setAttribute('uncheckedValue', 'disabled')
