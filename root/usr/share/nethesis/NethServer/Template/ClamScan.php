@@ -52,8 +52,6 @@ echo $view->panel()
                 ->insert($view->checkbox('BlockEncrypted', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
                 ->insert($view->checkbox('PartInstersection', 'enabled')->setAttribute('uncheckedValue', 'disabled')))
 
-
-
        ->insert($view->fieldset('')->setAttribute('template', $T('PuaText_label')))
            ->insert($view->fieldsetSwitch('DetectPua', 'enabled',$view::FIELDSETSWITCH_CHECKBOX | $view::FIELDSETSWITCH_EXPANDABLE)->setAttribute('uncheckedValue', 'disabled')
            ->insert($view->textInput('ExcludePua')))
@@ -61,6 +59,7 @@ echo $view->panel()
        ->insert($view->fieldset('')->setAttribute('template', $T('Signatures_label')))
             ->insert($view->columns()
                 ->insert($view->checkbox('Bytecode', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
+                ->insert($view->checkbox('BytecodeUnsigned', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
                 ->insert($view->checkbox('FilesystemScanUnofficialSigs', 'enabled')->setAttribute('uncheckedValue', 'disabled')))
     )
 );
