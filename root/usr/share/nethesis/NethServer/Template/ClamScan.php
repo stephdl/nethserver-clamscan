@@ -23,9 +23,8 @@ echo $view->panel()
                 ->insert($view->checkbox('Quarantine', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
                 ->insert($view->checkbox('reallyWantToMove', 'enabled')->setAttribute('uncheckedValue', 'disabled')))
 
-        ->insert($view->fieldset('')->setAttribute('template', $T('FalsePositif Warning_label')))
+        ->insert($view->fieldset('')->setAttribute('template', $T('MethodOfDetection_label')))
             ->insert($view->columns()
-            ->insert($view->checkbox('FilesystemScanUnofficialSigs', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
             ->insert($view->checkbox('AlgoDetection', 'enabled')->setAttribute('uncheckedValue', 'disabled')))
 
         ->insert($view->fieldset('')->setAttribute('template', $T('ScanElements_label')))
@@ -40,7 +39,7 @@ echo $view->panel()
                 ->insert($view->checkbox('ScanPdf', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
                 ->insert($view->checkbox('ScanPe', 'enabled')->setAttribute('uncheckedValue', 'disabled')))
 
-        ->insert($view->fieldset('')->setAttribute('template', $T('ScanMail_label')))
+        ->insert($view->fieldset('')->setAttribute('template', $T('MailTypeScan_label')))
             ->insert($view->columns()
                 ->insert($view->checkbox('ScanMail', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
                 ->insert($view->checkbox('PhishingSigs', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
@@ -59,8 +58,10 @@ echo $view->panel()
            ->insert($view->fieldsetSwitch('DetectPua', 'enabled',$view::FIELDSETSWITCH_CHECKBOX | $view::FIELDSETSWITCH_EXPANDABLE)->setAttribute('uncheckedValue', 'disabled')
            ->insert($view->textInput('ExcludePua')))
 
-       ->insert($view->fieldset('')->setAttribute('template', $T('BytecodeText_label')))
-           ->insert($view->checkbox('Bytecode', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
+       ->insert($view->fieldset('')->setAttribute('template', $T('Signatures_label')))
+            ->insert($view->columns()
+                ->insert($view->checkbox('Bytecode', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
+                ->insert($view->checkbox('FilesystemScanUnofficialSigs', 'enabled')->setAttribute('uncheckedValue', 'disabled')))
     )
 );
 
