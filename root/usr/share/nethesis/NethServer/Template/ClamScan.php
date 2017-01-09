@@ -57,7 +57,9 @@ echo $view->panel()
                 ->insert($view->checkbox('Bytecode', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
                 ->insert($view->checkbox('BytecodeUnsigned', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
                 ->insert($view->checkbox('PhishingSigs', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
-                ->insert($view->checkbox('PhishingScanUrl', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
+                ->insert($view->checkbox('PhishingScanUrl', 'enabled')->setAttribute('uncheckedValue', 'disabled')))
+
+            ->insert($view->columns()
                 ->insert($view->checkbox('FilesystemScanUnofficialSigs', 'enabled')->setAttribute('uncheckedValue', 'disabled')))
     )
 );
