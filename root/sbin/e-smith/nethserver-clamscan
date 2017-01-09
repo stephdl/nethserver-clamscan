@@ -31,7 +31,8 @@ my $MailReport = $db->get_prop("clamscan", "FilesystemScanReportTo") || 'root';
 
 my $Custom = $db->get_prop("clamscan", "customSettings") || '';
 
-my $maxscanfile = $db->get_prop("clamscan", "MaxScanFile") || '100M';
+my $maxscanfile = $db->get_prop("clamscan", "MaxScanFile") || '100';
+	$maxscanfile = $maxscanfile . 'M';
 
 my $clamscan_opts = " --recursive --infected --stdout" .
 		    " --log /var/log/clamav/clamscan.log";
