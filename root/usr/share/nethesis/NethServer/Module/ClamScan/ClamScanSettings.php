@@ -1,5 +1,5 @@
 <?php
-namespace NethServer\Module;
+namespace NethServer\Module\ClamScan;
 
 
 use Nethgui\System\PlatformInterface as Validate;
@@ -9,7 +9,7 @@ use Nethgui\System\PlatformInterface as Validate;
  *
  * @author stephane de Labrusse <stephdl@de-labrusse.fr>
  */
-class ClamScan extends \Nethgui\Controller\AbstractController
+class ClamScanSettings extends \Nethgui\Controller\AbstractController
 {
 
     protected function initializeAttributes(\Nethgui\Module\ModuleAttributesInterface $base)
