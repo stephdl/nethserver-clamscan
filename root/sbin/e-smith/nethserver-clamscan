@@ -48,7 +48,7 @@ my @exclude = split /\s+/, ($db->get_prop("clamscan", "FilesystemScanExclude") |
 
 push @exclude, $quarantine_dir;
 
-$clamscan_opts .= " --exclude=$_" for (@exclude);
+$clamscan_opts .= " --exclude=^$_" for (@exclude);
 
 $clamscan_opts .= " --move=$quarantine_dir"
 if (($db->get_prop("clamscan", "Quarantine") || "disabled")
