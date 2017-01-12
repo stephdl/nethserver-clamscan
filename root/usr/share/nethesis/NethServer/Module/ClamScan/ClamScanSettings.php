@@ -72,6 +72,15 @@ class ClamScanSettings extends \Nethgui\Controller\AbstractController
                 '23h' => $view->translate('${0} Hour', array(23)),
         ));
     }
+    public function process()
+    {
+        parent::process();
+
+        if ($this->getRequest()->hasParameter('Freshclam')) {
+            // Signal nethserver-squid-clear-cache
+            $this->getPlatform()->signalEvent('/etc/cron.daily/freshclam &');
+        }
+    }
 
     protected function onParametersSaved($changedParameters)
     {
