@@ -15,4 +15,4 @@ templates2events('/etc/cron.d/clamscan', $event);
 #freshclam-update
 my $event = 'freshclam-update';
     event_actions($event,
-'/etc/cron.daily/freshclam' => '10');
+'freshclam-update' => '10');
