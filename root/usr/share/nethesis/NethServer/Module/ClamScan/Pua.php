@@ -34,13 +34,5 @@ class Pua extends \Nethgui\Controller\AbstractController
                 'Server' => $view->translate('Server'),
                 'Script' => $view->translate('Script'),
         ));
-
     }
-
-    protected function onParametersSaved($changedParameters)
-    {
-        parent::onParametersSaved($changedParameters);
-        $this->getPlatform()->signalEvent('nethserver-clamscan-save');
-    }
-
 }
