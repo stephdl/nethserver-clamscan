@@ -16,7 +16,7 @@ class Pua extends \Nethgui\Controller\AbstractController
     {
         parent::initialize();
         $this->declareParameter('DetectPua', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'DetectPua'));
-        $this->declareParameter('ExcludePua', Validate::ANYTHING, array('configuration', 'clamscan', 'IncludePua', ','));
+        $this->declareParameter('IncludePua', Validate::ANYTHING, array('configuration', 'clamscan', 'IncludePua', ','));
     }
 
     public function prepareView(\Nethgui\View\ViewInterface $view)
