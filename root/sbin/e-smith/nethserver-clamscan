@@ -77,10 +77,10 @@ $clamscan_opts .= " --bytecode-unsigned=yes"
 $clamscan_opts .= " --detect-pua=yes"
         if ($db->get_prop("clamscan", "DetectPua") || 'disabled') eq "enabled";
 
-my @puaexclude = split /,/, ($db->get_prop("clamscan", "ExcludePua") || '');
+my @puainclude = split /,/, ($db->get_prop("clamscan", "IncludePua") || '');
 
 if (($db->get_prop("clamscan", "DetectPua") || 'disabled') eq "enabled") {
-$clamscan_opts .= " --exclude-pua=$_" for (@puaexclude)
+$clamscan_opts .= " --include-pua=$_" for (@puainclude)
 }
 
 ###  Scanning
