@@ -77,8 +77,7 @@ class ClamScanSettings extends \Nethgui\Controller\AbstractController
         parent::process();
 
         if ($this->getRequest()->hasParameter('Freshclam')) {
-            // Signal nethserver-squid-clear-cache
-            $this->getPlatform()->signalEvent('/etc/cron.daily/freshclam &');
+            $this->getPlatform()->signalEvent('freshclam-update');
         }
     }
 
