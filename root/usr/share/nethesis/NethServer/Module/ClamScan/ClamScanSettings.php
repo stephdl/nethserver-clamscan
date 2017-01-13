@@ -79,6 +79,9 @@ class ClamScanSettings extends \Nethgui\Controller\AbstractController
         if ($this->getRequest()->hasParameter('Freshclam')) {
             $this->getPlatform()->signalEvent('freshclam-update');
         }
+        if ($this->getRequest()->hasParameter('ClamScanning')) {
+            $this->getPlatform()->signalEvent('clamav-scanning');
+        }
     }
 
     protected function onParametersSaved($changedParameters)

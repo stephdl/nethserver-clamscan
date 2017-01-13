@@ -25,4 +25,5 @@ echo $view->panel()
 );
 
 echo $view->buttonList($view::BUTTON_SUBMIT | $view::BUTTON_HELP)
-        ->insert($view->button('Freshclam', $view::BUTTON_SUBMIT)->setAttribute('label', $T('Freshclam_label')));
+        ->insert($view->button('Freshclam', $view::BUTTON_SUBMIT)->setAttribute('label', $T('Freshclam_label')))
+        ->insert($view->button('ClamScanning', $view::BUTTON_SUBMIT)->setAttribute('label', $T('ClamScan_label')));
