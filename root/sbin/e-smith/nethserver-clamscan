@@ -43,12 +43,20 @@ $clamscan_opts .= " --max-files=10000 --max-filesize=$maxscanfile " .
 my $quarantine_dir = $db->get_prop("clamscan", "QuarantineDirectory") ||
 		"/var/spool/clamav/quarantine";
 
+#exclusion
 my @exclude = split /\s+/, ($db->get_prop("clamscan", "FilesystemScanExclude") ||
 			  "");
 
 push @exclude, $quarantine_dir;
 
-$clamscan_opts .= " --exclude-dir=^$_" for (@exclude);
+foreach my $exclude (@exclude) {
+	if ($exclude =~ m/^\//) {
+		$clamscan_opts .= " --exclude-dir=^$exclude";
+	}
+	else {
+		$clamscan_opts .= " --exclude=^$exclude";
+	}
+}
 
 $clamscan_opts .= " --move=$quarantine_dir"
 if (($db->get_prop("clamscan", "Quarantine") || "disabled")
