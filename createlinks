@@ -7,16 +7,9 @@ my $event = 'nethserver-clamscan-update';
 'initialize-default-databases' => '00');
 #templates to do
 templates2events('/etc/cron.d/clamscan', $event);
+templates2events('/etc/sudoers', $event);
 
 my $event = 'nethserver-clamscan-save';
-
+#templates to do
 templates2events('/etc/cron.d/clamscan', $event);
-
-#freshclam-update
-my $event = 'freshclam-update';
-    event_actions($event,
-'freshclam-update' => '10');
-
-my $event = 'clamav-scanning';
-    event_actions($event,
-'clamav-scanning' => '10');
+templates2events('/etc/sudoers', $event);

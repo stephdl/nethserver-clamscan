@@ -12,6 +12,7 @@ URL: http://dev.nethserver.org/projects/nethforge/wiki/%{name}
 BuildRequires: nethserver-devtools
 #AutoReq: no
 Requires: nethserver-antivirus
+Requires: clamav-scanner-systemd
 
 %description
 NethServer clamav scanning tools
