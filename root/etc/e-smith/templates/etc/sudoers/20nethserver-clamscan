@@ -1,0 +1,9 @@
+{
+    #
+    # 20fail2ban
+    #
+    push @cmnd_alias_httpd_admin, qw(
+    /usr/bin/systemctl start clamscan-nethgui.service
+    );
+    '';
+}
