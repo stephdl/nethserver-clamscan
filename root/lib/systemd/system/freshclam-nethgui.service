@@ -1,0 +1,7 @@
+[Unit]
+Description=Start a scan in nethgui
+Requisite=httpd-admin.service
+
+[Service]
+Type=simple
+ExecStart=/usr/libexec/nethserver/frehclam-nethgui
