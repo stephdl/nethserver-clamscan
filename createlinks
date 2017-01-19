@@ -9,7 +9,7 @@ my $event = 'nethserver-clamscan-update';
 templates2events('/etc/cron.d/clamscan', $event);
 templates2events('/etc/sudoers', $event);
 
-my $event = 'nethserver-clamscan-save';
+$event = 'nethserver-clamscan-save';
 #templates to do
 templates2events('/etc/cron.d/clamscan', $event);
 templates2events('/etc/sudoers', $event);
