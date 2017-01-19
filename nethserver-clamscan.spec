@@ -25,6 +25,7 @@ NethServer clamav scanning tools
 
 %build
 %{__mkdir} -p root/var/spool/clamav/quarantine
+%{__mkdir} -p root/var/log/clamav/
 %{makedocs}
 perl createlinks
 
@@ -33,8 +34,9 @@ rm -rf $RPM_BUILD_ROOT
 (cd root   ; find . -depth -print | cpio -dump $RPM_BUILD_ROOT)
 
 %{genfilelist} %{buildroot} \
-  --dir  /var/spool/clamav/quarantine 'attr(2755,clam,clam)' \
+   --dir  /var/spool/clamav/quarantine 'attr(2755,clam,clam)' \
    --file /sbin/e-smith/nethserver-clamscan 'attr(755,root,root)' \
+   --file root/usr/libexec/nethserver/Frehclam-nethgui attr(755,root,root)' \
 $RPM_BUILD_ROOT > e-smith-%{version}-filelist
 
 %clean

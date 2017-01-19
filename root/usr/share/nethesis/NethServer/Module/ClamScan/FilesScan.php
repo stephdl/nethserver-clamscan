@@ -24,6 +24,8 @@ class FilesScan extends \Nethgui\Controller\AbstractController
         $this->declareParameter('ScanPdf', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'ScanPdf'));
         $this->declareParameter('ScanPe', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'ScanPe'));
         $this->declareParameter('ScanSwf', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'ScanSwf'));
+        $this->declareParameter('ScanHwp', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'ScanHwp'));
+        $this->declareParameter('ScanXML', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'ScanXML'));
     }
 
 }

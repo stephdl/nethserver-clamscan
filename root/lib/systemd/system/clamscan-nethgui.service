@@ -3,5 +3,5 @@ Description=Start a scan in nethgui
 Requisite=httpd-admin.service
 
 [Service]
-Type=fork
+Type=simple
 ExecStart=/sbin/e-smith/nethserver-clamscan

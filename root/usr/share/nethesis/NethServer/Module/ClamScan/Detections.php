@@ -21,6 +21,7 @@ class Detections extends \Nethgui\Controller\AbstractController
         $this->declareParameter('AlgoDetection', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'AlgoDetection'));
         $this->declareParameter('DetectStructured', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'DetectStructured'));
         $this->declareParameter('PartInstersection', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'PartInstersection'));
+        $this->declareParameter('BlockMacros', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'BlockMacros'));
     }
 
 }

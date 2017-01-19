@@ -114,7 +114,14 @@ $clamscan_opts .= " --scan-pe=yes --max-embeddedpe=$maxscanfile --max-iconspe=10
         if ($db->get_prop("clamscan", "ScanPe") || "enabled") eq "enabled";
 
 $clamscan_opts .= " --scan-swf=yes"
-		        if ($db->get_prop("clamscan", "ScanSwf") || "enabled") eq "enabled";
+        if ($db->get_prop("clamscan", "ScanSwf") || "enabled") eq "enabled";
+
+$clamscan_opts .= " --scan-xmldocs=yes"
+        if ($db->get_prop("clamscan", "ScanXML") || "enabled") eq "enabled";
+
+$clamscan_opts .= " --scan-hwp3=yes --max-rechwp3=16"
+        if ($db->get_prop("clamscan", "ScanHwp") || "enabled") eq "enabled";
+
 
 ##enhance detection
 $clamscan_opts .= " --detect-broken=yes"
@@ -122,6 +129,9 @@ $clamscan_opts .= " --detect-broken=yes"
 
 $clamscan_opts .= " --block-encrypted=yes"
         if ($db->get_prop("clamscan", "BlockEncrypted") || "disabled") eq "enabled";
+
+$clamscan_opts .= " --block-macros=yes"
+        if ($db->get_prop("clamscan", "BlockMacros") || "disabled") eq "enabled";
 
 $clamscan_opts .= " --algorithmic-detection=yes"
         if ($db->get_prop("clamscan", "AlgoDetection") || "disabled") eq "enabled";
