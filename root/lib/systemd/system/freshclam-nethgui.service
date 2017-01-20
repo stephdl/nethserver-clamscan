@@ -1,7 +1,7 @@
 [Unit]
-Description=Start a scan in nethgui
+Description=Freshclam Update  in nethgui
 Requisite=httpd-admin.service
 
 [Service]
 Type=simple
-ExecStart=/usr/libexec/nethserver/frehclam-nethgui
+ExecStart=/usr/libexec/nethserver/freshclam-nethgui

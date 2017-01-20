@@ -2,9 +2,9 @@
     #
     # Give sudo for nethserver-clamscan
     #
-    push @cmnd_alias_httpd_admin, qw(
-    /usr/bin/systemctl start clamscan-nethgui.service
-    /usr/bin/systemctl start freshclam-nethgui.service
+    push @cmnd_alias_httpd_admin, (
+    "/usr/bin/systemctl start clamscan-nethgui.service",
+    "/usr/bin/systemctl start freshclam-nethgui.service"
     );
     '';
 }
