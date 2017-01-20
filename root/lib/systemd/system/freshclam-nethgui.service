@@ -4,4 +4,4 @@ Requisite=httpd-admin.service
 
 [Service]
 Type=simple
-ExecStart=/usr/libexec/nethserver/freshclam-nethgui
+ExecStart=/usr/share/clamav/freshclam-sleep xnow;/usr/bin/clamav-unofficial-sigs.sh
