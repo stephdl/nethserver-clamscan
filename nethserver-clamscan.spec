@@ -23,6 +23,7 @@ NethServer clamav scanning tools
 %post
 #upgrade clamav database following the installation
 if [ $1 -eq 1 ] ; then
+/sbin/e-smith/expand-template /etc/freshclam.conf
 /usr/libexec/nethserver/freshclam-nethgui &
 fi
 %preun
