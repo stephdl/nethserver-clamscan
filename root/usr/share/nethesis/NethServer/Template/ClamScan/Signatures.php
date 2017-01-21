@@ -11,4 +11,4 @@ echo $view->panel()
         ->insert($view->checkbox('PhishingSigs', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
         ->insert($view->checkbox('PhishingScanUrl', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
 ;
-echo $view->buttonList($view::BUTTON_SUBMIT | $view::BUTTON_HELP);
+echo $view->buttonList($view::BUTTON_SUBMIT);

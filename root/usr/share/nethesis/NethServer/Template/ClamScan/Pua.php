@@ -7,4 +7,4 @@ echo $view->panel()
        ->insert($view->fieldsetSwitch('DetectPua', 'enabled',$view::FIELDSETSWITCH_CHECKBOX | $view::FIELDSETSWITCH_EXPANDABLE)->setAttribute('uncheckedValue', 'disabled')
        ->insert($view->selector('IncludePua',$view::SELECTOR_MULTIPLE)))
 ;
-echo $view->buttonList($view::BUTTON_SUBMIT | $view::BUTTON_HELP);
+echo $view->buttonList($view::BUTTON_SUBMIT);
