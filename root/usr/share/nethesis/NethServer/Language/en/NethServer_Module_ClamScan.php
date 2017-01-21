@@ -69,3 +69,6 @@ $L['TOOL_label'] = 'General system tools, like process killers/finders';
 $L['SPY_label'] = 'Keyloggers, spying tools';
 $L['SERVER_label'] = 'Server based badware like DistributedNet';
 $L['SCRIPT_label'] = 'Known “problem” scripts written in Javascript, ActiveX or similar.';
+$L['SpecialDetect_label'] = 'Scanning Options (might give false positive)';
+$L['IncludePua_label'] = 'PUA Database';
+$L['Signatures_label'] = 'Virus Database (might give false positive)';
