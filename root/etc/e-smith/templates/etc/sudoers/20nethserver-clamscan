@@ -6,7 +6,7 @@
     "/usr/bin/systemctl start clamscan-nethgui.service",
     "/usr/bin/systemctl start freshclam-nethgui.service",
     "/sbin/e-smith/nethserver-clamscan",
-    "/usr/bin/clamscan"
+    "/usr/bin/clamscan",
     "/usr/bin/freshclam --quiet",
     "/bin/bash /usr/share/clamav/freshclam-sleep xnow"
     );

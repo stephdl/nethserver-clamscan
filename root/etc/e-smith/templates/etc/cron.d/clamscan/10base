@@ -5,7 +5,7 @@
     $OUT .= "# nethserver-clamscan filesystem scan\n";
 
     my $status = $clamscan{status} || 'disabled';
-    return '' if $status eq 'disabled';
+    return '#clamscan disabled' if $status eq 'disabled';
 
     my $ScanFreq = $clamscan{FilesystemScan} || 'disabled';
     my $Hour = $clamscan{JobHour} || '0';
