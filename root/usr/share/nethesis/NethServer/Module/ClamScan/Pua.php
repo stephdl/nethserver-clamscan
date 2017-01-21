@@ -23,16 +23,16 @@ class Pua extends \Nethgui\Controller\AbstractController
     {
         parent::prepareView($view);
         $view['IncludePuaDatasource'] = \Nethgui\Renderer\AbstractRenderer::hashToDatasource(array(
-                'PACKED' => $view->translate('PACKED_label'),
-                'PWTOOL' => $view->translate('PWTOOL_label'),
-                'NETTOOL' => $view->translate('NETTOOL_label'),
+                'Packed' => $view->translate('PACKED_label'),
+                'PwTool' => $view->translate('PWTOOL_label'),
+                'NetTool' => $view->translate('NETTOOL_label'),
                 'P2P' => $view->translate('P2P_label'),
                 'IRC' => $view->translate('IRC_label'),
                 'RAT' => $view->translate('RAT_label'),
-                'TOOL' => $view->translate('TOOL_label'),
-                'SPY' => $view->translate('SPY_label'),
-                'SERVER' => $view->translate('SERVER_label'),
-                'SCRIPT' => $view->translate('SCRIPT_label'),
+                'Tool' => $view->translate('TOOL_label'),
+                'Spy' => $view->translate('SPY_label'),
+                'Server' => $view->translate('SERVER_label'),
+                'Script' => $view->translate('SCRIPT_label'),
         ));
     }
 }
