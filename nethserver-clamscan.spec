@@ -1,6 +1,6 @@
 Summary: NethServer clamav scanning tools
 %define name nethserver-clamscan
-%define version 0.0.2
+%define version 0.1.0
 %define release 1
 Name: %{name}
 Version: %{version}
@@ -53,6 +53,8 @@ rm -rf $RPM_BUILD_ROOT
 #%dir %{_nseventsdir}/%{name}-update
 
 %changelog
+* Sat Jan 21 2017 Stephane de Labrusse <stephdl@de-labrusse.fr> - 0.1.0-1-ns7
+- Nethserver-clamscan is available for ns7
 
 * Fri Dec 30 2016 Stephane de Labrusse <stephdl@de-labrusse.fr> - 0.0.1-1-ns7
 - First release to NS7
