@@ -2,7 +2,7 @@
 $L['ClamScan_Title'] = 'Antivirus Scanner';
 $L['ClamScan_Description'] = 'clamscan - scan files and directories for viruses';
 $L['ClamScan_header'] = 'Scan files and directories for viruses';
-$L['status_label'] = 'Enable Clamscan';
+$L['status_label'] = 'Enable file system scan';
 $L['FilesystemScan_daily_label'] = 'Perform a daily scan';
 $L['FilesystemScan_weekly_label'] = 'Perform a weekly scan';
 $L['DetectPua_label'] = 'Detect PUA';
