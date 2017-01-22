@@ -31,6 +31,7 @@ fi
 %build
 %{__mkdir} -p root/var/spool/clamav/quarantine
 %{__mkdir} -p root/var/log/clamav/
+mkdir -p root/%{_nsdbconfdir}/{quarantine}/{migrate,force,defaults}
 %{makedocs}
 perl createlinks
 
@@ -51,6 +52,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 
 #%dir %{_nseventsdir}/%{name}-update
+%dir %{_nsdbconfdir}/quarantine
 
 %changelog
 * Sat Jan 21 2017 Stephane de Labrusse <stephdl@de-labrusse.fr> - 0.1.0-1-ns7
