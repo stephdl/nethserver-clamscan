@@ -169,7 +169,8 @@ close MAIL;
 ## populate quarantine database
 # we are looking to : /boot/efi/EFI/redhat/grub.efi: moved to '/var/spool/clamav/quarantine/grub.efi'
 
-my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine');
+my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine')
+    || die 'cannot open quarantine database';
 my $filename = '/tmp/quarantine';
 open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
 print $fh @report;

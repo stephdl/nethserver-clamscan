@@ -4,18 +4,19 @@ use esmith::DB;
 use File::Copy;
 
 my $db = esmith::ConfigDB->open() || die 'cannot open configuration database';
-my $q = esmith::ConfigDB->open('quarantine') || die 'cannot open quarantine database';
+my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine') || die 'cannot open quarantine database';
 my $restore = $db->get_prop('clamscan','restore') || '';
 my $restoreall = $db->get_prop('clamscan','restoreAll') || 'disabled';
 
 if ($restoreall eq 'enabled') {
-    foreach my $resto ($q->get_all_by_prop(type => 'quarantined')) {
-    my $pathresto= $resto->key;
-    my $pathquarantine = $q->get_prop($pathresto,'quarantine');
-    move("$pathquarantine","$pathresto");
-    $q->get($pathresto)->delete;
-    $db->get('clamscan')->delete_prop('restoreAll');
+    my @quarantine = $q->get_all_by_prop(type => 'quarantined');
+    foreach my $resto (@quarantine) {
+        my $pathresto= $resto->key;
+        my $pathquarantine = $q->get_prop($pathresto,'quarantine');
+        move("$pathquarantine","$pathresto");
+        $q->get($pathresto)->delete;
     }
+    $db->get('clamscan')->delete_prop('restoreAll');
 }
 
 exit 0 unless $restore;
