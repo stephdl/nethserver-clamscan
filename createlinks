@@ -13,3 +13,7 @@ $event = 'nethserver-clamscan-save';
 #templates to do
 templates2events('/etc/cron.d/clamscan', $event);
 templates2events('/etc/sudoers', $event);
+
+$event = 'nethserver-clamscan-restore';
+event_actions($event,
+'nethserver-clamscan-restore' => '10');

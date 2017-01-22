@@ -149,9 +149,6 @@ $clamscan_opts .= " --phishing-scan-urls=yes"
         if ($db->get_prop("clamscan", "PhishingScanUrl") || "disabled") eq "enabled";
 
 
-
-
-
 #launch clamscan and email the rapport
 open CLAMSCAN, "-|", "nice /usr/bin/clamscan $clamscan_opts $Custom $filesystems 2> /var/log/clamav/clamscan-errors.log";
 
@@ -168,3 +165,28 @@ open MAIL, "| /bin/mail " .
 
 print MAIL @report;
 close MAIL;
+
+## populate quarantine database
+# we are looking to : /boot/efi/EFI/redhat/grub.efi: moved to '/var/spool/clamav/quarantine/grub.efi'
+
+my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine');
+my $filename = '/tmp/quarantine';
+open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
+print $fh @report;
+close $fh;
+
+open (FILE, $filename);
+
+while (<FILE>)
+{
+   if (/(.*)(: moved to )(.*)/)
+    {
+      my $t3 = $3;
+      my $t1 = $1;
+      $t3 =~ s/^'//;
+      $t3 =~ s/'$//;
+      $q->set_prop($t1,'quarantine',$t3,type => 'quarantined');
+    }
+}
+close (FILE);
+unlink $filename;
