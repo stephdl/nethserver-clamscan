@@ -4,7 +4,9 @@ use esmith::DB;
 use File::Copy;
 
 my $db = esmith::ConfigDB->open() || die 'cannot open configuration database';
-my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine') || die 'cannot open quarantine database';
+my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine') 
+    || die 'cannot open quarantine database';
+
 my $restore = $db->get_prop('clamscan','restore') || '';
 my $restoreall = $db->get_prop('clamscan','restoreAll') || 'disabled';
 
@@ -25,6 +27,7 @@ my @restore = split(',',$restore);
 foreach my $resto (@restore) {
 my $pathquarantine = $q->get_prop($resto,'quarantine');
 move("$pathquarantine","$resto");
-$db->get('clamscan')->delete_prop('restore');
-$q->get($resto)->delete;
+$q->get($resto)->delete if ($q->get($resto));
 }
+$db->get('clamscan')->delete_prop('restore');
+

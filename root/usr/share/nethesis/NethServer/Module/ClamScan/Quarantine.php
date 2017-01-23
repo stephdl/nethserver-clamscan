@@ -22,8 +22,8 @@ class Quarantine extends \Nethgui\Controller\AbstractController
 
     private function readModules()
     {
-$values =       (array_keys ($this->getPlatform()->getDatabase('quarantine')->getAll('quarantined')));
-return $values;
+        $values = (array_keys ($this->getPlatform()->getDatabase('quarantine')->getAll('quarantined')));
+        return $values;
     }
 
     public function prepareView(\Nethgui\View\ViewInterface $view)
@@ -34,11 +34,13 @@ return $values;
         $view['restoreDatasource'] = array_map(function($fmt) use ($view) {
             return array($fmt, $view->translate($fmt));
         }, $this->templates);
+
+        parent::prepareView($view);
     }
 
     public function onParametersSaved($changes)
     {
-        $this->getPlatform()->signalEvent('nethserver-clamscan-restore@post-process');
+        $this->getPlatform()->signalEvent('nethserver-clamscan-restore');
     }
 
 }
