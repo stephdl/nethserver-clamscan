@@ -10,5 +10,5 @@ echo $view->panel()
     ->insert($view->textLabel('report')->setAttribute('class', 'labeled-control ls ui-corner-all')->setAttribute('tag', 'div')));
 
 $view->includeCss("
-.ls { white-space: pre-wrap; padding: 4px; border: 1px solid #c2c2c2; width: 500px; background: #e2e2r2; color: #4b4b4b; }
+.ls { white-space: pre-wrap; padding: 4px; border: 1px solid #c2c2c2; width: 600px; background: #e2e2r2; color: #4b4b4b; }
 ");
