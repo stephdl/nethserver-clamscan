@@ -51,7 +51,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f e-smith-%{version}-filelist
 %defattr(-,root,root)
 
-#%dir %{_nseventsdir}/%{name}-update
+%dir %{_nseventsdir}/%{name}-update
 %dir %{_nsdbconfdir}/quarantine
 
 %changelog
