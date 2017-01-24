@@ -76,5 +76,5 @@ $L['Quarantine_Title'] = 'Quarantine';
 $L['Restore_header'] = 'Restore files from quarantine';
 $L['Restore_label'] = 'Restore selected files';
 $L['RestoreAll_label'] = 'Restore all files';
-$L['restore_label'] = 'The below files are restorable from quarantine';
+$L['restore_label'] = 'These files are restorable from quarantine';
 $L['ListQuarantinedFiles_label'] = 'File list in /var/spool/clamav/quarantine';
