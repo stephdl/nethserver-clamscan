@@ -171,27 +171,19 @@ close MAIL;
 
 my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine')
     || die 'cannot open quarantine database';
-my $filename = '/tmp/quarantine';
-open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
-print $fh @report;
-close $fh;
 
-open (FILE, $filename);
-
-while (<FILE>)
+foreach my $test (@report)
 {
-   if (/(.*)(: moved to )(.*)/)
+    if ( $test =~ /(.*)(: moved to )(.*)/)
     {
-      my $t3 = $3;
-      my $t1 = $1;
-      $t3 =~ s/^'//;
-      $t3 =~ s/'$//;
+         my $t3 = $3;
+         my $t1 = $1;
+         $t3 =~ s/^'//;
+         $t3 =~ s/'$//;
 
-    #we don't want injection
-    my $protect = "[\'\(\)\<\>\"\|]";
-    $q->set_prop($t1,'quarantine',$t3,type => 'quarantined') 
-            unless (($t1 =~ /$protect/) || ($t3 =~ /$protect/));
+         #we don't want injection
+         my $protect = "[\'\(\)\<\>\"\|]";
+         $q->set_prop($t1,'quarantine',$t3,type => 'quarantined')
+             unless (($t1 =~ /$protect/) || ($t3 =~ /$protect/));
     }
 }
-close (FILE);
-unlink $filename;
