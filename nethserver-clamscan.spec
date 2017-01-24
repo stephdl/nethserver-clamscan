@@ -31,7 +31,7 @@ fi
 %build
 %{__mkdir} -p root/var/spool/clamav/quarantine
 %{__mkdir} -p root/var/log/clamav/
-mkdir -p root/%{_nsdbconfdir}/{quarantine}/{migrate,force,defaults}
+#mkdir -p root/%{_nsdbconfdir}/{quarantine}/{migrate,force,defaults}
 %{makedocs}
 perl createlinks
 
