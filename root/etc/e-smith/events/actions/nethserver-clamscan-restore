@@ -3,14 +3,15 @@ use esmith::ConfigDB;
 use esmith::DB;
 use File::Copy;
 
+my $event = shift;
 my $db = esmith::ConfigDB->open() || die 'cannot open configuration database';
 my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine') 
     || die 'cannot open quarantine database';
 
 my $restore = $db->get_prop('clamscan','restore') || '';
-my $restoreall = $db->get_prop('clamscan','restoreAll') || 'disabled';
+#my $restoreall = $db->get_prop('clamscan','restoreAll') || 'disabled';
 
-if ($restoreall eq 'enabled') {
+if ($event eq 'nethserver-clamscan-restore-all') {
     my @quarantine = $q->get_all_by_prop(type => 'quarantined');
     foreach my $resto (@quarantine) {
         my $pathresto= $resto->key;
@@ -18,16 +19,16 @@ if ($restoreall eq 'enabled') {
         move("$pathquarantine","$pathresto");
         $q->get($pathresto)->delete;
     }
-    $db->get('clamscan')->delete_prop('restoreAll');
+#   $db->get('clamscan')->delete_prop('restoreAll');
 }
 
-exit 0 unless $restore;
-
-my @restore = split(',',$restore);
-foreach my $resto (@restore) {
-my $pathquarantine = $q->get_prop($resto,'quarantine');
-move("$pathquarantine","$resto");
-$q->get($resto)->delete if ($q->get($resto));
+elsif ($event eq 'nethserver-clamscan-restore') {
+    exit 0 unless $restore;
+    my @restore = split(',',$restore);
+    foreach my $resto (@restore) {
+        my $pathquarantine = $q->get_prop($resto,'quarantine');
+        move("$pathquarantine","$resto");
+        $q->get($resto)->delete if ($q->get($resto));
+    }
+    $db->get('clamscan')->delete_prop('restore');
 }
-$db->get('clamscan')->delete_prop('restore');
-

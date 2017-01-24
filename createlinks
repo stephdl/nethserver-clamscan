@@ -17,3 +17,7 @@ templates2events('/etc/sudoers', $event);
 $event = 'nethserver-clamscan-restore';
 event_actions($event,
 'nethserver-clamscan-restore' => '10');
+
+$event = 'nethserver-clamscan-restore-all';
+event_actions($event,
+'nethserver-clamscan-restore' => '10');
