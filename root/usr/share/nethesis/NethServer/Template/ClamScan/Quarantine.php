@@ -1,12 +1,11 @@
 <?php
 echo $view->header()->setAttribute('template', $T('Restore_header'));
-
 echo $view->panel()
 //->insert($view->checkBox('restoreAll','enabled')->setAttribute('uncheckedValue', 'disabled'))
-
 ->insert($view->button('Restore',$view::BUTTON_SUBMIT))
-->insert($view->selector('restore', $view::SELECTOR_MULTIPLE))
+        ->insert($view->button('RestoreAll', $view::BUTTON_SUBMIT)->setAttribute('label', $T('RestoreAll_label')))
 
+->insert($view->selector('restore', $view::SELECTOR_MULTIPLE))
 ->insert($view->fieldset('', $view::FIELDSET_EXPANDABLE)->setAttribute('template', $T('ListQuarantinedFiles_label'))
     ->insert($view->textLabel('report')->setAttribute('class', 'labeled-control ls ui-corner-all')->setAttribute('tag', 'div')));
 
