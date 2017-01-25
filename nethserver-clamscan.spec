@@ -1,6 +1,6 @@
 Summary: NethServer clamav scanning tools
 %define name nethserver-clamscan
-%define version 0.1.0
+%define version 0.1.1
 %define release 1
 Name: %{name}
 Version: %{version}
@@ -55,6 +55,12 @@ rm -rf $RPM_BUILD_ROOT
 #%dir %{_nsdbconfdir}/quarantine
 
 %changelog
+* Wed Jan 25 2017 Stephane de Labrusse <stephdl@de-labrusse.fr> - 0.1.1-1-ns7
+- The file restoration can be done in the UI
+- clamscan make a e-smith database called quarantine
+- Freshclam applet in the dashboard
+- Freshclam-update drop the old database before to download the new one
+
 * Sat Jan 21 2017 Stephane de Labrusse <stephdl@de-labrusse.fr> - 0.1.0-1-ns7
 - Nethserver-clamscan is available for ns7
 

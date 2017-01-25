@@ -206,7 +206,7 @@ foreach my $test (@report)
 
          #we don't want injection
          my $protect = "[\'\(\)\<\>\"\|]";
-         $q->set_prop($t1,'ruleMatch',$t2)
+         $q->set_prop($t1,'ruleMatch',$t2,type => 'quarantined')
               unless (($t1 =~ /$protect/) || ($t2 =~ /$protect/));
     }
 
