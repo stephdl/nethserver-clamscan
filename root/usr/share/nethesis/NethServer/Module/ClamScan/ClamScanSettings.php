@@ -107,7 +107,7 @@ class ClamScanSettings extends \Nethgui\Controller\AbstractController
         parent::process();
 
         if ($this->getRequest()->hasParameter('Freshclam')) {
-            $this->getPlatform()->exec('/usr/bin/sudo  /usr/bin/systemctl start freshclam-nethgui.service');
+            $this->getPlatform()->signalEvent('freshclam-update');
         }
         if ($this->getRequest()->hasParameter('ClamScanning')) {
             $this->getPlatform()->exec('/usr/bin/sudo  /usr/bin/systemctl start clamscan-nethgui.service');

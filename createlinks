@@ -21,3 +21,7 @@ event_actions($event,
 $event = 'nethserver-clamscan-restore-all';
 event_actions($event,
 'nethserver-clamscan-restore' => '10');
+
+$event = 'freshclam-update';
+event_actions($event,
+'nethserver-clamscan-freshclam-update' => '10');
