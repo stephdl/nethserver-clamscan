@@ -24,6 +24,8 @@ use strict;
 use esmith::ConfigDB;
 
 my $db = esmith::ConfigDB->open_ro or die "Couldn't open ConfigDB";
+my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine')
+    || die 'cannot open quarantine database';
 
 my $filesystems = $db->get_prop("clamscan", "FilesystemScanFilesystems") || '/';
 
@@ -179,9 +181,6 @@ close MAIL;
 # we are looking to : 
 #    /boot/efi/EFI/redhat/grub.efi: Heuristics.Broken.Executable FOUND
 #    /boot/efi/EFI/redhat/grub.efi: moved to '/var/spool/clamav/quarantine/grub.efi'
-
-my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine')
-    || die 'cannot open quarantine database';
 
 foreach my $test (@report)
 {
