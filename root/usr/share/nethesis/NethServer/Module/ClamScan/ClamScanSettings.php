@@ -32,9 +32,39 @@ class ClamScanSettings extends \Nethgui\Controller\AbstractController
         $this->declareParameter('MaxScanFile', Validate::POSITIVE_INTEGER, array('configuration', 'clamscan', 'MaxScanFile'));
     }
 
+    public $sortId = 80;
+
+    private $timestamp = '';
+    private $alarm = FALSE;
+
+    private function readAntivirus()
+    {
+        $max = 0;
+        $fileList = glob('/var/lib/clamav/*.{cvd,cld,ndb,hdb,cdb}', GLOB_BRACE);
+        foreach ($fileList as $file) {
+            $changeTime = filemtime($file);
+            if ($changeTime > $max) {
+                $max = $changeTime;
+            }
+        }
+
+        $now = time();
+        $staleSignatures = $now - $max > 3600 * 24 * 3;
+        if ($staleSignatures) {
+            $this->alarm = TRUE;
+        }
+
+        $this->timestamp = min($max, $now);
+    }
+
+
     public function prepareView(\Nethgui\View\ViewInterface $view)
     {
         parent::prepareView($view);
+        $this->readAntivirus();
+        $view['timestamp'] = strftime("%F %R", $this->timestamp);
+        $view['alarm'] = $this->alarm;
+
         $view['JobDayDatasource'] = \Nethgui\Renderer\AbstractRenderer::hashToDatasource(array(
                 '1d' => $view->translate('MONDAY'),
                 '2d' => $view->translate('TUESDAY'),

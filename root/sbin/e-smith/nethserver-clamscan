@@ -34,8 +34,8 @@ my $Custom = $db->get_prop("clamscan", "customSettings") || '';
 my $maxscanfile = $db->get_prop("clamscan", "MaxScanFile") || '100';
 	$maxscanfile = $maxscanfile . 'M';
 
-my $clamscan_opts = " --recursive --infected --stdout" .
-		    " --log /var/log/clamav/clamscan.log";
+my $clamscan_opts = " --recursive --infected --stdout";
+        #	    " --log /var/log/clamav/clamscan.log";
 
 $clamscan_opts .= " --max-files=10000 --max-filesize=$maxscanfile " .
 		    " --max-scansize=$maxscanfile --max-recursion=16 --max-dir-recursion=15";
@@ -149,16 +149,25 @@ $clamscan_opts .= " --phishing-scan-urls=yes"
         if ($db->get_prop("clamscan", "PhishingScanUrl") || "disabled") eq "enabled";
 
 
-#launch clamscan and email the rapport
+#launch clamscan
 open CLAMSCAN, "-|", "nice /usr/bin/clamscan $clamscan_opts $Custom $filesystems 2> /var/log/clamav/clamscan-errors.log";
 
-my @report = <CLAMSCAN>;
+my $date = localtime;
+my @report;
+@report = <CLAMSCAN>;
+
+unshift  @report, "\n------------------------------------\n\t" . $date;
+print @report;
 close CLAMSCAN;
 
+#we want to write our own log because clamav doesnt write the date in it.
+open (FILE, ">>","/var/log/clamav/clamscan.log") or die $!;
+print FILE @report;
+close FILE;
+
+#email the rapport
 my $hostname = $db->get_value("SystemName") . "." .
 	$db->get_value("DomainName");
-
-my $date = localtime;
 
 open MAIL, "| /bin/mail " .
 	"-s \"[$hostname] Clam Antivirus Scan Results - $date\" $MailReport";
@@ -167,7 +176,9 @@ print MAIL @report;
 close MAIL;
 
 ## populate quarantine database
-# we are looking to : /boot/efi/EFI/redhat/grub.efi: moved to '/var/spool/clamav/quarantine/grub.efi'
+# we are looking to : 
+#    /boot/efi/EFI/redhat/grub.efi: Heuristics.Broken.Executable FOUND
+#    /boot/efi/EFI/redhat/grub.efi: moved to '/var/spool/clamav/quarantine/grub.efi'
 
 my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine')
     || die 'cannot open quarantine database';
@@ -186,4 +197,18 @@ foreach my $test (@report)
          $q->set_prop($t1,'quarantine',$t3,type => 'quarantined')
                   unless (($t1 =~ /$protect/) || ($t3 =~ /$protect/));
     }
+
+    #we want to know, why the rule matched
+    if ( $test =~ /(.*:)(.*)(FOUND)/)
+    {
+         my $t1 = $1;
+         my $t2 = $2;
+         $t1 =~ s/:$//g;
+
+         #we don't want injection
+         my $protect = "[\'\(\)\<\>\"\|]";
+         $q->set_prop($t1,'ruleMatch',$t2)
+              unless (($t1 =~ /$protect/) || ($t2 =~ /$protect/));
+    }
+
 }

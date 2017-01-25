@@ -24,6 +24,31 @@ echo $view->panel()
 
 );
 
+echo "<div class='dashboard-item'>";
+echo "<dl>";
+echo "<dt>".$T('statusDatabase_label')."</dt><dd><span class='";
+if ($view['alarm']) {
+    echo "antivirus-red'>".$T('warningDatabase_label');
+} else {
+    echo "antivirus-green'>".$T('okDatabase_label');
+}
+echo "<dt>".$T('timestamp_label')."</dt><dd>"; echo $view->textLabel('timestamp'); "</dd>";
+echo "</div>";
+
+$view->includeCSS("
+  span.antivirus-green {
+      padding: 3px;
+      color: green;
+      font-weight: bold;
+  }
+  span.antivirus-red {
+      padding: 3px;
+      color: red;
+      font-weight: bold;
+  }
+");
+
+
 echo $view->buttonList($view::BUTTON_SUBMIT)
         ->insert($view->button('Freshclam', $view::BUTTON_SUBMIT)->setAttribute('label', $T('Freshclam_label')))
         ->insert($view->button('ClamScanning', $view::BUTTON_SUBMIT)->setAttribute('label', $T('ClamScan_label')));

@@ -78,3 +78,7 @@ $L['Restore_label'] = 'Restore selected files';
 $L['RestoreAll_label'] = 'Restore all files';
 $L['restore_label'] = 'These files are restorable from quarantine';
 $L['ListQuarantinedFiles_label'] = 'File list in /var/spool/clamav/quarantine';
+$L['warningDatabase_label'] = 'Not updated';
+$L['okDatabase_label'] = 'Updated';
+$L['statusDatabase_label'] = 'Status';
+$L['timestamp_label'] = 'Last update';
