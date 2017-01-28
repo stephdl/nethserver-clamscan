@@ -53,18 +53,18 @@ class ClamScanSettings extends \Nethgui\Controller\AbstractController
         $now = time();
         $staleSignatures = $now - $max > 3600 * 24 * 3;
         if ($staleSignatures) {
-            $this->alarm = 'NotUpdated_label';
+            $this->alarm = 'NotUpdated';
         } else {
-            $this->alarm = 'Updated_label';
+            $this->alarm = 'Updated';
         }
 
         $this->timestamp = min($max, $now);
 
         $response = exec("sleep 2;/usr/bin/pgrep clamscan");
         if ($response) {
-            $this->clamscan = 'Running_label';
+            $this->clamscan = 'Running';
         }else {
-            $response = $this->clamscan = 'NotRunning_label';
+            $response = $this->clamscan = 'NotRunning';
         }
    }
 
@@ -73,8 +73,8 @@ class ClamScanSettings extends \Nethgui\Controller\AbstractController
         parent::prepareView($view);
         $this->readAntivirus();
         $view['timestamp'] = strftime("%F %R", $this->timestamp);
-        $view['alarm'] = $this->alarm;
-        $view['clamscan'] = $this->clamscan;
+        $view['alarm'] = $view->translate($this->alarm);
+        $view['clamscan'] = $view->translate($this->clamscan);
 
         $view['JobDayDatasource'] = \Nethgui\Renderer\AbstractRenderer::hashToDatasource(array(
                 '1d' => $view->translate('MONDAY'),
