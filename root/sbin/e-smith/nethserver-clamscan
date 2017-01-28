@@ -159,9 +159,8 @@ open CLAMSCAN, "-|", "nice /usr/bin/clamscan $clamscan_opts $Custom $filesystems
 my $date = localtime;
 my @report;
 @report = <CLAMSCAN>;
-
 unshift  @report, ("\n------------------------------------\n\t" . $date,
-                   "\n\tScanned Folder: ".$filesystems);
+                   "\nScanned Folder: ".$filesystems);
 close CLAMSCAN;
 
 #we want to write our own log because clamav doesnt write the date and the scanned folder in it.

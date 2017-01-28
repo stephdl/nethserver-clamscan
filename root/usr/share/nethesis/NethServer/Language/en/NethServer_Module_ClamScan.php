@@ -85,3 +85,5 @@ $L['timestamp_label'] = 'Last update';
 $L['ClamScanRunning_label'] = 'Virus Scanning';
 $L['NotRunning'] = 'Stopped';
 $L['Running'] = 'Running';
+$L['FilesystemScan_now_label'] = 'Perform now a scan';
+$L['FilesystemScanFilesystems_label'] = 'Folder to scan';
