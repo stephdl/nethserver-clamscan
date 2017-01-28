@@ -27,13 +27,19 @@ my $db = esmith::ConfigDB->open_ro or die "Couldn't open ConfigDB";
 my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine')
     || die 'cannot open quarantine database';
 
+#determine the scan periodicity and the folders to scan
+my $scan = $db->get_prop("clamscan", "FilesystemScan") || '';
 my $filesystems = $db->get_prop("clamscan", "FilesystemScanFilesystems") || '/';
+
+$filesystems = '/'. $filesystems unless $filesystems =~ /^\//;
+#when the job is cron based, then do full scan
+$filesystems = ($scan eq "now") ? $filesystems : '/';
 
 my $MailReport = $db->get_prop("clamscan", "FilesystemScanReportTo") || 'root';
 
 my $Custom = $db->get_prop("clamscan", "customSettings") || '';
 
-my $maxscanfile = $db->get_prop("clamscan", "MaxScanFile") || '100';
+my $maxscanfile = $db->get_prop("clamscan", "MaxScanFile") || '45';
 	$maxscanfile = $maxscanfile . 'M';
 
 my $clamscan_opts = " --recursive --infected --stdout";
@@ -46,11 +52,8 @@ my $quarantine_dir = $db->get_prop("clamscan", "QuarantineDirectory") ||
 		"/var/spool/clamav/quarantine";
 
 #exclusion
-my @exclude = split /\s+/, ($db->get_prop("clamscan", "FilesystemScanExclude") ||
-			  "");
-
+my @exclude = split /\s+/, ($db->get_prop("clamscan", "FilesystemScanExclude") || "");
 push @exclude, $quarantine_dir;
-
 foreach my $exclude (@exclude) {
 	if ($exclude =~ m/^\//) {
 		$clamscan_opts .= " --exclude-dir=^$exclude";
@@ -124,7 +127,6 @@ $clamscan_opts .= " --scan-xmldocs=yes"
 $clamscan_opts .= " --scan-hwp3=yes --max-rechwp3=16"
         if ($db->get_prop("clamscan", "ScanHwp") || "enabled") eq "enabled";
 
-
 ##enhance detection
 $clamscan_opts .= " --detect-broken=yes"
         if ($db->get_prop("clamscan", "DetectBroken") || "disabled") eq "enabled";
@@ -157,12 +159,11 @@ open CLAMSCAN, "-|", "nice /usr/bin/clamscan $clamscan_opts $Custom $filesystems
 my $date = localtime;
 my @report;
 @report = <CLAMSCAN>;
-
-unshift  @report, "\n------------------------------------\n\t" . $date;
-print @report;
+unshift  @report, ("\n------------------------------------\n\t" . $date,
+                   "\nScanned Folder: ".$filesystems);
 close CLAMSCAN;
 
-#we want to write our own log because clamav doesnt write the date in it.
+#we want to write our own log because clamav doesnt write the date and the scanned folder in it.
 open (FILE, ">>","/var/log/clamav/clamscan.log") or die $!;
 print FILE @report;
 close FILE;
@@ -173,12 +174,11 @@ my $hostname = $db->get_value("SystemName") . "." .
 
 open MAIL, "| /bin/mail " .
 	"-s \"[$hostname] Clam Antivirus Scan Results - $date\" $MailReport";
-
 print MAIL @report;
 close MAIL;
 
 ## populate quarantine database
-# we are looking to : 
+# we are looking to :
 #    /boot/efi/EFI/redhat/grub.efi: Heuristics.Broken.Executable FOUND
 #    /boot/efi/EFI/redhat/grub.efi: moved to '/var/spool/clamav/quarantine/grub.efi'
 
@@ -196,7 +196,6 @@ foreach my $test (@report)
          $q->set_prop($t1,'quarantine',$t3,type => 'quarantined')
                   unless (($t1 =~ /$protect/) || ($t3 =~ /$protect/));
     }
-
     #we want to know, why the rule matched
     if ( $test =~ /(.*:)(.*)(FOUND)/)
     {
@@ -209,5 +208,4 @@ foreach my $test (@report)
          $q->set_prop($t1,'ruleMatch',$t2,type => 'quarantined')
               unless (($t1 =~ /$protect/) || ($t2 =~ /$protect/));
     }
-
 }

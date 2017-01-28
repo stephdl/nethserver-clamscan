@@ -5,7 +5,7 @@ use File::Copy;
 
 my $event = shift;
 my $db = esmith::ConfigDB->open() || die 'cannot open configuration database';
-my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine') 
+my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine')
     || die 'cannot open quarantine database';
 
 my $restore = $db->get_prop('clamscan','restore') || '';
@@ -17,7 +17,7 @@ if ($event eq 'nethserver-clamscan-restore-all') {
         my $pathresto= $resto->key;
         my $pathquarantine = $q->get_prop($pathresto,'quarantine');
         move("$pathquarantine","$pathresto");
-        $q->get($pathresto)->delete;
+        $q->get($pathresto)->delete if ( -f $pathresto);
     }
 #   $db->get('clamscan')->delete_prop('restoreAll');
 }
@@ -28,7 +28,7 @@ elsif ($event eq 'nethserver-clamscan-restore') {
     foreach my $resto (@restore) {
         my $pathquarantine = $q->get_prop($resto,'quarantine');
         move("$pathquarantine","$resto");
-        $q->get($resto)->delete if ($q->get($resto));
+        $q->get($resto)->delete if ($q->get($resto) && (-f $resto));
     }
     $db->get('clamscan')->delete_prop('restore');
 }

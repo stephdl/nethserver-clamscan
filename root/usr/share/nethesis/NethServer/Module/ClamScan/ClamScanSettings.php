@@ -22,7 +22,8 @@ class ClamScanSettings extends \Nethgui\Controller\AbstractController
                         '11h','12h','13h','14h','15h','16h','17h',
                                 '18h','19h','20h','21h','22h','23h'));
 */
-        $this->declareParameter('FilesystemScan', $this->createValidator()->memberOf('daily','weekly'), array('configuration', 'clamscan', 'FilesystemScan'));
+        $this->declareParameter('FilesystemScan', $this->createValidator()->memberOf('daily','weekly','now'), array('configuration', 'clamscan', 'FilesystemScan'));
+        $this->declareParameter('FilesystemScanFilesystems', Validate::ANYTHING, array('configuration', 'clamscan', 'FilesystemScanFilesystems'));
         $this->declareParameter('FilesystemScanExclude', Validate::ANYTHING, array('configuration', 'clamscan', 'FilesystemScanExclude'));
         $this->declareParameter('Quarantine', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'Quarantine'));
         $this->declareParameter('status', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'status'));
@@ -35,7 +36,8 @@ class ClamScanSettings extends \Nethgui\Controller\AbstractController
     public $sortId = 80;
 
     private $timestamp = '';
-    private $alarm = FALSE;
+    private $alarm = '';
+    private $clamscan = '';
 
     private function readAntivirus()
     {
@@ -51,19 +53,28 @@ class ClamScanSettings extends \Nethgui\Controller\AbstractController
         $now = time();
         $staleSignatures = $now - $max > 3600 * 24 * 3;
         if ($staleSignatures) {
-            $this->alarm = TRUE;
+            $this->alarm = 'NotUpdated';
+        } else {
+            $this->alarm = 'Updated';
         }
 
         $this->timestamp = min($max, $now);
-    }
 
+        $response = exec("sleep 2;/usr/bin/pgrep clamscan");
+        if ($response) {
+            $this->clamscan = 'Running';
+        }else {
+            $response = $this->clamscan = 'NotRunning';
+        }
+   }
 
     public function prepareView(\Nethgui\View\ViewInterface $view)
     {
         parent::prepareView($view);
         $this->readAntivirus();
         $view['timestamp'] = strftime("%F %R", $this->timestamp);
-        $view['alarm'] = $this->alarm;
+        $view['alarm'] = $view->translate($this->alarm);
+        $view['clamscan'] = $view->translate($this->clamscan);
 
         $view['JobDayDatasource'] = \Nethgui\Renderer\AbstractRenderer::hashToDatasource(array(
                 '1d' => $view->translate('MONDAY'),
@@ -108,9 +119,10 @@ class ClamScanSettings extends \Nethgui\Controller\AbstractController
 
         if ($this->getRequest()->hasParameter('Freshclam')) {
             $this->getPlatform()->signalEvent('freshclam-update');
+
         }
         if ($this->getRequest()->hasParameter('ClamScanning')) {
-            $this->getPlatform()->exec('/usr/bin/sudo  /usr/bin/systemctl start clamscan-nethgui.service');
+            $this->getPlatform()->signalEvent('nethserver-clamscan-now');
         }
     }
 
