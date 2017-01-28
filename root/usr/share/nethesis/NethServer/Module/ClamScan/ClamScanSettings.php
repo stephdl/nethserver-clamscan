@@ -126,11 +126,6 @@ class ClamScanSettings extends \Nethgui\Controller\AbstractController
         }
     }
 
-    public function nextPath()
-    {
-        return $this->getRequest()->isMutation() ? 'Clamscan' : parent::nextPath();
-    }
-
     protected function onParametersSaved($changedParameters)
     {
         parent::onParametersSaved($changedParameters);
