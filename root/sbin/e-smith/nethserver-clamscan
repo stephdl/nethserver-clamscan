@@ -160,11 +160,11 @@ my $date = localtime;
 my @report;
 @report = <CLAMSCAN>;
 
-unshift  @report, "\n------------------------------------\n\t" . $date;
-print @report;
+unshift  @report, ("\n------------------------------------\n\t" . $date,
+                   "\n\tScanned Folder: ".$filesystems);
 close CLAMSCAN;
 
-#we want to write our own log because clamav doesnt write the date in it.
+#we want to write our own log because clamav doesnt write the date and the scanned folder in it.
 open (FILE, ">>","/var/log/clamav/clamscan.log") or die $!;
 print FILE @report;
 close FILE;
