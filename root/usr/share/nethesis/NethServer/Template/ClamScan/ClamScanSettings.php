@@ -13,6 +13,11 @@ echo $view->panel()
         ->insert($view->columns()
             ->insert($view->selector('JobDay', $view::SELECTOR_DROPDOWN))
             ->insert($view->selector('JobHour', $view::SELECTOR_DROPDOWN))))
+
+    ->insert($view->fieldsetSwitch('FilesystemScan', 'now', $view::FIELDSETSWITCH_EXPANDABLE)
+            ->insert($view->textInput('FilesystemScanFilesystems', $view::LABEL_ABOVE)->setAttribute('placeholder', '/'))
+            ->insert($view->button('ClamScanning', $view::BUTTON_SUBMIT)->setAttribute('label', $T('ClamScan_label'))))
+
     ->insert($view->columns()
         ->insert($view->textInput('MaxScanFile', $view::LABEL_ABOVE))
         ->insert($view->textArea('FilesystemScanExclude', $view::LABEL_ABOVE)->setAttribute('dimensions', '6x25')))
@@ -26,29 +31,10 @@ echo $view->panel()
 
 echo "<div class='dashboard-item'>";
 echo "<dl>";
-echo "<dt>".$T('statusDatabase_label')."</dt><dd><span class='";
-if ($view['alarm']) {
-    echo "antivirus-red'>".$T('warningDatabase_label');
-} else {
-    echo "antivirus-green'>".$T('okDatabase_label');
-}
+echo "<dt>".$T('database_label')."</dt><dd>"; echo $view->textLabel('alarm'); "</dd>";
 echo "<dt>".$T('timestamp_label')."</dt><dd>"; echo $view->textLabel('timestamp'); "</dd>";
+echo "<dt>".$T('ClamScanRunning_label')."</dt><dd>"; echo $view->textLabel('clamscan'); "</dd>";
 echo "</div>";
 
-$view->includeCSS("
-  span.antivirus-green {
-      padding: 3px;
-      color: green;
-      font-weight: bold;
-  }
-  span.antivirus-red {
-      padding: 3px;
-      color: red;
-      font-weight: bold;
-  }
-");
-
-
 echo $view->buttonList($view::BUTTON_SUBMIT)
-        ->insert($view->button('Freshclam', $view::BUTTON_SUBMIT)->setAttribute('label', $T('Freshclam_label')))
-        ->insert($view->button('ClamScanning', $view::BUTTON_SUBMIT)->setAttribute('label', $T('ClamScan_label')));
+        ->insert($view->button('Freshclam', $view::BUTTON_SUBMIT)->setAttribute('label', $T('Freshclam_label')));

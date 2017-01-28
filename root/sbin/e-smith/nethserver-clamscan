@@ -27,7 +27,11 @@ my $db = esmith::ConfigDB->open_ro or die "Couldn't open ConfigDB";
 my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine')
     || die 'cannot open quarantine database';
 
-my $filesystems = $db->get_prop("clamscan", "FilesystemScanFilesystems") || '/';
+    my $filesystems = $db->get_prop("clamscan", "FilesystemScanFilesystems") || '/';
+
+        $filesystems = '/'. $filesystems unless $filesystems =~ /^\//;
+        #when the job is cron based, then do full scan
+        $filesystems = ($scan eq "now") ? $filesystems : '/';
 
 my $MailReport = $db->get_prop("clamscan", "FilesystemScanReportTo") || 'root';
 
@@ -178,7 +182,7 @@ print MAIL @report;
 close MAIL;
 
 ## populate quarantine database
-# we are looking to : 
+# we are looking to :
 #    /boot/efi/EFI/redhat/grub.efi: Heuristics.Broken.Executable FOUND
 #    /boot/efi/EFI/redhat/grub.efi: moved to '/var/spool/clamav/quarantine/grub.efi'
 
