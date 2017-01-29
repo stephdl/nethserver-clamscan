@@ -1,6 +1,6 @@
 Summary: NethServer clamav scanning tools
 %define name nethserver-clamscan
-%define version 0.0.3
+%define version 0.0.4
 %define release 1
 Name: %{name}
 Version: %{version}
@@ -45,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 #%dir %{_nseventsdir}/%{name}-update
 
 %changelog
+* Sun Jan 29 2017 Stephane de Labrusse <stephdl@de-labrusse.fr> - 0.0.4-1-ns6
+- Quarantine page with restoration
+
 * Sat Jan 21 2017 Stephane de Labrusse <stephdl@de-labrusse.fr> - 0.0.3-1-ns6
 - First available version to NS6
 
