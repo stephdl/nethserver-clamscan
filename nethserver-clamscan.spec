@@ -1,7 +1,7 @@
 Summary: NethServer clamav scanning tools
 %define name nethserver-clamscan
 %define version 0.0.4
-%define release 1
+%define release 2
 Name: %{name}
 Version: %{version}
 Release: %{release}%{?dist}
@@ -41,10 +41,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f e-smith-%{version}-filelist
 %defattr(-,root,root)
-
-#%dir %{_nseventsdir}/%{name}-update
+%doc COPYING
 
 %changelog
+* Sun Mar 11 2017 Stephane de Labrusse <stephdl@de-labrusse.fr> 0.0.4-2-ns6
+- GPL license
+
 * Sun Jan 29 2017 Stephane de Labrusse <stephdl@de-labrusse.fr> - 0.0.4-1-ns6
 - Quarantine page with restoration
 
