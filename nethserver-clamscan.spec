@@ -21,11 +21,6 @@ NethServer clamav scanning tools
 %setup
 
 %post
-#upgrade clamav database following the installation
-if [ $1 -eq 1 ] ; then
-/sbin/e-smith/expand-template /etc/freshclam.conf
-/usr/libexec/nethserver/freshclam-nethgui &
-fi
 %preun
 
 %build
@@ -42,7 +37,6 @@ rm -rf $RPM_BUILD_ROOT
 %{genfilelist} %{buildroot} \
    --dir  /var/spool/clamav/quarantine 'attr(2755,root,root)' \
    --file /sbin/e-smith/nethserver-clamscan 'attr(755,root,root)' \
-   --file /usr/libexec/nethserver/freshclam-nethgui 'attr(755,root,root)' \
 $RPM_BUILD_ROOT > e-smith-%{version}-filelist
 
 %clean
