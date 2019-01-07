@@ -1,7 +1,7 @@
 Summary: NethServer clamav scanning tools
 %define name nethserver-clamscan
 %define version 0.1.2
-%define release 2
+%define release 3
 Name: %{name}
 Version: %{version}
 Release: %{release}%{?dist}
