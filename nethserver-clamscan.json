@@ -1,0 +1,26 @@
+{
+  "id": "nethserver-clamscan",
+  "name": "ClamScan",
+  "summary": "Scan files and directories for viruses",
+  "description": "Scan files and directories for viruses ",
+  "url": "",
+  "homepage": "https://github.com/stephdl/nethserver-clamscan",
+  "provides": ["nethserver-clamscan"],
+  "release": {
+    "version": "_RELEASE_"
+  },
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/stephdl/dev/issues"
+  },
+  "author": {
+    "name": "Stephane de Labrusse",
+    "url": "https://github.com/stephdl/nethserver-clamscan",
+    "email": "stephdl@de-labrusse.fr"
+  },
+  "infoapi": {
+    "path": "nethserver-clamscan/read"
+  },
+  "icon": "logo.png",
+  "external": true
+}

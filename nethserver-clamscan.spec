@@ -1,7 +1,7 @@
 Summary: NethServer clamav scanning tools
 %define name nethserver-clamscan
-%define version 0.1.2
-%define release 3
+%define version 0.1.3
+%define release 1
 Name: %{name}
 Version: %{version}
 Release: %{release}%{?dist}
@@ -29,10 +29,19 @@ NethServer clamav scanning tools
 #mkdir -p root/%{_nsdbconfdir}/{quarantine}/{migrate,force,defaults}
 %{makedocs}
 perl createlinks
+sed -i 's/_RELEASE_/%{version}/' %{name}.json
 
 %install
 rm -rf $RPM_BUILD_ROOT
 (cd root   ; find . -depth -print | cpio -dump $RPM_BUILD_ROOT)
+
+mkdir -p %{buildroot}/usr/share/cockpit/%{name}/
+mkdir -p %{buildroot}/usr/share/cockpit/nethserver/applications/
+mkdir -p %{buildroot}/usr/libexec/nethserver/api/%{name}/
+cp -a manifest.json %{buildroot}/usr/share/cockpit/%{name}/
+cp -a logo.png %{buildroot}/usr/share/cockpit/%{name}/
+cp -a %{name}.json %{buildroot}/usr/share/cockpit/nethserver/applications/
+cp -a api/* %{buildroot}/usr/libexec/nethserver/api/%{name}/
 
 %{genfilelist} %{buildroot} \
    --dir  /var/spool/clamav/quarantine 'attr(2755,root,root)' \
@@ -49,6 +58,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING
 
 %changelog
+* Tue Oct 15 2019 Stephane de Labrusse <stephdl@de-labrusse.fr> 0.1.3-1.ns7
+- cockpit. added to legacy apps
+
 * Sun Mar 11 2017 Stephane de Labrusse <stephdl@de-labrusse.fr>  0.1.2-2-ns7
 - GPL license
 

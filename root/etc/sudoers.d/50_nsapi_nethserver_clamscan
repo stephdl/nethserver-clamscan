@@ -1,0 +1,7 @@
+#
+# nsapi_nethserver_clamscan
+#
+Cmnd_Alias NSAPI_NETHSERVER_CLAMSCAN = \
+     /usr/libexec/nethserver/api/nethserver-clamscan/read
+
+Defaults!NSAPI_NETHSERVER_CLAMSCAN !requiretty
