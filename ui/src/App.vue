@@ -24,17 +24,45 @@
 <div id="app">
     <nav id="navbar-left" class="nav-pf-vertical nav-pf-vertical-with-sub-menus nav-pf-persistent-secondary panel-group">
         <ul class="list-group panel">
-            <router-link tag="li" to="/dashboard" active-class="active" class="list-group-item" id="dashboard-item">
+            <router-link tag="li" to="/Clamscan" active-class="active" class="list-group-item" id="Clamscan-item">
                 <a>
-                    <span class="fa fa-cube"></span>
-                    <span class="list-group-item-value">{{$t('dashboard.title')}}</span>
+                    <span class="fa fa-gear"></span>
+                    <span class="list-group-item-value">{{$t('clamscan.title')}}</span>
                 </a>
             </router-link>
             <li class="li-empty"></li>
-            <router-link tag="li" to="/settings" active-class="active" class="list-group-item">
+            <router-link tag="li" to="/Detections" active-class="active" class="list-group-item" id="Detections-item">
                 <a>
-                    <span class="fa fa-at"></span>
-                    <span class="list-group-item-value">{{$t('settings.title')}}</span>
+                    <span class="fa fa-gear"></span>
+                    <span class="list-group-item-value">{{$t('detections.title')}}</span>
+                </a>
+            </router-link>
+            <li class="li-empty"></li>
+            <router-link tag="li" to="/Files" active-class="active" class="list-group-item" id="Files-item">
+                <a>
+                    <span class="fa fa-gear"></span>
+                    <span class="list-group-item-value">{{$t('files.title')}}</span>
+                </a>
+            </router-link>
+            <li class="li-empty"></li>
+            <router-link tag="li" to="/Pua" active-class="active" class="list-group-item" id="Pua-item">
+                <a>
+                    <span class="fa fa-gear"></span>
+                    <span class="list-group-item-value">{{$t('pua.title')}}</span>
+                </a>
+            </router-link>
+            <li class="li-empty"></li>
+            <router-link tag="li" to="/Quarantine" active-class="active" class="list-group-item" id="Quarantine-item">
+                <a>
+                    <span class="fa fa-gear"></span>
+                    <span class="list-group-item-value">{{$t('quarantine.title')}}</span>
+                </a>
+            </router-link>
+            <li class="li-empty"></li>
+            <router-link tag="li" to="/Signatures" active-class="active" class="list-group-item" id="Signatures-item">
+                <a>
+                    <span class="fa fa-gear"></span>
+                    <span class="list-group-item-value">{{$t('signatures.title')}}</span>
                 </a>
             </router-link>
             <li class="li-empty"></li>

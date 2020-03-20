@@ -18,7 +18,22 @@
     "stop_follow_button": "Stop following",
     "filter_label": "Regexp filter"
     },
-    "dashboard":{
-        "title": "Dashboard"
+    "clamscan":{
+        "title": "Clamscan"
+    },
+    "detections":{
+        "title": "Detections"
+    },
+    "files":{
+        "title": "Files"
+    },
+    "pua":{
+        "title": "PUA"
+    },
+    "quarantine":{
+        "title": "Quarantine"
+    },
+    "signatures":{
+        "title": "Signatures"
     }
 }

@@ -26,8 +26,12 @@ import DocInfo from "./directives/DocInfo.vue";
 import VueGoodTable from "vue-good-table";
 
 import App from './App.vue'
-import Dashboard from './views/Dashboard.vue'
-import Settings from './views/Settings.vue'
+import Clamscan from './views/Clamscan.vue'
+import Detections from './views/Detections.vue'
+import Files from './views/Files.vue'
+import Pua from './views/Pua.vue'
+import Quarantine from './views/Quarantine.vue'
+import Signatures from './views/Signatures.vue'
 import Logs from './views/Logs.vue'
 import About from './views/About.vue'
 
@@ -47,9 +51,13 @@ const router = new Router({
     mode: 'hash',
     base: process.env.BASE_URL,
     routes: [
-      { path: '/', redirect: '/dashboard'},
-      { path: '/dashboard', component: Dashboard },
-      { path: '/settings', component: Settings },
+      { path: '/', redirect: '/Clamscan'},
+      { path: '/Clamscan', component: Clamscan },
+      { path: '/Detections', component: Detections },
+      { path: '/Files', component: Files },
+      { path: '/Pua', component: Pua },
+      { path: '/Quarantine', component: Quarantine },
+      { path: '/Signatures', component: Signatures },
       { path: '/logs', component: Logs },
       { path: '/about', name: 'about', component: About },
     ]
