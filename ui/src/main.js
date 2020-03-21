@@ -62,7 +62,7 @@ const router = new Router({
       { path: '/about', name: 'about', component: About },
     ]
 })
-router.replace("/dashboard")
+router.replace("/Clamscan")
 
 var app = new Vue({
     i18n,
