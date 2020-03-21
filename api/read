@@ -1,0 +1,113 @@
+#!/usr/bin/perl
+
+#
+#
+# This script is part of NethServer.
+#
+# NethServer is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License,
+# or any later version.
+#
+# NethServer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with NethServer.  If not, see COPYING.
+#
+
+use warnings;
+use strict;
+use JSON;
+use esmith::ConfigDB;
+use NethServer::ApiTools;
+use List::Util qw(min);
+
+my $db = esmith::ConfigDB->open_ro;
+my $input = NethServer::ApiTools::readInput();
+my $cmd = $input->{'action'} || '';
+my $data;
+my %ret;
+
+
+if ($cmd eq 'configuration') {
+
+my $max = 0;
+my @fileList = glob('/var/lib/clamav/*.{cvd,cld,ndb,hdb,cdb}');
+foreach my $file (@fileList) {
+    my $changeTime = (stat($file))[9];
+    if ($changeTime > $max) {
+        $max = $changeTime;
+    }
+}
+my $alarm;
+my $now = time();
+my $staleSignatures = $now - $max > 3600 * 24 * 3;
+if ($staleSignatures) {
+    $alarm = 'NotUpdated';
+} else {
+    $alarm = 'Updated';
+}
+
+my $timestamp = min($max, $now);
+my $clamscan;
+my $response = `sleep 2;/usr/bin/pgrep clamscan`;
+if ($response) {
+    $clamscan = 'Running';
+} else {
+    $clamscan = 'NotRunning';
+}
+
+
+   my %clamscan = (
+           AlgoDetection => $db->get_prop('clamscan','AlgoDetection'),
+           BlockEncrypted => $db->get_prop('clamscan','BlockEncrypted'),
+           BlockMacros => $db->get_prop('clamscan','BlockMacros'),
+           Bytecode => $db->get_prop('clamscan','Bytecode'),
+           BytecodeTimout => $db->get_prop('clamscan','BytecodeTimout'),
+           BytecodeUnsigned => $db->get_prop('clamscan','BytecodeUnsigned'),
+           DetectBroken => $db->get_prop('clamscan','DetectBroken'),
+           DetectPua => $db->get_prop('clamscan','DetectPua'),
+           DetectStructured => $db->get_prop('clamscan','DetectStructured'),
+           MinHitFile => $db->get_prop('clamscan','MinHitFile'),
+           FilesystemScan => $db->get_prop('clamscan','FilesystemScan'),
+           FilesystemScanExclude => $db->get_prop('clamscan','FilesystemScanExclude'),
+           FilesystemScanFilesystems => $db->get_prop('clamscan','FilesystemScanFilesystems'),
+           FilesystemScanReportTo => $db->get_prop('clamscan','FilesystemScanReportTo'),
+           FilesystemScanUnofficialSigs => $db->get_prop('clamscan','FilesystemScanUnofficialSigs'),
+           IncludePua => $db->get_prop('clamscan','IncludePua'),
+           JobDay => $db->get_prop('clamscan','JobDay'),
+           JobHour => $db->get_prop('clamscan','JobHour'),
+           MaxScanFile => $db->get_prop('clamscan','MaxScanFile'),
+           PartInstersection => $db->get_prop('clamscan','PartInstersection'),
+           PhishingScanUrl => $db->get_prop('clamscan','PhishingScanUrl'),
+           PhishingSigs => $db->get_prop('clamscan','PhishingSigs'),
+           Quarantine => $db->get_prop('clamscan','Quarantine'),
+           QuarantineDirectory => $db->get_prop('clamscan','QuarantineDirectory'),
+           ScanArchive => $db->get_prop('clamscan','ScanArchive'),
+           ScanElf => $db->get_prop('clamscan','ScanElf'),
+           ScanHTML => $db->get_prop('clamscan','ScanHTML'),
+           ScanHwp => $db->get_prop('clamscan','ScanHwp'),
+           ScanMail => $db->get_prop('clamscan','ScanMail'),
+           ScanOle2 => $db->get_prop('clamscan','ScanOle2'),
+           ScanPdf => $db->get_prop('clamscan','ScanPdf'),
+           ScanPe => $db->get_prop('clamscan','ScanPe'),
+           ScanSwf => $db->get_prop('clamscan','ScanSwf'),
+           ScanXML => $db->get_prop('clamscan','ScanXML'),
+           customSettings => $db->get_prop('clamscan','customSettings'),
+           reallyWantToMove => $db->get_prop('clamscan','reallyWantToMove'),
+           status => $db->get_prop('clamscan','status'),
+           timestamp => $timestamp,
+           clamscan => $clamscan,
+           alarm => $alarm
+           );
+
+   $ret{'configuration'} = \%clamscan;
+   print encode_json(\%ret);
+   exit (0);
+
+} else {
+     NethServer::ApiTools::error();
+ }

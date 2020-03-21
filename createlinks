@@ -27,3 +27,4 @@ event_actions($event,
 $event = 'nethserver-clamscan-now';
 event_actions($event,
 'nethserver-clamscan-now' => '10');
+templates2events('/etc/cron.d/clamscan', $event);
