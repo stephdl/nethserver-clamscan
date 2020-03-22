@@ -249,9 +249,15 @@
             for="textInput-modal-markup"
         >{{$t('clamscan.Last_Update_Database')}}
         </label>
-        <div class="col-sm-3">
-          {{configuration.timestamp}}
-        </div>
+        <form v-on:submit.prevent="FreshClamUpdate('status')">
+          <div class="col-sm-3">
+            {{configuration.timestamp  | dateFormat}}
+          </div>
+          <div class="col-sm-5">
+            <span v-if="loadersFreshClam" class="spinner spinner-sm form-spinner-loader adjust-top-loader"></span>
+            <button  class="btn btn-default" type="submit">{{$t('clamscan.FreshClamUpdate')}}</button>
+          </div>
+        </form>
     </div>
     <div v-if="configuration.status" class="form-group">
         <label
@@ -259,15 +265,9 @@
           for="textInput-modal-markup"
           >{{$t('clamscan.Virus_Scanning')}}
         </label>
-        <form v-on:submit.prevent="FreshClamUpdate('status')">
         <div class="col-sm-3"
-          >{{$t('clamscan.Database_'+configuration.clamscan)}}
+          >{{$t('clamscan.Virus_scanning_'+configuration.clamscan)}}
         </div>
-          <div class="col-sm-5">
-            <span v-if="loadersFreshClam" class="spinner spinner-sm form-spinner-loader adjust-top-loader"></span>
-            <button  class="btn btn-primary" type="submit">{{$t('clamscan.FreshClamUpdate')}}</button>
-          </div>
-        </form>
     </div>
     
     <div  class="form-group">
