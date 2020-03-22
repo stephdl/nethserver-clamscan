@@ -34,7 +34,10 @@
           v-on:change="handleLogs()"
           :disabled="view.follow"
         >
-          <option selected>/var/log/messages</option>
+          <option selected>/var/log/clamav/clamscan.log</option>
+          <option >var/log/clamav/clamscan-errors.log</option>
+          <option >/var/log/clamav-unofficial-sigs/clamav-unofficial-sigs.log</option>
+          <option value="/var/log/messages">Freshclam-update (/var/log/messages)</option>
         </select>
       </div>
       <div class="col-xs-12 col-sm-6 col-md-8">
@@ -109,7 +112,7 @@ mounted() {
 data() {
   return {
     view: {
-      path: "/var/log/messages",
+      path: "/var/log/clamav/clamscan.log",
       logsLoaded: false,
       logsContent: "",
       follow: false,
@@ -141,7 +144,7 @@ methods: {
         action: this.view.follow ? "follow" : "dump",
         lines: this.view.follow ? null : this.view.lines,
         mode: "file",
-        filter: this.view.filter,
+        filter: (this.view.path === '/var/log/messages') ? 'freshclam' : this.view.filter,
         paths: [this.view.path]
       },
       this.view.follow
