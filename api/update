@@ -87,15 +87,36 @@ if ($action eq 'clamscan') {
         $cdb->set_prop('clamscan', $prop, $data->{$prop});
     }
 
-  $data->{reallyWantToMove} = ($data->{Quarantine} eq 'enabled')? 'enabled': 'disabled';
-  $cdb->set_prop('clamscan','reallyWantToMove',$data->{reallyWantToMove});
-
       esmith::event::set_json_log(1);
-    my $success = esmith::event::event_signal('nethserver-clamscan-now');
+    my $success = esmith::event::event_signal('nethserver-clamscan-save');
     if($success) {
         NethServer::ApiTools::success();
     } else {
-       NethServer::ApiTools::error("EventError", "clamscan_now_action_failed", 15545655562);
+       NethServer::ApiTools::error("EventError", "detections_update_failed", 15545655562);
+    }
+} elsif ($action eq 'files') {
+
+    foreach my $prop (qw(
+        ScanArchive
+        ScanElf
+        ScanHTML
+        ScanHwp
+        ScanMail
+        ScanOle2
+        ScanPdf
+        ScanPe
+        ScanSwf
+        ScanXML
+    )) {
+        $cdb->set_prop('clamscan', $prop, $data->{$prop});
+    }
+
+      esmith::event::set_json_log(1);
+    my $success = esmith::event::event_signal('nethserver-clamscan-save');
+    if($success) {
+        NethServer::ApiTools::success();
+    } else {
+       NethServer::ApiTools::error("EventError", "files_update_failed", 15545655562);
     }
 } elsif ($action eq 'FreshClamUpdate') {
       esmith::event::set_json_log(1);

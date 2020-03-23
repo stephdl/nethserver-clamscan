@@ -93,6 +93,25 @@ if ($response) {
    print encode_json(\%ret);
    exit (0);
 
+} elsif ($cmd eq 'files') {
+
+   my %clamscan = (
+           ScanArchive => $db->get_prop('clamscan','ScanArchive'),
+           ScanElf => $db->get_prop('clamscan','ScanElf'),
+           ScanHTML => $db->get_prop('clamscan','ScanHTML'),
+           ScanHwp => $db->get_prop('clamscan','ScanHwp'),
+           ScanMail => $db->get_prop('clamscan','ScanMail'),
+           ScanOle2 => $db->get_prop('clamscan','ScanOle2'),
+           ScanPdf => $db->get_prop('clamscan','ScanPdf'),
+           ScanPe => $db->get_prop('clamscan','ScanPe'),
+           ScanSwf => $db->get_prop('clamscan','ScanSwf'),
+           ScanXML => $db->get_prop('clamscan','ScanXML')
+           );
+
+   $ret{'configuration'} = \%clamscan;
+   print encode_json(\%ret);
+   exit (0);
+
 } else {
      NethServer::ApiTools::error();
 }
