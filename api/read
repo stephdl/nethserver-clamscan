@@ -62,42 +62,13 @@ if ($response) {
 
 
    my %clamscan = (
-           AlgoDetection => $db->get_prop('clamscan','AlgoDetection'),
-           BlockEncrypted => $db->get_prop('clamscan','BlockEncrypted'),
-           BlockMacros => $db->get_prop('clamscan','BlockMacros'),
-           Bytecode => $db->get_prop('clamscan','Bytecode'),
-           BytecodeTimout => $db->get_prop('clamscan','BytecodeTimout'),
-           BytecodeUnsigned => $db->get_prop('clamscan','BytecodeUnsigned'),
-           DetectBroken => $db->get_prop('clamscan','DetectBroken'),
-           DetectPua => $db->get_prop('clamscan','DetectPua'),
-           DetectStructured => $db->get_prop('clamscan','DetectStructured'),
-           MinHitFile => $db->get_prop('clamscan','MinHitFile'),
            FilesystemScan => $db->get_prop('clamscan','FilesystemScan'),
            FilesystemScanExclude => $db->get_prop('clamscan','FilesystemScanExclude'),
            FilesystemScanFilesystems => $db->get_prop('clamscan','FilesystemScanFilesystems'),
-           FilesystemScanReportTo => $db->get_prop('clamscan','FilesystemScanReportTo'),
-           FilesystemScanUnofficialSigs => $db->get_prop('clamscan','FilesystemScanUnofficialSigs'),
-           IncludePua => $db->get_prop('clamscan','IncludePua'),
            JobDay => $db->get_prop('clamscan','JobDay'),
            JobHour => $db->get_prop('clamscan','JobHour'),
            MaxScanFile => $db->get_prop('clamscan','MaxScanFile'),
-           PartInstersection => $db->get_prop('clamscan','PartInstersection'),
-           PhishingScanUrl => $db->get_prop('clamscan','PhishingScanUrl'),
-           PhishingSigs => $db->get_prop('clamscan','PhishingSigs'),
            Quarantine => $db->get_prop('clamscan','Quarantine'),
-           QuarantineDirectory => $db->get_prop('clamscan','QuarantineDirectory'),
-           ScanArchive => $db->get_prop('clamscan','ScanArchive'),
-           ScanElf => $db->get_prop('clamscan','ScanElf'),
-           ScanHTML => $db->get_prop('clamscan','ScanHTML'),
-           ScanHwp => $db->get_prop('clamscan','ScanHwp'),
-           ScanMail => $db->get_prop('clamscan','ScanMail'),
-           ScanOle2 => $db->get_prop('clamscan','ScanOle2'),
-           ScanPdf => $db->get_prop('clamscan','ScanPdf'),
-           ScanPe => $db->get_prop('clamscan','ScanPe'),
-           ScanSwf => $db->get_prop('clamscan','ScanSwf'),
-           ScanXML => $db->get_prop('clamscan','ScanXML'),
-           customSettings => $db->get_prop('clamscan','customSettings'),
-           reallyWantToMove => $db->get_prop('clamscan','reallyWantToMove'),
            status => $db->get_prop('clamscan','status'),
            timestamp => $timestamp,
            clamscan => $clamscan,
@@ -107,7 +78,21 @@ if ($response) {
    $ret{'configuration'} = \%clamscan;
    print encode_json(\%ret);
    exit (0);
+} elsif ($cmd eq 'detections') {
+
+   my %clamscan = (
+           AlgoDetection => $db->get_prop('clamscan','AlgoDetection'),
+           BlockEncrypted => $db->get_prop('clamscan','BlockEncrypted'),
+           BlockMacros => $db->get_prop('clamscan','BlockMacros'),
+           DetectBroken => $db->get_prop('clamscan','DetectBroken'),
+           DetectStructured => $db->get_prop('clamscan','DetectStructured'),
+           PartInstersection => $db->get_prop('clamscan','PartInstersection')
+           );
+
+   $ret{'configuration'} = \%clamscan;
+   print encode_json(\%ret);
+   exit (0);
 
 } else {
      NethServer::ApiTools::error();
- }
+}

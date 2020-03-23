@@ -54,11 +54,38 @@ if ($action eq 'clamscan') {
        NethServer::ApiTools::error("EventError", "update_action_failed", 15507655562);
     }
 } elsif ($action eq 'scanFileSystemNow') {
-  $cdb->set_prop('clamscan','FilesystemScanFilesystems',$data->{FilesystemScanFilesystems});
-  $cdb->set_prop('clamscan','FilesystemScan',$data->{FilesystemScan});
-  $cdb->set_prop('clamscan','MaxScanFile',$data->{MaxScanFile});
-  $cdb->set_prop('clamscan','FilesystemScanExclude',$data->{FilesystemScanExclude});
-  $cdb->set_prop('clamscan','Quarantine',$data->{Quarantine});
+      foreach my $prop (qw(
+        FilesystemScanFilesystems
+        FilesystemScan
+        MaxScanFile
+        FilesystemScanExclude
+        Quarantine
+    )) {
+        $cdb->set_prop('clamscan', $prop, $data->{$prop});
+    }
+  
+  $data->{reallyWantToMove} = ($data->{Quarantine} eq 'enabled')? 'enabled': 'disabled';
+  $cdb->set_prop('clamscan','reallyWantToMove',$data->{reallyWantToMove});
+
+      esmith::event::set_json_log(1);
+    my $success = esmith::event::event_signal('nethserver-clamscan-now');
+    if($success) {
+        NethServer::ApiTools::success();
+    } else {
+       NethServer::ApiTools::error("EventError", "clamscan_now_action_failed", 15545655562);
+    }
+} elsif ($action eq 'detections') {
+
+    foreach my $prop (qw(
+        BlockEncrypted
+        DetectBroken
+        AlgoDetection
+        DetectStructured
+        PartInstersection
+        BlockMacros 
+    )) {
+        $cdb->set_prop('clamscan', $prop, $data->{$prop});
+    }
 
   $data->{reallyWantToMove} = ($data->{Quarantine} eq 'enabled')? 'enabled': 'disabled';
   $cdb->set_prop('clamscan','reallyWantToMove',$data->{reallyWantToMove});
