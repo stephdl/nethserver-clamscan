@@ -175,7 +175,7 @@
         </div>
         <div class="col-sm-5">
             <span v-if="loadersScan" class="spinner spinner-sm form-spinner-loader adjust-top-loader"></span>
-          <button class="btn btn-default" type="submit">{{$t('clamscan.start_scan_now')}}</button>
+          <button class="btn btn-primary" type="submit">{{$t('clamscan.start_scan_now')}}</button>
         </div>
       </form>
     </div>
@@ -275,7 +275,7 @@
       <span v-if="loaders" class="spinner spinner-sm form-spinner-loader adjust-top-loader"></span>
       </label>
       <div class="col-sm-5">
-        <button class="btn btn-primary" type="submit">{{$t('save')}}</button>
+        <button :disabled="configuration.FilesystemScan == 'now'" class="btn btn-primary" type="submit">{{$t('save')}}</button>
       </div>
     </div>
 </form>
