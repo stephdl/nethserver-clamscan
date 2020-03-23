@@ -1,5 +1,5 @@
 <template>
-  <div>
+   <div> <!-- Do not remove :( -->
   <h2>{{$t('detections.title')}}</h2>
   <h3>{{$t('detections.Scanning_Options_might_give_false_positives')}}</h3>
   <div v-if="!view.isLoaded" class="spinner spinner-lg"></div>

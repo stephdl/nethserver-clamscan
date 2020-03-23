@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <h2>{{$t('clamscan.title')}}</h2>
-        <div v-if="!view.isLoaded" class="spinner spinner-lg"></div>
-<div v-if="view.isLoaded">
+  <div> <!-- Do not remove :( -->
+  <h2>{{$t('clamscan.title')}}</h2>
+  <div v-if="!view.isLoaded" class="spinner spinner-lg"></div>
+  <div v-if="view.isLoaded">
   <form class="form-horizontal" v-on:submit.prevent="saveSettings('status')">
     <div :class="['form-group', errors.status.hasError ? 'has-error' : '']">
           <label
