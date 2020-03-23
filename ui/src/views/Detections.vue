@@ -295,11 +295,5 @@ methods: {
 </script>
 
 <style>
-input[type=radio].form-control, input[type=checkbox].form-control {
-    width: 12px !important;
-    height: 12px !important;
-    display: inline-block;
-    vertical-align: -25%;
-    margin-right: 1em;
-}
+
 </style>
