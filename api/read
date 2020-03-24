@@ -126,6 +126,18 @@ if ($response) {
    print encode_json(\%ret);
    exit (0);
 
+} elsif ($cmd eq 'pua') {
+
+ my @pua = split(',',$db->get_prop('clamscan','IncludePua'));
+    my %clamscan = (
+            IncludePua => \@pua,
+            DetectPua => $db->get_prop('clamscan','DetectPua')
+            );
+
+    $ret{'configuration'} = \%clamscan;
+    print encode_json(\%ret);
+    exit (0);
+
 } else {
      NethServer::ApiTools::error();
 }

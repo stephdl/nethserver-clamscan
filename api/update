@@ -137,6 +137,22 @@ if ($action eq 'clamscan') {
     } else {
        NethServer::ApiTools::error("EventError", "signatures_update_failed", 15545655562);
     }
+} elsif ($action eq 'pua') {
+
+    foreach my $prop (qw(
+        IncludePua
+        DetectPua
+    )) {
+        $cdb->set_prop('clamscan', $prop, $data->{$prop});
+    }
+
+      esmith::event::set_json_log(1);
+    my $success = esmith::event::event_signal('nethserver-clamscan-save');
+    if($success) {
+        NethServer::ApiTools::success();
+    } else {
+       NethServer::ApiTools::error("EventError", "pua_update_failed", 15545655562);
+    }
 } elsif ($action eq 'FreshClamUpdate') {
       esmith::event::set_json_log(1);
     my $success = esmith::event::event_signal('freshclam-update');
