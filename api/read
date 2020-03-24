@@ -111,6 +111,20 @@ if ($response) {
    $ret{'configuration'} = \%clamscan;
    print encode_json(\%ret);
    exit (0);
+   
+} elsif ($cmd eq 'signatures') {
+
+   my %clamscan = (
+           Bytecode => $db->get_prop('clamscan','Bytecode'),
+           BytecodeUnsigned => $db->get_prop('clamscan','BytecodeUnsigned'),
+           FilesystemScanUnofficialSigs => $db->get_prop('clamscan','FilesystemScanUnofficialSigs'),
+           PhishingSigs => $db->get_prop('clamscan','PhishingSigs'),
+           PhishingScanUrl => $db->get_prop('clamscan','PhishingScanUrl')
+           );
+
+   $ret{'configuration'} = \%clamscan;
+   print encode_json(\%ret);
+   exit (0);
 
 } else {
      NethServer::ApiTools::error();
