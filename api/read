@@ -26,6 +26,7 @@ use NethServer::ApiTools;
 use List::Util qw(min);
 
 my $db = esmith::ConfigDB->open_ro;
+my $dbq = esmith::ConfigDB->open_ro('quarantine');
 my $input = NethServer::ApiTools::readInput();
 my $cmd = $input->{'action'} || '';
 my $data;
@@ -112,6 +113,18 @@ if ($response) {
    print encode_json(\%ret);
    exit (0);
    
+ } elsif ($cmd eq 'quarantine') {
+   
+    my @Quarantine;
+    foreach my $item ($dbq->get_all_by_prop( type => 'quarantined')) {
+        my $key = $item->key;
+        my $ruleMatch = $item->prop('ruleMatch');
+        push @Quarantine, { path => $key, ruleMatch =>$ruleMatch};
+    }
+
+    print encode_json({"Quarantine"=> [@Quarantine]});
+    exit (0);
+
 } elsif ($cmd eq 'signatures') {
 
    my %clamscan = (

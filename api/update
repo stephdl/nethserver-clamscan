@@ -153,6 +153,27 @@ if ($action eq 'clamscan') {
     } else {
        NethServer::ApiTools::error("EventError", "pua_update_failed", 15545655562);
     }
+  } elsif ($action eq 'restore') {
+
+          $cdb->set_prop('clamscan', 'restore', $data->{'restore'});
+
+        esmith::event::set_json_log(1);
+      my $success = esmith::event::event_signal('nethserver-clamscan-restore');
+      if($success) {
+          NethServer::ApiTools::success();
+      } else {
+         NethServer::ApiTools::error("EventError", "restore_update_failed", 15545655562);
+      }
+
+} elsif ($action eq 'restoreAll') {
+      esmith::event::set_json_log(1);
+    my $success = esmith::event::event_signal('nethserver-clamscan-restore-all');
+    if($success) {
+        NethServer::ApiTools::success();
+    } else {
+       NethServer::ApiTools::error("EventError", "restore_all_action_failed", 14545464654562);
+    }
+
 } elsif ($action eq 'FreshClamUpdate') {
       esmith::event::set_json_log(1);
     my $success = esmith::event::event_signal('freshclam-update');
