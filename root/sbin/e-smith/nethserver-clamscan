@@ -27,6 +27,13 @@ my $db = esmith::ConfigDB->open_ro or die "Couldn't open ConfigDB";
 my $q = esmith::ConfigDB->open('quarantine') || esmith::ConfigDB->create('quarantine')
     || die 'cannot open quarantine database';
 
+# first remove the found in quarantine db
+my @found = $q->get_all_by_prop(type => 'found');
+foreach my $found (@found) {
+    my $key= $found->key;
+    $q->get($key)->delete;
+}
+
 #determine the scan periodicity and the folders to scan
 my $scan = $db->get_prop("clamscan", "FilesystemScan") || '';
 my $filesystems = $db->get_prop("clamscan", "FilesystemScanFilesystems") || '/';
