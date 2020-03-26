@@ -13,7 +13,12 @@
                 </div>
             </div>
             <div v-else>
-              <h3>{{$t('list')}}</h3>
+                <h3>{{$t('list')}}
+                  <div class="right">
+                    <span v-if="loadersRecoverAll" class="spinner spinner-sm form-spinner-loader adjust-top-loader"></span>
+                    <button  @click="RecoverAll()" class="btn btn-default span-right-margin-recoverAll" type="submit">{{$t('quarantine.RecoverAll')}}</button>
+                  </div>
+                </h3>
                 <vue-good-table
                 v-if="view.isLoaded"
                 :customRowsPerPageDropdown="[25,50,100]"
@@ -69,6 +74,7 @@ export default {
       },
       IPList: [],
       loaders: false,
+      loadersRecoverAll: false,
       errors: this.initErrors(),
       tableLangsTexts: this.tableLangs(),
     columns: [
@@ -185,7 +191,63 @@ export default {
       },
         true //sudo
     );
-    }
+  },
+    RecoverAll(type) {
+    var context = this;
+    var settingsObj = {
+      action: "RestoreAll"
+    };
+    context.loadersRecoverAll = true;
+    context.errors = context.initErrors();
+    nethserver.exec(
+      ["nethserver-clamscan/validate"],
+      settingsObj,
+      null,
+      function(success) {
+        context.loadersRecoverAll = false;
+    
+        // notification
+        nethserver.notifications.success = context.$i18n.t(
+          "clamscan.RecoverAll__ok"
+        );
+        nethserver.notifications.error = context.$i18n.t(
+          "clamscan.RecoverAll_error"
+        );
+        // update values
+        nethserver.exec(
+          ["nethserver-clamscan/update"],
+          settingsObj,
+          function(stream) {
+            console.info("clamscan", stream);
+          },
+          function(success) {
+            context.getQuarantined();
+          },
+          function(error, data) {
+            console.error(error, data);
+          },
+          true //sudo
+        );
+      },
+      function(error, data) {
+        var errorData = {};
+        context.loaders = false;
+        context.errors = context.initErrors();
+        try {
+          errorData = JSON.parse(data);
+          for (var e in errorData.attributes) {
+            var attr = errorData.attributes[e];
+            context.errors[attr.parameter].hasError = true;
+            context.errors[attr.parameter].message = attr.error;
+            context.errors[attr.parameter].value = attr.value;
+          }
+        } catch (e) {
+          console.error(e);
+        }
+    },
+      true // sudo
+  );
+  },
   }
 };
 </script>
@@ -193,5 +255,11 @@ export default {
 <style>
 .divider {
     border-top: 1px solid #d1d1d1;
+}
+.right {
+    float: right;
+}
+.span-right-margin-recoverAll {
+    margin-right: 30px;
 }
 </style>

@@ -165,7 +165,7 @@ if ($action eq 'clamscan') {
          NethServer::ApiTools::error("EventError", "restore_update_failed", 15545655562);
       }
 
-} elsif ($action eq 'restoreAll') {
+} elsif ($action eq 'RestoreAll') {
       esmith::event::set_json_log(1);
     my $success = esmith::event::event_signal('nethserver-clamscan-restore-all');
     if($success) {
