@@ -121,8 +121,14 @@ if ($response) {
         my $ruleMatch = $item->prop('ruleMatch');
         push @Quarantine, { path => $key, ruleMatch =>$ruleMatch};
     }
+    my @Found;
+    foreach my $item ($dbq->get_all_by_prop( type => 'found')) {
+        my $key = $item->key;
+        my $ruleMatch = $item->prop('ruleMatch');
+        push @Found, { path => $key, ruleMatch =>$ruleMatch};
+    }
 
-    print encode_json({"Quarantine"=> [@Quarantine]});
+    print encode_json({"Quarantine"=> [@Quarantine], "Found"=> [@Found]});
     exit (0);
 
 } elsif ($cmd eq 'signatures') {
