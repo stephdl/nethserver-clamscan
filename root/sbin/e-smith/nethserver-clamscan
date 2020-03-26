@@ -184,6 +184,20 @@ close MAIL;
 
 foreach my $test (@report)
 {
+    #we want to know, why the rule matched and we store it to quarantine db
+    # we use a 'found' type, we could make a table of it
+    if ( $test =~ /(.*:)(.*)(FOUND)/)
+    {
+         my $t1 = $1;
+         my $t2 = $2;
+         $t1 =~ s/:$//g;
+
+         #we don't want injection
+         my $protect = "[\'\(\)\<\>\"\|]";
+         next if ($t1 =~ /$protect/);
+         next if ($t2 =~ /$protect/);
+         $q->set_prop($t1,'ruleMatch',$t2,type => 'found');
+    }
     if ( $test =~ /(.*)(: moved to )(.*)/)
     {
          my $t3 = $3;
@@ -193,19 +207,16 @@ foreach my $test (@report)
 
          #we don't want injection
          my $protect = "[\'\(\)\<\>\"\|]";
-         $q->set_prop($t1,'quarantine',$t3,type => 'quarantined')
-                  unless (($t1 =~ /$protect/) || ($t3 =~ /$protect/));
-    }
-    #we want to know, why the rule matched
-    if ( $test =~ /(.*:)(.*)(FOUND)/)
-    {
-         my $t1 = $1;
-         my $t2 = $2;
-         $t1 =~ s/:$//g;
-
-         #we don't want injection
-         my $protect = "[\'\(\)\<\>\"\|]";
-         $q->set_prop($t1,'ruleMatch',$t2,type => 'quarantined')
-              unless (($t1 =~ /$protect/) || ($t2 =~ /$protect/));
+         next if ($t1 =~ /$protect/);
+         next if ($t3 =~ /$protect/);
+         # if we find it inside the db (most probable), we retrieve the matched rule
+         # and we store it again with quarantined type
+         if ($q->get($t1)) {
+             my $rule = $q->get_prop_and_delete ($t1, 'ruleMatch');
+             my $key = $q->get($t1);
+             $key->delete;
+             $q->set_prop($t1,'quarantine',$t3,type => 'quarantined');
+             $q->set_prop($t1,'ruleMatch',$rule);
+         }
     }
 }
