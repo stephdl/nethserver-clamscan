@@ -54,7 +54,7 @@
             <li class="li-empty"></li>
             <router-link tag="li" to="/Quarantine" active-class="active" class="list-group-item" id="Quarantine-item">
                 <a>
-                    <span class="fa fa-gear"></span>
+                    <span class="fa fa-lock"></span>
                     <span class="list-group-item-value">{{$t('quarantine.title')}}</span>
                 </a>
             </router-link>
