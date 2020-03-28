@@ -1,4 +1,9 @@
 {
+    "menu":{
+      "nethserver-clamscan": "Clamscan"
+    },
+    "save":"Save",
+    
     "settings": {
         "title": "Settings"
     },
@@ -6,20 +11,73 @@
         "title": "Jails"
     },
     "about": {
-        "title": "About",
-        "website": "Web site",
-        "bug_tracker": "Bug tracker"
+      "title": "About",
+      "website": "Web site",
+      "bug_tracker": "Bug tracker"
     },
     "logs": {
-    "title": "Logs",
-    "follow": "Follow",
-    "stop_follow": "Stop",
-    "start_follow_button": "Follow",
-    "stop_follow_button": "Stop following",
-    "filter_label": "Regexp filter"
+      "title": "Logs",
+      "follow": "Follow",
+      "stop_follow": "Stop",
+      "start_follow_button": "Follow",
+      "stop_follow_button": "Stop following",
+      "filter_label": "Regexp filter"
     },
     "clamscan":{
-        "title": "Clamscan"
+      "title": "Clamscan",
+      "status": "Enable file system scan",
+      "Scan_files_and_directories_for_viruses":"Scan files and directories to find viruses",
+      "FilesystemScan":"Choose the sheduled time",
+      "FilesystemScan_daily":"Perform a daily scan",
+      "FilesystemScan_weekly":"Perform a weekly scan",
+      "FilesystemScan_now":"Perform a scan now",
+      "Scan_filesystem_now":"Folder to scan",
+      "JobHour":"Hour",
+      "JobDay":"Day",
+      "start_scan_now":"Scan now",
+      "MaxScanFile":"Maximum size exclusion (MB)",
+      "FilesystemScanExclude":"Files/Folders to exclude",
+      "Before_to_activate_quarantine_you_should_test_your_settings_first": "Test first your settings without the quarantine to avoid the false positive",
+      "Quarantine":"Quarantine",
+      "Virus_Database":"Viruse database:",
+      "Database_Updated": "Updated",
+      "Database_NotUpdated": "Not updated",
+      "Last_Update_Database": "Last database update:",
+      "FreshClamUpdate": "Update the database",
+      "Virus_Scanning": "Virus Scanning:",
+      "Virus_scanning_Running": "Running",
+      "Virus_scanning_NotRunning": "Stopped",
+      "0h": "0 Hour",
+      "1h": "1 Hour",
+      "2h": "2 Hour",
+      "3h": "3 Hour",
+      "4h": "4 Hour",
+      "5h": "5 Hour",
+      "6h": "6 Hour",
+      "7h": "7 Hour",
+      "8h": "8 Hour",
+      "9h": "9 Hour",
+      "10h": "10 Hour",
+      "11h": "11 Hour",
+      "12h": "12 Hour",
+      "13h": "13 Hour",
+      "14h": "14 Hour",
+      "15h": "15 Hour",
+      "16h": "16 Hour",
+      "17h": "17 Hour",
+      "18h": "18 Hour",
+      "19h": "19 Hour",
+      "20h": "20 Hour",
+      "21h": "21 Hour",
+      "22h": "22 Hour",
+      "23h": "23 Hour",
+      "1d":"Monday",
+      "2d":"Tuesday",
+      "3d":"Wednesday",
+      "4d": "Thursday",
+      "5d":"Friday",
+      "6d":"Saturday",
+      "7d":"Sunday"
     },
     "detections":{
         "title": "Detections"

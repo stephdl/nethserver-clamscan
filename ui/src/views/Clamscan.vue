@@ -1,6 +1,7 @@
 <template>
   <div> <!-- Do not remove :( -->
   <h2>{{$t('clamscan.title')}}</h2>
+  <h3>{{$t('clamscan.Scan_files_and_directories_for_viruses')}}</h3>
   <div v-if="!view.isLoaded" class="spinner spinner-lg"></div>
   <div v-if="view.isLoaded">
   <form class="form-horizontal" v-on:submit.prevent="saveSettings('status')">
@@ -8,7 +9,7 @@
           <label
             class="col-sm-2 control-label"
             for="textInput-modal-markup"
-          >{{$t('settings.status')}}</label>
+          >{{$t('clamscan.status')}}</label>
           <div class="col-sm-5">
             <toggle-button
               class="min-toggle"
@@ -58,34 +59,34 @@
         <label
             class="col-sm-2 control-label"
             for="textInput-modal-markup"
-            >{{$t('settings.JobHour')}}
+            >{{$t('clamscan.JobHour')}}
         </label>
         <div class="col-sm-5">
             <select v-model="configuration.JobHour" class="form-control">
-                <option selected value="0h">{{ $t('settings.0h')}}</option>
-                <option value="1h">{{ $t('settings.1h')}}</option>
-                <option value="2h">{{ $t('settings.2h')}}</option>
-                <option value="3h">{{ $t('settings.3h')}}</option>
-                <option value="4h">{{ $t('settings.4h')}}</option>
-                <option value="5h">{{ $t('settings.5h')}}</option>
-                <option value="6h">{{ $t('settings.6h')}}</option>
-                <option value="7h">{{ $t('settings.7h')}}</option>
-                <option value="8h">{{ $t('settings.8h')}}</option>
-                <option value="9h">{{ $t('settings.9h')}}</option>
-                <option value="10h">{{ $t('settings.10h')}}</option>
-                <option value="11h">{{ $t('settings.11h')}}</option>
-                <option value="12h">{{ $t('settings.12h')}}</option>
-                <option value="13h">{{ $t('settings.13h')}}</option>
-                <option value="14h">{{ $t('settings.14h')}}</option>
-                <option value="15h">{{ $t('settings.15h')}}</option>
-                <option value="16h">{{ $t('settings.16h')}}</option>
-                <option value="17h">{{ $t('settings.17h')}}</option>
-                <option value="18h">{{ $t('settings.18h')}}</option>
-                <option value="19h">{{ $t('settings.19h')}}</option>
-                <option value="20h">{{ $t('settings.20h')}}</option>
-                <option value="21h">{{ $t('settings.21h')}}</option>
-                <option value="22h">{{ $t('settings.22h')}}</option>
-                <option value="23h">{{ $t('settings.23h')}}</option>
+                <option selected value="0h">{{ $t('clamscan.0h')}}</option>
+                <option value="1h">{{ $t('clamscan.1h')}}</option>
+                <option value="2h">{{ $t('clamscan.2h')}}</option>
+                <option value="3h">{{ $t('clamscan.3h')}}</option>
+                <option value="4h">{{ $t('clamscan.4h')}}</option>
+                <option value="5h">{{ $t('clamscan.5h')}}</option>
+                <option value="6h">{{ $t('clamscan.6h')}}</option>
+                <option value="7h">{{ $t('clamscan.7h')}}</option>
+                <option value="8h">{{ $t('clamscan.8h')}}</option>
+                <option value="9h">{{ $t('clamscan.9h')}}</option>
+                <option value="10h">{{ $t('clamscan.10h')}}</option>
+                <option value="11h">{{ $t('clamscan.11h')}}</option>
+                <option value="12h">{{ $t('clamscan.12h')}}</option>
+                <option value="13h">{{ $t('clamscan.13h')}}</option>
+                <option value="14h">{{ $t('clamscan.14h')}}</option>
+                <option value="15h">{{ $t('clamscan.15h')}}</option>
+                <option value="16h">{{ $t('clamscan.16h')}}</option>
+                <option value="17h">{{ $t('clamscan.17h')}}</option>
+                <option value="18h">{{ $t('clamscan.18h')}}</option>
+                <option value="19h">{{ $t('clamscan.19h')}}</option>
+                <option value="20h">{{ $t('clamscan.20h')}}</option>
+                <option value="21h">{{ $t('clamscan.21h')}}</option>
+                <option value="22h">{{ $t('clamscan.22h')}}</option>
+                <option value="23h">{{ $t('clamscan.23h')}}</option>
             </select>
             <span
               v-if="errors.JobHour.hasError"
@@ -98,17 +99,17 @@
         <label
             class="col-sm-2 control-label"
             for="textInput-modal-markup"
-            >{{$t('settings.JobDay')}}
+            >{{$t('clamscan.JobDay')}}
         </label>
         <div class="col-sm-5">
             <select v-model="configuration.JobDay" class="form-control">
-                <option selected value="1d">{{ $t('settings.1d')}}</option>
-                <option value="2d">{{ $t('settings.2d')}}</option>
-                <option value="3d">{{ $t('settings.3d')}}</option>
-                <option value="4d">{{ $t('settings.4d')}}</option>
-                <option value="5d">{{ $t('settings.5d')}}</option>
-                <option value="6d">{{ $t('settings.6d')}}</option>
-                <option value="7d">{{ $t('settings.7d')}}</option>
+                <option selected value="1d">{{ $t('clamscan.1d')}}</option>
+                <option value="2d">{{ $t('clamscan.2d')}}</option>
+                <option value="3d">{{ $t('clamscan.3d')}}</option>
+                <option value="4d">{{ $t('clamscan.4d')}}</option>
+                <option value="5d">{{ $t('clamscan.5d')}}</option>
+                <option value="6d">{{ $t('clamscan.6d')}}</option>
+                <option value="7d">{{ $t('clamscan.7d')}}</option>
             </select>
             <span
               v-if="errors.JobDay.hasError"
@@ -121,34 +122,34 @@
         <label
             class="col-sm-2 control-label"
             for="textInput-modal-markup"
-            >{{$t('settings.JobHour')}}
+            >{{$t('clamscan.JobHour')}}
         </label>
         <div class="col-sm-5">
             <select v-model="configuration.JobHour" class="form-control">
-                <option selected value="0h">{{ $t('settings.0h')}}</option>
-                <option value="1h">{{ $t('settings.1h')}}</option>
-                <option value="2h">{{ $t('settings.2h')}}</option>
-                <option value="3h">{{ $t('settings.3h')}}</option>
-                <option value="4h">{{ $t('settings.4h')}}</option>
-                <option value="5h">{{ $t('settings.5h')}}</option>
-                <option value="6h">{{ $t('settings.6h')}}</option>
-                <option value="7h">{{ $t('settings.7h')}}</option>
-                <option value="8h">{{ $t('settings.8h')}}</option>
-                <option value="9h">{{ $t('settings.9h')}}</option>
-                <option value="10h">{{ $t('settings.10h')}}</option>
-                <option value="11h">{{ $t('settings.11h')}}</option>
-                <option value="12h">{{ $t('settings.12h')}}</option>
-                <option value="13h">{{ $t('settings.13h')}}</option>
-                <option value="14h">{{ $t('settings.14h')}}</option>
-                <option value="15h">{{ $t('settings.15h')}}</option>
-                <option value="16h">{{ $t('settings.16h')}}</option>
-                <option value="17h">{{ $t('settings.17h')}}</option>
-                <option value="18h">{{ $t('settings.18h')}}</option>
-                <option value="19h">{{ $t('settings.19h')}}</option>
-                <option value="20h">{{ $t('settings.20h')}}</option>
-                <option value="21h">{{ $t('settings.21h')}}</option>
-                <option value="22h">{{ $t('settings.22h')}}</option>
-                <option value="23h">{{ $t('settings.23h')}}</option>
+                <option selected value="0h">{{ $t('clamscan.0h')}}</option>
+                <option value="1h">{{ $t('clamscan.1h')}}</option>
+                <option value="2h">{{ $t('clamscan.2h')}}</option>
+                <option value="3h">{{ $t('clamscan.3h')}}</option>
+                <option value="4h">{{ $t('clamscan.4h')}}</option>
+                <option value="5h">{{ $t('clamscan.5h')}}</option>
+                <option value="6h">{{ $t('clamscan.6h')}}</option>
+                <option value="7h">{{ $t('clamscan.7h')}}</option>
+                <option value="8h">{{ $t('clamscan.8h')}}</option>
+                <option value="9h">{{ $t('clamscan.9h')}}</option>
+                <option value="10h">{{ $t('clamscan.10h')}}</option>
+                <option value="11h">{{ $t('clamscan.11h')}}</option>
+                <option value="12h">{{ $t('clamscan.12h')}}</option>
+                <option value="13h">{{ $t('clamscan.13h')}}</option>
+                <option value="14h">{{ $t('clamscan.14h')}}</option>
+                <option value="15h">{{ $t('clamscan.15h')}}</option>
+                <option value="16h">{{ $t('clamscan.16h')}}</option>
+                <option value="17h">{{ $t('clamscan.17h')}}</option>
+                <option value="18h">{{ $t('clamscan.18h')}}</option>
+                <option value="19h">{{ $t('clamscan.19h')}}</option>
+                <option value="20h">{{ $t('clamscan.20h')}}</option>
+                <option value="21h">{{ $t('clamscan.21h')}}</option>
+                <option value="22h">{{ $t('clamscan.22h')}}</option>
+                <option value="23h">{{ $t('clamscan.23h')}}</option>
             </select>
             <span
               v-if="errors.JobHour.hasError"
@@ -216,7 +217,7 @@
           <label
             class="col-sm-2 control-label"
             for="textInput-modal-markup"
-          >{{$t('settings.Quarantine')}}</label>
+          >{{$t('clamscan.Quarantine')}}</label>
           <div class="col-sm-5">
             <toggle-button
               class="min-toggle"
