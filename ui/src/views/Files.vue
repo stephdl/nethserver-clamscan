@@ -11,7 +11,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('files.ScanArchive')}}</label>
+      >{{$t('files.ScanArchive')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('files.ScanArchive')"
+        :chapter="'ScanArchive'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -32,7 +39,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('files.ScanElf')}}</label>
+      >{{$t('files.ScanElf')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('files.ScanElf')"
+        :chapter="'ScanElf'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -53,7 +67,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('files.ScanHTML')}}</label>
+      >{{$t('files.ScanHTML')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('files.ScanHTML')"
+        :chapter="'ScanHTML'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -74,7 +95,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('files.ScanHwp')}}</label>
+      >{{$t('files.ScanHwp')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('files.ScanHwp')"
+        :chapter="'ScanHwp'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -95,7 +123,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('files.ScanMail')}}</label>
+      >{{$t('files.ScanMail')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('files.ScanMail')"
+        :chapter="'ScanMail'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -116,7 +151,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('files.ScanOle2')}}</label>
+      >{{$t('files.ScanOle2')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('files.ScanOle2')"
+        :chapter="'ScanOle2'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -137,7 +179,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('files.ScanPdf')}}</label>
+      >{{$t('files.ScanPdf')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('files.ScanPdf')"
+        :chapter="'ScanPdf'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -158,7 +207,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('files.ScanPe')}}</label>
+      >{{$t('files.ScanPe')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('files.ScanPe')"
+        :chapter="'ScanPe'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -179,7 +235,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('files.ScanSwf')}}</label>
+      >{{$t('files.ScanSwf')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('files.ScanSwf')"
+        :chapter="'ScanSwf'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -200,7 +263,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('files.ScanXML')}}</label>
+      >{{$t('files.ScanXML')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('files.ScanXML')"
+        :chapter="'ScanXML'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
