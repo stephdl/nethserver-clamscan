@@ -11,7 +11,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('pua.DetectPua')}}</label>
+      >{{$t('pua.DetectPua')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('pua.DetectPua')"
+        :chapter="'DetectPua'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
           <input
             type="checkbox"
@@ -32,7 +39,14 @@
         <label
           class="col-sm-2 control-label"
           for="textInput-modal-markup"
-          >{{$t('pua.Packed')}}</label>
+          >{{$t('pua.Packed')}}
+          <doc-info
+            :placement="'top'"
+            :title="$t('pua.Packed')"
+            :chapter="'Packed'"
+            :inline="true"
+          ></doc-info>
+          </label>
           <div class="col-sm-5">
             <input
             type="checkbox"
@@ -50,7 +64,14 @@
         <label
           class="col-sm-2 control-label"
           for="textInput-modal-markup"
-          >{{$t('pua.PwTool')}}</label>
+          >{{$t('pua.PwTool')}}
+          <doc-info
+            :placement="'top'"
+            :title="$t('pua.PwTool')"
+            :chapter="'PwTool'"
+            :inline="true"
+          ></doc-info>
+          </label>
           <div class="col-sm-5">
             <input
             type="checkbox"
@@ -68,7 +89,14 @@
         <label
           class="col-sm-2 control-label"
           for="textInput-modal-markup"
-          >{{$t('pua.NetTool')}}</label>
+          >{{$t('pua.NetTool')}}
+          <doc-info
+            :placement="'top'"
+            :title="$t('pua.NetTool')"
+            :chapter="'NetTool'"
+            :inline="true"
+          ></doc-info>
+          </label>
           <div class="col-sm-5">
             <input
             type="checkbox"
@@ -86,7 +114,14 @@
         <label
           class="col-sm-2 control-label"
           for="textInput-modal-markup"
-          >{{$t('pua.P2P')}}</label>
+          >{{$t('pua.P2P')}}
+          <doc-info
+            :placement="'top'"
+            :title="$t('pua.P2P')"
+            :chapter="'P2P'"
+            :inline="true"
+          ></doc-info>
+          </label>
           <div class="col-sm-5">
             <input
             type="checkbox"
@@ -104,7 +139,14 @@
         <label
           class="col-sm-2 control-label"
           for="textInput-modal-markup"
-          >{{$t('pua.IRC')}}</label>
+          >{{$t('pua.IRC')}}
+          <doc-info
+            :placement="'top'"
+            :title="$t('pua.IRC')"
+            :chapter="'IRC'"
+            :inline="true"
+          ></doc-info>
+          </label>
           <div class="col-sm-5">
             <input
             type="checkbox"
@@ -122,7 +164,14 @@
         <label
           class="col-sm-2 control-label"
           for="textInput-modal-markup"
-          >{{$t('pua.RAT')}}</label>
+          >{{$t('pua.RAT')}}
+          <doc-info
+            :placement="'top'"
+            :title="$t('pua.RAT')"
+            :chapter="'RAT'"
+            :inline="true"
+          ></doc-info>
+          </label>
           <div class="col-sm-5">
             <input
             type="checkbox"
@@ -140,7 +189,14 @@
         <label
           class="col-sm-2 control-label"
           for="textInput-modal-markup"
-          >{{$t('pua.Tool')}}</label>
+          >{{$t('pua.Tool')}}
+          <doc-info
+            :placement="'top'"
+            :title="$t('pua.Tool')"
+            :chapter="'Tool'"
+            :inline="true"
+          ></doc-info>
+          </label>
           <div class="col-sm-5">
             <input
             type="checkbox"
@@ -158,7 +214,14 @@
         <label
           class="col-sm-2 control-label"
           for="textInput-modal-markup"
-          >{{$t('pua.Spy')}}</label>
+          >{{$t('pua.Spy')}}
+          <doc-info
+            :placement="'top'"
+            :title="$t('pua.Spy')"
+            :chapter="'Spy'"
+            :inline="true"
+          ></doc-info>
+          </label>
           <div class="col-sm-5">
             <input
             type="checkbox"
@@ -176,7 +239,14 @@
         <label
           class="col-sm-2 control-label"
           for="textInput-modal-markup"
-          >{{$t('pua.Server')}}</label>
+          >{{$t('pua.Server')}}
+          <doc-info
+            :placement="'top'"
+            :title="$t('pua.Server')"
+            :chapter="'Server'"
+            :inline="true"
+          ></doc-info>
+          </label>
           <div class="col-sm-5">
             <input
             type="checkbox"
@@ -194,7 +264,14 @@
         <label
           class="col-sm-2 control-label"
           for="textInput-modal-markup"
-          >{{$t('pua.Script')}}</label>
+          >{{$t('pua.Script')}}
+          <doc-info
+            :placement="'top'"
+            :title="$t('pua.Script')"
+            :chapter="'Script'"
+            :inline="true"
+          ></doc-info>
+          </label>
           <div class="col-sm-5">
             <input
             type="checkbox"
