@@ -73,7 +73,8 @@ if ($response) {
            status => $db->get_prop('clamscan','status'),
            timestamp => $timestamp,
            clamscan => $clamscan,
-           alarm => $alarm
+           alarm => $alarm,
+           OfficialSignatures => $db->get_prop('clamd','OfficialSignatures')
            );
 
    $ret{'configuration'} = \%clamscan;
@@ -138,7 +139,8 @@ if ($response) {
            BytecodeUnsigned => $db->get_prop('clamscan','BytecodeUnsigned'),
            FilesystemScanUnofficialSigs => $db->get_prop('clamscan','FilesystemScanUnofficialSigs'),
            PhishingSigs => $db->get_prop('clamscan','PhishingSigs'),
-           PhishingScanUrl => $db->get_prop('clamscan','PhishingScanUrl')
+           PhishingScanUrl => $db->get_prop('clamscan','PhishingScanUrl'),
+           UnofficialSignaturesRating => $db->get_prop('clamd','UnofficialSignaturesRating')
            );
 
    $ret{'configuration'} = \%clamscan;
