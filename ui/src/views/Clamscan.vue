@@ -239,7 +239,7 @@
             for="textInput-modal-markup"
         >{{$t('clamscan.Virus_Database')}}
         </label>
-        <div class="col-sm-3">
+        <div class="col-sm-3 dialog">
           {{$t('clamscan.Database_'+configuration.alarm)}}
         </div>
     </div>
@@ -250,7 +250,7 @@
         >{{$t('clamscan.Last_Update_Database')}}
         </label>
         <form v-on:submit.prevent="FreshClamUpdate('status')">
-          <div class="col-sm-3">
+          <div class="col-sm-3 dialog">
             {{configuration.timestamp  | dateFormat}}
           </div>
           <div class="col-sm-5">
@@ -265,7 +265,7 @@
           for="textInput-modal-markup"
           >{{$t('clamscan.Virus_Scanning')}}
         </label>
-        <div class="col-sm-3"
+        <div class="col-sm-3 dialog"
           >{{$t('clamscan.Virus_scanning_'+configuration.clamscan)}}
         </div>
     </div>
@@ -599,5 +599,8 @@ input[type=radio].form-control {
     display: inline-block;
     vertical-align: -25%;
     margin-right: 1em;
+}
+.dialog {
+  margin-top:3px
 }
 </style>
