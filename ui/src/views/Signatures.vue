@@ -11,7 +11,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('signatures.Bytecode')}}</label>
+      >{{$t('signatures.Bytecode')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('signatures.Bytecode')"
+        :chapter="'Bytecode'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
           <input
             type="checkbox"
@@ -33,7 +40,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('signatures.BytecodeUnsigned')}}</label>
+      >{{$t('signatures.BytecodeUnsigned')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('signatures.BytecodeUnsigned')"
+        :chapter="'BytecodeUnsigned'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -54,7 +68,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('signatures.FilesystemScanUnofficialSigs')}}</label>
+      >{{$t('signatures.FilesystemScanUnofficialSigs')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('signatures.FilesystemScanUnofficialSigs')"
+        :chapter="'FilesystemScanUnofficialSigs'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -75,7 +96,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('signatures.PhishingSigs')}}</label>
+      >{{$t('signatures.PhishingSigs')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('signatures.PhishingSigs')"
+        :chapter="'PhishingSigs'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -96,7 +124,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('signatures.PhishingScanUrl')}}</label>
+      >{{$t('signatures.PhishingScanUrl')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('signatures.PhishingScanUrl')"
+        :chapter="'PhishingScanUrl'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
