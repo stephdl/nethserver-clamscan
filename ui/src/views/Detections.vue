@@ -11,7 +11,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('detections.AlgoDetection')}}</label>
+      >{{$t('detections.AlgoDetection')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('detections.AlgoDetection')"
+        :chapter="'AlgoDetection'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -32,7 +39,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('detections.BlockEncrypted')}}</label>
+      >{{$t('detections.BlockEncrypted')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('detections.BlockEncrypted')"
+        :chapter="'BlockEncrypted'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -53,7 +67,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('detections.BlockMacros')}}</label>
+      >{{$t('detections.BlockMacros')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('detections.BlockMacros')"
+        :chapter="'BlockMacros'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -74,7 +95,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('detections.DetectStructured')}}</label>
+      >{{$t('detections.DetectStructured')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('detections.DetectStructured')"
+        :chapter="'DetectStructured'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -95,7 +123,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('detections.DetectBroken')}}</label>
+      >{{$t('detections.DetectBroken')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('detections.DetectBroken')"
+        :chapter="'DetectBroken'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
@@ -116,7 +151,14 @@
       <label
         class="col-sm-2 control-label"
         for="textInput-modal-markup"
-      >{{$t('detections.PartInstersection')}}</label>
+      >{{$t('detections.PartInstersection')}}
+      <doc-info
+        :placement="'top'"
+        :title="$t('detections.PartInstersection')"
+        :chapter="'PartInstersection'"
+        :inline="true"
+      ></doc-info>
+      </label>
       <div class="col-sm-5">
         <input
           type="checkbox"
