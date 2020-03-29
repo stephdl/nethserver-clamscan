@@ -77,7 +77,8 @@
       "4d": "Thursday",
       "5d":"Friday",
       "6d":"Saturday",
-      "7d":"Sunday"
+      "7d":"Sunday",
+      "OfficialSignatures_disabled_in_antivirus_module":"The official signatures are disabled"
     },
     "detections":{
         "title": "Detections"
@@ -93,5 +94,9 @@
     },
     "signatures":{
         "title": "Signatures"
+    },
+    "docs":{
+      "OfficialSignatures":"The official signatures can be enabled or disabled in the Antivirus module, you can find the Antivirus module in the Applications area of cockpit",
+      "FilesystemScanUnofficialSigs":"The unofficial signatures can be set to low, medium, hight in the Antivirus module, you can find the Antivirus module in the Applications area of cockpit"
     }
 }

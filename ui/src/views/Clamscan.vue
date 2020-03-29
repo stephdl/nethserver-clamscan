@@ -239,9 +239,18 @@
             class="col-sm-2 control-label"
             for="textInput-modal-markup"
         >{{$t('clamscan.Virus_Database')}}
+        <doc-info
+          :placement="'top'"
+          :title="$t('clamscan.Virus_Database')"
+          :chapter="'OfficialSignatures'"
+          :inline="true"
+        ></doc-info>
         </label>
         <div class="col-sm-3 dialog">
           {{$t('clamscan.Database_'+configuration.alarm)}}
+        </div>
+        <div v-if="configuration.OfficialSignatures === 'disabled' "class="col-sm-5 dialog">
+          {{$t('clamscan.OfficialSignatures_disabled_in_antivirus_module')}}
         </div>
     </div>
     <div v-if="configuration.status" class="form-group" >
@@ -374,11 +383,7 @@ methods: {
         context.configuration = success.configuration;
         context.configuration.status = success.configuration.status == "enabled";
         context.configuration.Quarantine = success.configuration.Quarantine == "enabled";
-        // context.configuration.FilesystemScan = success.configuration.FilesystemScan;
-        // context.configuration.JobHour = success.configuration.JobHour;
-        // context.configuration.JobDay = success.configuration.JobDay;
-        // context.configuration.MaxScanFile = success.configuration.MaxScanFile;
-      // context.configuration.FilesystemScanExclude = context.configuration.FilesystemScanExclude.split("\n");
+
         context.view.isLoaded = true;
       },
       function(error) {

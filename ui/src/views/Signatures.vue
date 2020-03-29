@@ -76,7 +76,7 @@
         :inline="true"
       ></doc-info>
       </label>
-      <div class="col-sm-5">
+      <div class="col-sm-1">
         <input
           type="checkbox"
           true-value="enabled"
@@ -88,6 +88,9 @@
           v-if="errors.FilesystemScanUnofficialSigs.hasError"
           class="help-block"
         >{{errors.FilesystemScanUnofficialSigs.message}}</span>
+      </div>
+      <div class="col-sm-2 dialog">
+        {{$t('signatures.UnofficialSigs_are_set_to_'+signatures.UnofficialSignaturesRating)}}
       </div>
     </div>
     <div
@@ -312,5 +315,7 @@ methods: {
 </script>
 
 <style>
-
+.dialog {
+  margin-top:3px
+}
 </style>
