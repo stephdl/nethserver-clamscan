@@ -80,9 +80,6 @@
       "7d":"Sunday",
       "OfficialSignatures_disabled_in_antivirus_module":"The official signatures are disabled"
     },
-    "detections":{
-        "title": "Detections"
-    },
     "pua":{
       "title": "PUA",
       "PUA_are_applications_that_can_be_used_in_an_unwanted context": "Detect Potentially Unwanted Applications (PUA)",
@@ -127,7 +124,23 @@
       "ScanSwf":"Scan SWF files",
       "ScanXML":"Scan xml-based files"
     },
+    "detections":{
+      "title": "Detections",
+      "AlgoDetection":"Heuristic alerts",
+      "Scanning_Options_might_give_false_positives":"Scanning Options (might give false positives)",
+      "BlockEncrypted":"Mark encrypted archives as viruses",
+      "BlockMacros":"Mark OLE2 files containing VBA macros as viruses",
+      "DetectStructured":"Detect SSN and Credit Card numbers",
+      "DetectBroken":"Mark broken executables as viruses",
+      "PartInstersection":"Detect partition intersections in raw disk images"
+    },
     "docs":{
+      "PartInstersection":"Detect partition intersections in raw disk images using heuristics.",
+      "DetectBroken":"Alert on broken executable files (PE & ELF).",
+      "DetectStructured":"Use  the  DLP (Data Loss Prevention) module to detect SSN and Credit Card numbers inside documents/text files. High false positive rating",
+      "BlockMacros":"Alert on OLE2 files containing VBA macros (Heuristics.OLE2.ContainsMacros).",
+      "BlockEncrypted":"Alert on encrypted archives (encrypted .zip, .7zip, .rar, .pdf).",
+      "AlgoDetection":"In some cases (eg. complex malware, exploits in graphic files, and others), ClamAV  uses  special  algorithms  to  provide accurate detection. This option can be used to control the algorithmic detection.",
       "ScanXML":"Scan xml-based document files supported by libclamav. If you turn off this option, the  original files will still be scanned, but without additional processing.",
       "ScanSwf":"Scan SWF files. If you turn off this option, the original files will still be scanned without additional processing.",
       "ScanPe":"PE stands for Portable Executable - it's an executable file format used in all 32-bit of  Windows  operating systems. By default ClamAV performs deeper analysis of executable and attempts to decompress popular executable packers such as UPX, Petite, and FSG. If turn off this option, the original files will still be scanned but without additionaling.",
