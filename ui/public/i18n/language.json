@@ -93,10 +93,24 @@
         "title": "Quarantine"
     },
     "signatures":{
-        "title": "Signatures"
+        "title": "Signatures",
+        "Virus_Database_might_have_false_positive": "Add more signatures to detect malwares (you might have false positives)",
+        "Bytecode": "Bytecode",
+        "BytecodeUnsigned": "Bytecode Unsigned",
+        "FilesystemScanUnofficialSigs": "Unofficial signatures",
+        "UnofficialSigs_are_set_to_low": "Unofficial signatures are set to low rating",
+        "UnofficialSigs_are_set_to_medium": "Unofficial signatures are set to medium rating",
+        "UnofficialSigs_are_set_to_high": "Unofficial signatures are set to high rating",
+        "PhishingSigs": "Email phishing",
+        "PhishingScanUrl": "URL phishing"
     },
     "docs":{
       "OfficialSignatures":"The official signatures can be enabled or disabled in the Antivirus module, you can find the Antivirus module in the Applications area of cockpit",
-      "FilesystemScanUnofficialSigs":"The unofficial signatures can be set to low, medium, hight in the Antivirus module, you can find the Antivirus module in the Applications area of cockpit"
+      "FilesystemScanUnofficialSigs":"The Unofficial signatures provides the third-party signature databases provided by Sanesecurity, FOXHOLE, OITC, Scamnailer, BOFHLAND, CRDF, Porcupine, Securiteinfo, MalwarePatrol, Yara-Rules Project, urlhaus, etc. The unofficial signatures can be set to low, medium, high rating in the Antivirus module, you can find the Antivirus module in the Applications area of cockpit",
+      "Bytecode": "With  this  option  enabled ClamAV will load bytecode from the database. It is highly recommended you keep this option turned on, otherwise you may miss detections for many new viruses.",
+      "BytecodeUnsigned": "Allow loading bytecode from outside digitally signed .c[lv]d files.",
+      "PhishingSigs":"Enable email signature-based phishing detection.",
+      "PhishingScanUrl":"Enable URL signature-based phishing detection (Phishing.Heuristics.Email.*)."
+      
     }
 }

@@ -13,7 +13,7 @@
         for="textInput-modal-markup"
       >{{$t('signatures.Bytecode')}}
       <doc-info
-        :placement="'top'"
+        :placement="'bottom'"
         :title="$t('signatures.Bytecode')"
         :chapter="'Bytecode'"
         :inline="true"
@@ -42,7 +42,7 @@
         for="textInput-modal-markup"
       >{{$t('signatures.BytecodeUnsigned')}}
       <doc-info
-        :placement="'top'"
+        :placement="'bottom'"
         :title="$t('signatures.BytecodeUnsigned')"
         :chapter="'BytecodeUnsigned'"
         :inline="true"
@@ -70,7 +70,7 @@
         for="textInput-modal-markup"
       >{{$t('signatures.FilesystemScanUnofficialSigs')}}
       <doc-info
-        :placement="'top'"
+        :placement="'bottom'"
         :title="$t('signatures.FilesystemScanUnofficialSigs')"
         :chapter="'FilesystemScanUnofficialSigs'"
         :inline="true"
@@ -101,7 +101,7 @@
         for="textInput-modal-markup"
       >{{$t('signatures.PhishingSigs')}}
       <doc-info
-        :placement="'top'"
+        :placement="'bottom'"
         :title="$t('signatures.PhishingSigs')"
         :chapter="'PhishingSigs'"
         :inline="true"
@@ -129,7 +129,7 @@
         for="textInput-modal-markup"
       >{{$t('signatures.PhishingScanUrl')}}
       <doc-info
-        :placement="'top'"
+        :placement="'bottom'"
         :title="$t('signatures.PhishingScanUrl')"
         :chapter="'PhishingScanUrl'"
         :inline="true"
