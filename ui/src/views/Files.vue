@@ -13,7 +13,7 @@
         for="textInput-modal-markup"
       >{{$t('files.ScanArchive')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('files.ScanArchive')"
         :chapter="'ScanArchive'"
         :inline="true"
@@ -41,7 +41,7 @@
         for="textInput-modal-markup"
       >{{$t('files.ScanElf')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('files.ScanElf')"
         :chapter="'ScanElf'"
         :inline="true"
@@ -69,7 +69,7 @@
         for="textInput-modal-markup"
       >{{$t('files.ScanHTML')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('files.ScanHTML')"
         :chapter="'ScanHTML'"
         :inline="true"
@@ -97,7 +97,7 @@
         for="textInput-modal-markup"
       >{{$t('files.ScanHwp')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('files.ScanHwp')"
         :chapter="'ScanHwp'"
         :inline="true"
@@ -125,7 +125,7 @@
         for="textInput-modal-markup"
       >{{$t('files.ScanMail')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('files.ScanMail')"
         :chapter="'ScanMail'"
         :inline="true"
@@ -153,7 +153,7 @@
         for="textInput-modal-markup"
       >{{$t('files.ScanOle2')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('files.ScanOle2')"
         :chapter="'ScanOle2'"
         :inline="true"
@@ -181,7 +181,7 @@
         for="textInput-modal-markup"
       >{{$t('files.ScanPdf')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('files.ScanPdf')"
         :chapter="'ScanPdf'"
         :inline="true"
@@ -209,7 +209,7 @@
         for="textInput-modal-markup"
       >{{$t('files.ScanPe')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('files.ScanPe')"
         :chapter="'ScanPe'"
         :inline="true"
@@ -237,7 +237,7 @@
         for="textInput-modal-markup"
       >{{$t('files.ScanSwf')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('files.ScanSwf')"
         :chapter="'ScanSwf'"
         :inline="true"
@@ -265,7 +265,7 @@
         for="textInput-modal-markup"
       >{{$t('files.ScanXML')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('files.ScanXML')"
         :chapter="'ScanXML'"
         :inline="true"

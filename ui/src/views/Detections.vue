@@ -13,7 +13,7 @@
         for="textInput-modal-markup"
       >{{$t('detections.AlgoDetection')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('detections.AlgoDetection')"
         :chapter="'AlgoDetection'"
         :inline="true"
@@ -41,7 +41,7 @@
         for="textInput-modal-markup"
       >{{$t('detections.BlockEncrypted')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('detections.BlockEncrypted')"
         :chapter="'BlockEncrypted'"
         :inline="true"
@@ -69,7 +69,7 @@
         for="textInput-modal-markup"
       >{{$t('detections.BlockMacros')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('detections.BlockMacros')"
         :chapter="'BlockMacros'"
         :inline="true"
@@ -97,7 +97,7 @@
         for="textInput-modal-markup"
       >{{$t('detections.DetectStructured')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('detections.DetectStructured')"
         :chapter="'DetectStructured'"
         :inline="true"
@@ -125,7 +125,7 @@
         for="textInput-modal-markup"
       >{{$t('detections.DetectBroken')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('detections.DetectBroken')"
         :chapter="'DetectBroken'"
         :inline="true"
@@ -153,7 +153,7 @@
         for="textInput-modal-markup"
       >{{$t('detections.PartInstersection')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('detections.PartInstersection')"
         :chapter="'PartInstersection'"
         :inline="true"

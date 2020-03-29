@@ -240,7 +240,7 @@
             for="textInput-modal-markup"
         >{{$t('clamscan.Virus_Database')}}
         <doc-info
-          :placement="'top'"
+          :placement="'right'"
           :title="$t('clamscan.Virus_Database')"
           :chapter="'OfficialSignatures'"
           :inline="true"
