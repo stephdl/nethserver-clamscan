@@ -83,9 +83,6 @@
     "detections":{
         "title": "Detections"
     },
-    "files":{
-        "title": "Files"
-    },
     "pua":{
       "title": "PUA",
       "PUA_are_applications_that_can_be_used_in_an_unwanted context": "Detect Potentially Unwanted Applications (PUA)",
@@ -116,7 +113,31 @@
         "PhishingSigs": "Email phishing",
         "PhishingScanUrl": "URL phishing"
     },
+    "files":{
+      "title": "Files",
+      "ScanArchive":"Archives",
+      "Scan_inside_these_types_of_files":"Scan inside these types of files",
+      "ScanElf":"Executable and Linking Format",
+      "ScanHTML":"HTML files and embedded scripts",
+      "ScanHwp":"Scan HWP files",
+      "ScanMail":"Email attachments",
+      "ScanOle2":"Microsoft documents and .msi",
+      "ScanPdf":"PDF Documents",
+      "ScanPe":"Microsoft Portable Executables",
+      "ScanSwf":"Scan SWF files",
+      "ScanXML":"Scan xml-based files"
+    },
     "docs":{
+      "ScanXML":"Scan xml-based document files supported by libclamav. If you turn off this option, the  original files will still be scanned, but without additional processing.",
+      "ScanSwf":"Scan SWF files. If you turn off this option, the original files will still be scanned without additional processing.",
+      "ScanPe":"PE stands for Portable Executable - it's an executable file format used in all 32-bit of  Windows  operating systems. By default ClamAV performs deeper analysis of executable and attempts to decompress popular executable packers such as UPX, Petite, and FSG. If turn off this option, the original files will still be scanned but without additionaling.",
+      "ScanPdf":"Scan  within PDF files. If you turn off this option, the original files will still be scanned but without decoding and additional processing.",
+      "ScanOle2":"Scan Microsoft Office documents and .msi files. If you turn off this option, the files will still be scanned but without additional processing.",
+      "ScanMail":"Scan mail files. If you turn off this option, the original files will still be scanned, without parsing individual messages/attachments.",
+      "ScanHwp":"Scan  HWP3  files. If you turn off this option, the original files will still be scanned, but without additional processing.",
+      "ScanHTML":"Detect, normalize/decrypt and scan HTML files and embedded scripts. If you turn off this option, the original files will still be scanned, but without additional processing.",
+      "ScanElf":"Executable and Linking Format is a standard format for UN*X executables. This option  controls the  ELF  support.  If  you  turn it off, the original files will still be scanned but without additional processing.",
+      "ScanArchive":" Scan archives supported by libclamav. If you turn off this option, the original files will still be scanned, but without unpacking and additional processing.",
       "Script":"Known “problem” scripts written in JavaScript, ActiveX or similar.",
       "Server":"Server based badware like DistributedNet.",
       "Spy":"Keyloggers, spying tools.",
