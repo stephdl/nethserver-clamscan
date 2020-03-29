@@ -3,7 +3,10 @@
       "nethserver-clamscan": "Clamscan"
     },
     "save":"Save",
-    
+    "search":"Search",
+    "rows_per_page":"Row per page",
+    "prev":"Previous",
+    "next":"Next",
     "settings": {
         "title": "Settings"
     },
@@ -96,7 +99,17 @@
       "Script":"Script"
     },
     "quarantine":{
-        "title": "Quarantine"
+        "title": "Quarantine",
+        "list_suspicious_files": "List of suspicious files",
+        "list_files_moved_to_quarantine":"List of moved files to quarantine",
+        "Path_to_suspicious_file":"Path to suspicious files",
+        "Matched_rule":"Matched rules",
+        "Path_to_quarantined_file":"Original path to quarantined files",
+        "Matched_rule": "Matched rules",
+        "RecoverTheseFiles":"Recoverable files",
+        "RecoverAll":"Recover all quarantined files",
+        "See_files_moved_in_Quarantine":"View moved files to quarantine",
+        "See_suspicious_files":"View suspicious files"
     },
     "signatures":{
         "title": "Signatures",
