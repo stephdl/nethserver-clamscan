@@ -13,7 +13,7 @@
         for="textInput-modal-markup"
       >{{$t('pua.DetectPua')}}
       <doc-info
-        :placement="'top'"
+        :placement="'right'"
         :title="$t('pua.DetectPua')"
         :chapter="'DetectPua'"
         :inline="true"
@@ -41,7 +41,7 @@
           for="textInput-modal-markup"
           >{{$t('pua.Packed')}}
           <doc-info
-            :placement="'top'"
+            :placement="'right'"
             :title="$t('pua.Packed')"
             :chapter="'Packed'"
             :inline="true"
@@ -66,7 +66,7 @@
           for="textInput-modal-markup"
           >{{$t('pua.PwTool')}}
           <doc-info
-            :placement="'top'"
+            :placement="'right'"
             :title="$t('pua.PwTool')"
             :chapter="'PwTool'"
             :inline="true"
@@ -91,7 +91,7 @@
           for="textInput-modal-markup"
           >{{$t('pua.NetTool')}}
           <doc-info
-            :placement="'top'"
+            :placement="'right'"
             :title="$t('pua.NetTool')"
             :chapter="'NetTool'"
             :inline="true"
@@ -116,7 +116,7 @@
           for="textInput-modal-markup"
           >{{$t('pua.P2P')}}
           <doc-info
-            :placement="'top'"
+            :placement="'right'"
             :title="$t('pua.P2P')"
             :chapter="'P2P'"
             :inline="true"
@@ -141,7 +141,7 @@
           for="textInput-modal-markup"
           >{{$t('pua.IRC')}}
           <doc-info
-            :placement="'top'"
+            :placement="'right'"
             :title="$t('pua.IRC')"
             :chapter="'IRC'"
             :inline="true"
@@ -166,7 +166,7 @@
           for="textInput-modal-markup"
           >{{$t('pua.RAT')}}
           <doc-info
-            :placement="'top'"
+            :placement="'right'"
             :title="$t('pua.RAT')"
             :chapter="'RAT'"
             :inline="true"
@@ -191,7 +191,7 @@
           for="textInput-modal-markup"
           >{{$t('pua.Tool')}}
           <doc-info
-            :placement="'top'"
+            :placement="'right'"
             :title="$t('pua.Tool')"
             :chapter="'Tool'"
             :inline="true"
@@ -216,7 +216,7 @@
           for="textInput-modal-markup"
           >{{$t('pua.Spy')}}
           <doc-info
-            :placement="'top'"
+            :placement="'right'"
             :title="$t('pua.Spy')"
             :chapter="'Spy'"
             :inline="true"
@@ -241,7 +241,7 @@
           for="textInput-modal-markup"
           >{{$t('pua.Server')}}
           <doc-info
-            :placement="'top'"
+            :placement="'right'"
             :title="$t('pua.Server')"
             :chapter="'Server'"
             :inline="true"
@@ -266,7 +266,7 @@
           for="textInput-modal-markup"
           >{{$t('pua.Script')}}
           <doc-info
-            :placement="'top'"
+            :placement="'right'"
             :title="$t('pua.Script')"
             :chapter="'Script'"
             :inline="true"

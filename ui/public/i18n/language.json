@@ -87,7 +87,19 @@
         "title": "Files"
     },
     "pua":{
-        "title": "PUA"
+      "title": "PUA",
+      "PUA_are_applications_that_can_be_used_in_an_unwanted context": "Detect Potentially Unwanted Applications (PUA)",
+      "DetectPua": "Enable PUA detection",
+      "Packed": "Packed",
+      "PwTool": "PwTool",
+      "NetTool":"NetTool",
+      "P2P": "P2P",
+      "IRC":"IRC",
+      "RAT":"RAT",
+      "Tool":"Tool",
+      "Spy":"Spy",
+      "Server":"Server",
+      "Script":"Script"
     },
     "quarantine":{
         "title": "Quarantine"
@@ -105,6 +117,17 @@
         "PhishingScanUrl": "URL phishing"
     },
     "docs":{
+      "Script":"Known “problem” scripts written in JavaScript, ActiveX or similar.",
+      "Server":"Server based badware like DistributedNet.",
+      "Spy":"Keyloggers, spying tools.",
+      "Tool":"General system tools, like process killers/finders.",
+      "RAT":"Remote Access Trojans are used to remotely access systems, but can be used also by system admins, for example VNC or RAdmin.",
+      "IRC":"IRC Clients can be a productivity killer and depending on the client - a powerful platform for malicious scripts (take mIRC for example).",
+      "P2P":"Peer to Peer clients can be used to generate a lot of unwanted traffic and sometimes it happens that copyrights are violated by downloading copyright protected content (Music, Movies) - therefore we consider them possibly unwanted as well.",
+      "NetTool":"Applications that can be used to sniff, filter, manipulate or scan network traffic or networks. While a networkscanner - for example - can be a extremely helpful tool for admins, you may not want to see an average user playing around with it. Same goes for tools like netcat and the like.",
+      "PwTool":"Password tools are all applications that can be used to recover or decrypt passwords for various applications - like mail clients or system passwords. Such tools can be quite helpful if a password is lost, however, it can also be used to spy out passwords.",
+      "Packed": "This is a detection for files that use some kind of runtime packer. A runtime packer can be used to reduce the size of executable files without the need for an external unpacker. While this can‘t be considered malicious in general, runtime packers are widely used with malicious files since they can prevent a already known malware from detection by an Antivirus product.",
+      "DetectPua":"ClamAV supports the detection of so called PUAs. At the moment the above categories are available",
       "OfficialSignatures":"The official signatures can be enabled or disabled in the Antivirus module, you can find the Antivirus module in the Applications area of cockpit",
       "FilesystemScanUnofficialSigs":"The Unofficial signatures provides the third-party signature databases provided by Sanesecurity, FOXHOLE, OITC, Scamnailer, BOFHLAND, CRDF, Porcupine, Securiteinfo, MalwarePatrol, Yara-Rules Project, urlhaus, etc. The unofficial signatures can be set to low, medium, high rating in the Antivirus module, you can find the Antivirus module in the Applications area of cockpit",
       "Bytecode": "With  this  option  enabled ClamAV will load bytecode from the database. It is highly recommended you keep this option turned on, otherwise you may miss detections for many new viruses.",
