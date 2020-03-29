@@ -26,35 +26,35 @@
     <ul class="list-group panel">
       <router-link tag="li" to="/Clamscan" active-class="active" class="list-group-item" id="Clamscan-item">
         <a>
-          <span class="fa fa-gear"></span>
+          <span class="pficon pficon-on-running"></span>
           <span class="list-group-item-value">{{$t('clamscan.title')}}</span>
         </a>
       </router-link>
       <li class="li-empty"></li>
       <router-link tag="li" to="/Detections" active-class="active" class="list-group-item" id="Detections-item">
         <a>
-          <span class="fa fa-gear"></span>
+          <span class="pficon pficon-search"></span>
           <span class="list-group-item-value">{{$t('detections.title')}}</span>
         </a>
       </router-link>
       <li class="li-empty"></li>
       <router-link tag="li" to="/Files" active-class="active" class="list-group-item" id="Files-item">
         <a>
-          <span class="fa fa-gear"></span>
+          <span class="pficon pficon-orders"></span>
           <span class="list-group-item-value">{{$t('files.title')}}</span>
         </a>
       </router-link>
       <li class="li-empty"></li>
       <router-link tag="li" to="/Pua" active-class="active" class="list-group-item" id="Pua-item">
         <a>
-          <span class="fa fa-gear"></span>
+          <span class="pficon pficon-applications"></span>
           <span class="list-group-item-value">{{$t('pua.title')}}</span>
         </a>
       </router-link>
       <li class="li-empty"></li>
       <router-link tag="li" to="/Signatures" active-class="active" class="list-group-item" id="Signatures-item">
         <a>
-          <span class="fa fa-gear"></span>
+          <span class="fa fa-database"></span>
           <span class="list-group-item-value">{{$t('signatures.title')}}</span>
         </a>
       </router-link>
