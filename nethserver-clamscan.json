@@ -18,9 +18,5 @@
     "url": "https://github.com/stephdl/nethserver-clamscan",
     "email": "stephdl@de-labrusse.fr"
   },
-  "infoapi": {
-    "path": "nethserver-clamscan/read"
-  },
-  "icon": "logo.png",
-  "external": true
+  "icon": "logo.png"
 }

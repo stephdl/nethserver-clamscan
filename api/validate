@@ -1,0 +1,94 @@
+#!/usr/bin/php
+<?php
+/*
+ * Copyright (C) 2019 Nethesis S.r.l.
+ * http://www.nethesis.it - nethserver@nethesis.it
+ *
+ * This script is part of NethServer.
+ *
+ * NethServer is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License,
+ * or any later version.
+ *
+ * NethServer is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with NethServer.  If not, see COPYING.
+*/
+require_once("/usr/libexec/nethserver/api/lib/Helpers.php");
+$data = readInput();
+$v = new LegacyValidator($data);
+$cmd = $data['action'];
+
+if (($cmd === 'clamscan')|| ($cmd === 'scanFileSystemNow')) {
+    $hours =  $v->createValidator()->memberOf(array('0h','1h','2h', '3h',
+          '4h','5h','6h','7h','8h','9h','10h','11h','12h','13h','14h','15h','16h',
+          '17h','18h','19h','20h','21h','22h','23h'));
+    $weekday = $v->createValidator()->memberOf(array('1d','2d','3d',
+          '4d','5d','6d','7d'));
+    $v->declareParameter('status', Validate::SERVICESTATUS);
+    $v->declareParameter('Quarantine', Validate::SERVICESTATUS);
+
+    $v->declareParameter('FilesystemScan', $v->createValidator()->memberOf('daily','weekly','now'));
+    $v->declareParameter('JobHour', $hours);
+    $v->declareParameter('JobDay', $weekday);
+    $v->declareParameter('MaxScanFile', $v->createValidator()->integer()->greatThan(0));
+
+    $explode = explode("\n", $data['FilesystemScanExclude']);
+    foreach ($explode as $path) {
+        if ($path === '') {
+            continue;
+        }
+        if (! is_dir ($path)) {
+            $v->addValidationError('FilesystemScanExclude','Bad_Path_To_Folders');
+        }
+    }
+    if ($cmd === 'scanFileSystemNow') {
+        if  (! is_dir ($data['FilesystemScanFilesystems'])) {
+            $v->addValidationError('FilesystemScanFilesystems','Bad_Path_To_Scan');
+        }
+    }
+} elseif ($cmd === 'detections') {
+    $v->declareParameter('BlockEncrypted', Validate::SERVICESTATUS);
+    $v->declareParameter('DetectBroken', Validate::SERVICESTATUS);
+    $v->declareParameter('AlgoDetection', Validate::SERVICESTATUS);
+    $v->declareParameter('DetectStructured', Validate::SERVICESTATUS);
+    $v->declareParameter('PartInstersection', Validate::SERVICESTATUS);
+    $v->declareParameter('BlockMacros', Validate::SERVICESTATUS);
+} elseif ($cmd === 'files') {
+    $v->declareParameter('ScanArchive', Validate::SERVICESTATUS);
+    $v->declareParameter('ScanElf', Validate::SERVICESTATUS);
+    $v->declareParameter('ScanHTML', Validate::SERVICESTATUS);
+    $v->declareParameter('ScanHwp', Validate::SERVICESTATUS);
+    $v->declareParameter('ScanMail', Validate::SERVICESTATUS);
+    $v->declareParameter('ScanOle2', Validate::SERVICESTATUS);
+    $v->declareParameter('ScanPdf', Validate::SERVICESTATUS);
+    $v->declareParameter('ScanPe', Validate::SERVICESTATUS);
+    $v->declareParameter('ScanSwf', Validate::SERVICESTATUS);
+    $v->declareParameter('ScanXML', Validate::SERVICESTATUS);
+} elseif ($cmd === 'pua') {
+  $v->declareParameter('DetectPua', Validate::SERVICESTATUS);
+      $pua = array('Packed','PwTool','NetTool','P2P','IRC','RAT','Tool','Spy','Server','Script','');
+      $explode = explode(",", $data['IncludePua']);
+      foreach ($explode as $path) {
+        if (! in_array($path,$pua)) {
+            $v->addValidationError('IncludePua','Bad_PUA');
+        }
+    }
+} elseif ($cmd === 'signatures') {
+    $v->declareParameter('Bytecode', Validate::SERVICESTATUS);
+    $v->declareParameter('BytecodeUnsigned', Validate::SERVICESTATUS);
+    $v->declareParameter('FilesystemScanUnofficialSigs', Validate::SERVICESTATUS);
+    $v->declareParameter('PhishingSigs', Validate::SERVICESTATUS);
+    $v->declareParameter('PhishingScanUrl', Validate::SERVICESTATUS);
+}
+# Validate the input
+if ($v->validate()) {
+    success();
+} else {
+    error($v);
+}

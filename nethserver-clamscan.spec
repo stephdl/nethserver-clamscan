@@ -1,12 +1,14 @@
 Summary: NethServer clamav scanning tools
 %define name nethserver-clamscan
-%define version 0.1.3
+%define version 1.0.0
 %define release 1
 Name: %{name}
 Version: %{version}
 Release: %{release}%{?dist}
 License: GPL
 Source: %{name}-%{version}.tar.gz
+# Execute prep-sources to create Source1
+Source1:        %{name}.tar.gz
 BuildArch: noarch
 URL: http://dev.nethserver.org/projects/nethforge/wiki/%{name}
 BuildRequires: nethserver-devtools
@@ -38,10 +40,12 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p %{buildroot}/usr/share/cockpit/%{name}/
 mkdir -p %{buildroot}/usr/share/cockpit/nethserver/applications/
 mkdir -p %{buildroot}/usr/libexec/nethserver/api/%{name}/
-cp -a manifest.json %{buildroot}/usr/share/cockpit/%{name}/
-cp -a logo.png %{buildroot}/usr/share/cockpit/%{name}/
+
+tar xvf %{SOURCE1} -C %{buildroot}/usr/share/cockpit/%{name}/
+
 cp -a %{name}.json %{buildroot}/usr/share/cockpit/nethserver/applications/
 cp -a api/* %{buildroot}/usr/libexec/nethserver/api/%{name}/
+chmod +x %{buildroot}/usr/libexec/nethserver/api/%{name}/*
 
 %{genfilelist} %{buildroot} \
    --dir  /var/spool/clamav/quarantine 'attr(2755,root,root)' \
@@ -56,8 +60,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{_nseventsdir}/%{name}-update
 %doc COPYING
+%attr(0440,root,root) /etc/sudoers.d/50_nsapi_nethserver_clamscan
 
 %changelog
+* Tue Mar 31 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> 1.0.0-1.ns7
+- cockpit UI !!!!
+
 * Tue Oct 15 2019 Stephane de Labrusse <stephdl@de-labrusse.fr> 0.1.3-1.ns7
 - cockpit. added to legacy apps
 

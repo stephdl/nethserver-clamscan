@@ -1,5 +1,4 @@
-
-#!/bin/bash
+#!/usr/bin/perl
 
 #
 #
@@ -19,11 +18,149 @@
 # along with NethServer.  If not, see COPYING.
 #
 
-input=$(cat)
-action=$(jq -r .action <<<"$input")
-protocol=$(jq -r .location.protocol <<<"$input")
-host=$(jq -r .location.hostname <<<"$input")
+use warnings;
+use strict;
+use JSON;
+use esmith::ConfigDB;
+use NethServer::ApiTools;
+use List::Util qw(min);
 
-if [[ $action == "app-info" ]]; then
-    printf '{"url":"%s"}' "${protocol}//${host}:980/en-US/ClamScan"
-fi 
+my $db = esmith::ConfigDB->open_ro;
+my $dbq = esmith::ConfigDB->open_ro('quarantine') || esmith::ConfigDB->create('quarantine')
+    || die 'cannot open quarantine database';
+
+my $input = NethServer::ApiTools::readInput();
+my $cmd = $input->{'action'} || '';
+my $data;
+my %ret;
+
+
+if ($cmd eq 'configuration') {
+
+my $max = 0;
+my @fileList = glob('/var/lib/clamav/*.{cvd,cld,ndb,hdb,cdb}');
+foreach my $file (@fileList) {
+    my $changeTime = (stat($file))[9];
+    if ($changeTime > $max) {
+        $max = $changeTime;
+    }
+}
+my $alarm;
+my $now = time();
+my $staleSignatures = $now - $max > 3600 * 24 * 3;
+if ($staleSignatures) {
+    $alarm = 'NotUpdated';
+} else {
+    $alarm = 'Updated';
+}
+
+my $timestamp = min($max, $now);
+my $clamscan;
+my $response = `sleep 2;/usr/bin/pgrep clamscan`;
+if ($response) {
+    $clamscan = 'Running';
+} else {
+    $clamscan = 'NotRunning';
+}
+
+
+   my %clamscan = (
+           FilesystemScan => $db->get_prop('clamscan','FilesystemScan'),
+           FilesystemScanExclude => $db->get_prop('clamscan','FilesystemScanExclude'),
+           FilesystemScanFilesystems => $db->get_prop('clamscan','FilesystemScanFilesystems'),
+           JobDay => $db->get_prop('clamscan','JobDay'),
+           JobHour => $db->get_prop('clamscan','JobHour'),
+           MaxScanFile => $db->get_prop('clamscan','MaxScanFile'),
+           Quarantine => $db->get_prop('clamscan','Quarantine'),
+           status => $db->get_prop('clamscan','status'),
+           timestamp => $timestamp,
+           clamscan => $clamscan,
+           alarm => $alarm,
+           OfficialSignatures => $db->get_prop('clamd','OfficialSignatures')
+           );
+
+   $ret{'configuration'} = \%clamscan;
+   print encode_json(\%ret);
+   exit (0);
+} elsif ($cmd eq 'detections') {
+
+   my %clamscan = (
+           AlgoDetection => $db->get_prop('clamscan','AlgoDetection'),
+           BlockEncrypted => $db->get_prop('clamscan','BlockEncrypted'),
+           BlockMacros => $db->get_prop('clamscan','BlockMacros'),
+           DetectBroken => $db->get_prop('clamscan','DetectBroken'),
+           DetectStructured => $db->get_prop('clamscan','DetectStructured'),
+           PartInstersection => $db->get_prop('clamscan','PartInstersection')
+           );
+
+   $ret{'configuration'} = \%clamscan;
+   print encode_json(\%ret);
+   exit (0);
+
+} elsif ($cmd eq 'files') {
+
+   my %clamscan = (
+           ScanArchive => $db->get_prop('clamscan','ScanArchive'),
+           ScanElf => $db->get_prop('clamscan','ScanElf'),
+           ScanHTML => $db->get_prop('clamscan','ScanHTML'),
+           ScanHwp => $db->get_prop('clamscan','ScanHwp'),
+           ScanMail => $db->get_prop('clamscan','ScanMail'),
+           ScanOle2 => $db->get_prop('clamscan','ScanOle2'),
+           ScanPdf => $db->get_prop('clamscan','ScanPdf'),
+           ScanPe => $db->get_prop('clamscan','ScanPe'),
+           ScanSwf => $db->get_prop('clamscan','ScanSwf'),
+           ScanXML => $db->get_prop('clamscan','ScanXML')
+           );
+
+   $ret{'configuration'} = \%clamscan;
+   print encode_json(\%ret);
+   exit (0);
+   
+ } elsif ($cmd eq 'quarantine') {
+   
+    my @Quarantine;
+    foreach my $item ($dbq->get_all_by_prop( type => 'quarantined')) {
+        my $key = $item->key;
+        my $ruleMatch = $item->prop('ruleMatch');
+        push @Quarantine, { path => $key, ruleMatch =>$ruleMatch};
+    }
+    my @Found;
+    foreach my $item ($dbq->get_all_by_prop( type => 'found')) {
+        my $key = $item->key;
+        my $ruleMatch = $item->prop('ruleMatch');
+        push @Found, { path => $key, ruleMatch =>$ruleMatch};
+    }
+
+    print encode_json({"Quarantine"=> [@Quarantine], "Found"=> [@Found]});
+    exit (0);
+
+} elsif ($cmd eq 'signatures') {
+
+   my %clamscan = (
+           Bytecode => $db->get_prop('clamscan','Bytecode'),
+           BytecodeUnsigned => $db->get_prop('clamscan','BytecodeUnsigned'),
+           FilesystemScanUnofficialSigs => $db->get_prop('clamscan','FilesystemScanUnofficialSigs'),
+           PhishingSigs => $db->get_prop('clamscan','PhishingSigs'),
+           PhishingScanUrl => $db->get_prop('clamscan','PhishingScanUrl'),
+           UnofficialSignaturesRating => $db->get_prop('clamd','UnofficialSignaturesRating')
+           );
+
+   $ret{'configuration'} = \%clamscan;
+   print encode_json(\%ret);
+   exit (0);
+
+} elsif ($cmd eq 'pua') {
+
+ my @pua = split(',',$db->get_prop('clamscan','IncludePua'));
+    my %clamscan = (
+            IncludePua => \@pua,
+            DetectPua => $db->get_prop('clamscan','DetectPua')
+            );
+
+    $ret{'configuration'} = \%clamscan;
+    print encode_json(\%ret);
+    exit (0);
+
+} else {
+     NethServer::ApiTools::error();
+}

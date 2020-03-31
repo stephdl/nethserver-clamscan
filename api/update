@@ -1,0 +1,185 @@
+#!/usr/bin/perl
+
+#
+# Copyright (C) 2019 Nethesis S.r.l.
+# http://www.nethesis.it - nethserver@nethesis.it
+#
+# This script is part of NethServer.
+#
+# NethServer is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License,
+# or any later version.
+#
+# NethServer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with NethServer.  If not, see COPYING.
+#
+
+use strict;
+use esmith::ConfigDB;
+use esmith::event;
+use JSON;
+use NethServer::ApiTools;
+my $data = NethServer::ApiTools::readInput();
+my $cdb = esmith::ConfigDB->open() || die("Could not open ConfigDB");
+my $action = $data->{'action'};
+
+
+if ($action eq 'clamscan') {
+    foreach my $prop (qw(
+        FilesystemScan
+        FilesystemScanExclude
+        JobDay
+        JobHour
+        MaxScanFile
+        Quarantine
+        status
+    )) {
+        $cdb->set_prop('clamscan', $prop, $data->{$prop});
+    }
+
+    $data->{reallyWantToMove} = ($data->{Quarantine} eq 'enabled')? 'enabled': 'disabled';
+    $cdb->set_prop('clamscan','reallyWantToMove',$data->{reallyWantToMove});
+
+    esmith::event::set_json_log(1);
+    my $success = esmith::event::event_signal('nethserver-clamscan-save');
+    if($success) {
+        NethServer::ApiTools::success();
+    } else {
+       NethServer::ApiTools::error("EventError", "update_action_failed", 15507655562);
+    }
+} elsif ($action eq 'scanFileSystemNow') {
+      foreach my $prop (qw(
+        FilesystemScanFilesystems
+        FilesystemScan
+        MaxScanFile
+        FilesystemScanExclude
+        Quarantine
+    )) {
+        $cdb->set_prop('clamscan', $prop, $data->{$prop});
+    }
+  
+  $data->{reallyWantToMove} = ($data->{Quarantine} eq 'enabled')? 'enabled': 'disabled';
+  $cdb->set_prop('clamscan','reallyWantToMove',$data->{reallyWantToMove});
+
+      esmith::event::set_json_log(1);
+    my $success = esmith::event::event_signal('nethserver-clamscan-now');
+    if($success) {
+        NethServer::ApiTools::success();
+    } else {
+       NethServer::ApiTools::error("EventError", "clamscan_now_action_failed", 15545655562);
+    }
+} elsif ($action eq 'detections') {
+
+    foreach my $prop (qw(
+        BlockEncrypted
+        DetectBroken
+        AlgoDetection
+        DetectStructured
+        PartInstersection
+        BlockMacros 
+    )) {
+        $cdb->set_prop('clamscan', $prop, $data->{$prop});
+    }
+
+      esmith::event::set_json_log(1);
+    my $success = esmith::event::event_signal('nethserver-clamscan-save');
+    if($success) {
+        NethServer::ApiTools::success();
+    } else {
+       NethServer::ApiTools::error("EventError", "detections_update_failed", 15545655562);
+    }
+} elsif ($action eq 'files') {
+
+    foreach my $prop (qw(
+        ScanArchive
+        ScanElf
+        ScanHTML
+        ScanHwp
+        ScanMail
+        ScanOle2
+        ScanPdf
+        ScanPe
+        ScanSwf
+        ScanXML
+    )) {
+        $cdb->set_prop('clamscan', $prop, $data->{$prop});
+    }
+
+      esmith::event::set_json_log(1);
+    my $success = esmith::event::event_signal('nethserver-clamscan-save');
+    if($success) {
+        NethServer::ApiTools::success();
+    } else {
+       NethServer::ApiTools::error("EventError", "files_update_failed", 15545655562);
+    }
+} elsif ($action eq 'signatures') {
+
+    foreach my $prop (qw(
+        Bytecode
+        BytecodeUnsigned
+        FilesystemScanUnofficialSigs
+        PhishingSigs
+        PhishingScanUrl
+    )) {
+        $cdb->set_prop('clamscan', $prop, $data->{$prop});
+    }
+
+      esmith::event::set_json_log(1);
+    my $success = esmith::event::event_signal('nethserver-clamscan-save');
+    if($success) {
+        NethServer::ApiTools::success();
+    } else {
+       NethServer::ApiTools::error("EventError", "signatures_update_failed", 15545655562);
+    }
+} elsif ($action eq 'pua') {
+
+    foreach my $prop (qw(
+        IncludePua
+        DetectPua
+    )) {
+        $cdb->set_prop('clamscan', $prop, $data->{$prop});
+    }
+
+      esmith::event::set_json_log(1);
+    my $success = esmith::event::event_signal('nethserver-clamscan-save');
+    if($success) {
+        NethServer::ApiTools::success();
+    } else {
+       NethServer::ApiTools::error("EventError", "pua_update_failed", 15545655562);
+    }
+  } elsif ($action eq 'restore') {
+
+          $cdb->set_prop('clamscan', 'restore', $data->{'restore'});
+
+        esmith::event::set_json_log(1);
+      my $success = esmith::event::event_signal('nethserver-clamscan-restore');
+      if($success) {
+          NethServer::ApiTools::success();
+      } else {
+         NethServer::ApiTools::error("EventError", "restore_update_failed", 15545655562);
+      }
+
+} elsif ($action eq 'RestoreAll') {
+      esmith::event::set_json_log(1);
+    my $success = esmith::event::event_signal('nethserver-clamscan-restore-all');
+    if($success) {
+        NethServer::ApiTools::success();
+    } else {
+       NethServer::ApiTools::error("EventError", "restore_all_action_failed", 14545464654562);
+    }
+
+} elsif ($action eq 'FreshClamUpdate') {
+      esmith::event::set_json_log(1);
+    my $success = esmith::event::event_signal('freshclam-update');
+    if($success) {
+        NethServer::ApiTools::success();
+    } else {
+       NethServer::ApiTools::error("EventError", "freshclam-update_action_failed", 14545464654562);
+    }
+}
