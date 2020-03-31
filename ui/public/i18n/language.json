@@ -114,7 +114,6 @@
         "Path_to_suspicious_file":"Path to suspicious files",
         "Matched_rule":"Matched rules",
         "Path_to_quarantined_file":"Original path to quarantined files",
-        "Matched_rule": "Matched rules",
         "RecoverTheseFiles":"Recoverable files",
         "RecoverAll":"Recover all quarantined files",
         "See_files_moved_in_Quarantine":"View moved files to quarantine",
