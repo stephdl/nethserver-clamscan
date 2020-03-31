@@ -1,6 +1,6 @@
 Summary: NethServer clamav scanning tools
 %define name nethserver-clamscan
-%define version 0.1.3
+%define version 1.0.0
 %define release 1
 Name: %{name}
 Version: %{version}
@@ -63,6 +63,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0440,root,root) /etc/sudoers.d/50_nsapi_nethserver_clamscan
 
 %changelog
+* Tue Mar 31 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> 1.0.0-1.ns7
+- cockpit UI !!!!
+
 * Tue Oct 15 2019 Stephane de Labrusse <stephdl@de-labrusse.fr> 0.1.3-1.ns7
 - cockpit. added to legacy apps
 
