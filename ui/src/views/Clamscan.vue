@@ -425,7 +425,7 @@ methods: {
       null,
       function(success) {
         context.loaders = false;
-    
+        context.loadersScan = false;
         // notification
         nethserver.notifications.success = context.$i18n.t(
           "clamscan.settings_updated_ok"
@@ -452,6 +452,7 @@ methods: {
       function(error, data) {
         var errorData = {};
         context.loaders = false;
+        context.loadersScan = false;
         context.errors = context.initErrors();
         try {
           errorData = JSON.parse(data);
@@ -518,6 +519,7 @@ methods: {
       function(error, data) {
         var errorData = {};
         context.loaders = false;
+        context.loadersScan = false;
         context.errors = context.initErrors();
         try {
           errorData = JSON.parse(data);
@@ -574,6 +576,7 @@ methods: {
       function(error, data) {
         var errorData = {};
         context.loaders = false;
+        context.loadersFreshClam = false;
         context.errors = context.initErrors();
         try {
           errorData = JSON.parse(data);
