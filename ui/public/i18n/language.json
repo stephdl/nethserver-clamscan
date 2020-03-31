@@ -109,7 +109,9 @@
         "RecoverTheseFiles":"Recoverable files",
         "RecoverAll":"Recover all quarantined files",
         "See_files_moved_in_Quarantine":"View moved files to quarantine",
-        "See_suspicious_files":"View suspicious files"
+        "See_suspicious_files":"View suspicious files",
+        "no_quarantined_desc":"It seems you have never run a scan or you are free of malwares",
+        "No_quarantined_files": "No infected/suspicious files"
     },
     "signatures":{
         "title": "Signatures",
