@@ -171,8 +171,9 @@
           />
           <span
             v-if="errors.FilesystemScanFilesystems.hasError"
-            class="help-block"
-          >{{errors.FilesystemScanFilesystems.message}}</span>
+            class="help-block">
+            {{$t('validation.validation_failed')}}:
+            {{$t('validation.'+errors.FilesystemScanFilesystems.message)}}
         </div>
         <div class="col-sm-5">
             <span v-if="loadersScan" class="spinner spinner-sm form-spinner-loader adjust-top-loader"></span>

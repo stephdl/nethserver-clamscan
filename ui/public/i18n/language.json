@@ -7,11 +7,10 @@
     "rows_per_page":"Row per page",
     "prev":"Previous",
     "next":"Next",
-    "settings": {
-        "title": "Settings"
-    },
-    "jails":{
-        "title": "Jails"
+    "validation":{
+      "validation_failed": "Validation failed",
+      "Bad_Path_To_Folders": "The exclusion paths to folders are not valid",
+      "Bad_Path_To_Scan": "The path of the folder to scan is not good"
     },
     "about": {
       "title": "About",
