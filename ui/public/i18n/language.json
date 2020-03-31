@@ -27,6 +27,12 @@
       "filter_label": "Regexp filter"
     },
     "clamscan":{
+      "FreshClamUpdate_error": "Error...The database update is not started",
+      "FreshClamUpdate__ok": "The database update has started",
+      "Scan_Now_error": "Error...The scan is not started",
+      "Scan_Now__ok": "The scan is started",
+      "settings_updated_error": "Errors...The settings have not been updated",
+      "settings_updated_ok": "The settings have been updated",
       "title": "Clamscan",
       "status": "Enable file system scan",
       "Scan_files_and_directories_for_viruses":"Scan files and directories to find viruses",
@@ -84,6 +90,8 @@
       "OfficialSignatures_disabled_in_antivirus_module":"The official signatures are disabled"
     },
     "pua":{
+      "settings_updated_error": "Errors...The settings have not been updated",
+      "settings_updated_ok": "The settings have been updated",
       "title": "PUA",
       "PUA_are_applications_that_can_be_used_in_an_unwanted context": "Detect Potentially Unwanted Applications (PUA)",
       "DetectPua": "Enable PUA detection",
@@ -99,6 +107,8 @@
       "Script":"Script"
     },
     "quarantine":{
+        "RecoverAll__ok": "The recover all action is started",
+        "RecoverAll_error": "Error...The recover all action is not started",
         "title": "Quarantine",
         "list_suspicious_files": "List of suspicious files",
         "list_files_moved_to_quarantine":"List of moved files to quarantine",
@@ -114,6 +124,8 @@
         "No_quarantined_files": "No infected/suspicious files"
     },
     "signatures":{
+        "settings_updated_error": "Errors...The settings have not been updated",
+        "settings_updated_ok": "The settings have been updated",
         "title": "Signatures",
         "Virus_Database_might_have_false_positive": "Add more signatures to detect malwares (you might have false positives)",
         "Bytecode": "Bytecode",
@@ -126,6 +138,8 @@
         "PhishingScanUrl": "URL phishing"
     },
     "files":{
+      "settings_updated_error": "Errors...The settings have not been updated",
+      "settings_updated_ok": "The settings have been updated",
       "title": "Files",
       "ScanArchive":"Archives",
       "Scan_inside_these_types_of_files":"Scan inside these types of files",
@@ -140,6 +154,8 @@
       "ScanXML":"Scan xml-based files"
     },
     "detections":{
+      "settings_updated_error": "Errors...The settings have not been updated",
+      "settings_updated_ok": "The settings have been updated",
       "title": "Detections",
       "AlgoDetection":"Heuristic alerts",
       "Scanning_Options_might_give_false_positives":"Scanning Options (might give false positives)",

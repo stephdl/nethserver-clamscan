@@ -270,10 +270,10 @@ methods: {
     
         // notification
         nethserver.notifications.success = context.$i18n.t(
-          "clamscan.settings_updated_ok"
+          "signatures.settings_updated_ok"
         );
         nethserver.notifications.error = context.$i18n.t(
-          "clamscan.settings_updated_error"
+          "signatures.settings_updated_error"
         );
         // update values
         nethserver.exec(

@@ -231,7 +231,7 @@ export default {
     
         // notification
         nethserver.notifications.success = context.$i18n.t(
-          "clamscan.RecoverAll__ok"
+          "quarantine.RecoverAll__ok"
         );
         nethserver.notifications.error = context.$i18n.t(
           "clamscan.RecoverAll_error"

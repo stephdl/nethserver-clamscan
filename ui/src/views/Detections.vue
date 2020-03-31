@@ -292,10 +292,10 @@ methods: {
     
         // notification
         nethserver.notifications.success = context.$i18n.t(
-          "clamscan.settings_updated_ok"
+          "detections.settings_updated_ok"
         );
         nethserver.notifications.error = context.$i18n.t(
-          "clamscan.settings_updated_error"
+          "detections.settings_updated_error"
         );
         // update values
         nethserver.exec(
