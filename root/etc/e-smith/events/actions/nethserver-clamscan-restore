@@ -1,4 +1,6 @@
 #!/usr/bin/perl
+use strict;
+use warnings;
 use esmith::ConfigDB;
 use esmith::DB;
 use File::Copy;
@@ -14,10 +16,14 @@ my $restore = $db->get_prop('clamscan','restore') || '';
 if ($event eq 'nethserver-clamscan-restore-all') {
     my @quarantine = $q->get_all_by_prop(type => 'quarantined');
     foreach my $resto (@quarantine) {
-        my $pathresto= $resto->key;
-        my $pathquarantine = $q->get_prop($pathresto,'quarantine');
-        move("$pathquarantine","$pathresto");
-        $q->get($pathresto)->delete if ( -f $pathresto);
+        my $key= $resto->key;
+        my $pathquarantine = $q->get_prop($key,'quarantine');
+        my $filePath = $q->get_prop($key,'filePath') || '';
+        if ($filePath eq '') {
+            $filePath = $key;
+        }
+        move("$pathquarantine","$filePath");
+        $q->get($key)->delete if ( -f $filePath);
     }
 #   $db->get('clamscan')->delete_prop('restoreAll');
 }
@@ -25,10 +31,20 @@ if ($event eq 'nethserver-clamscan-restore-all') {
 elsif ($event eq 'nethserver-clamscan-restore') {
     exit 0 unless $restore;
     my @restore = split(',',$restore);
+    my @quarantine = $q->get_all_by_prop(type => 'quarantined');
     foreach my $resto (@restore) {
-        my $pathquarantine = $q->get_prop($resto,'quarantine');
-        move("$pathquarantine","$resto");
-        $q->get($resto)->delete if ($q->get($resto) && (-f $resto));
+        foreach my $r (@quarantine) {
+            my $key= $r->key;
+            my $pathquarantine = $q->get_prop($key,'quarantine');
+            my $filePath = $q->get_prop($key,'filePath') || '';
+            if ($filePath eq '') {
+                $filePath = $key;
+            }
+            if ($resto eq $filePath) {
+                move("$pathquarantine","$resto");
+                $q->get($key)->delete if ($q->get($key) && (-f $resto));
+            }
+        }
     }
     $db->get('clamscan')->delete_prop('restore');
 }
