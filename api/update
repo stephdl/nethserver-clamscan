@@ -60,6 +60,7 @@ if ($action eq 'clamscan') {
         MaxScanFile
         FilesystemScanExclude
         Quarantine
+        status
     )) {
         $cdb->set_prop('clamscan', $prop, $data->{$prop});
     }
