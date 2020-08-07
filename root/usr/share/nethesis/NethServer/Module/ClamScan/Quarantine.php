@@ -21,7 +21,13 @@ class Quarantine extends \Nethgui\Controller\AbstractController
 
     private function readModules()
     {
-        $values = (array_keys ($this->getPlatform()->getDatabase('quarantine')->getAll('quarantined')));
+        $values = array();
+        foreach ($this->getPlatform()->getDatabase('quarantine')->getAll('quarantined') as $key=>$props) {
+            if (!$props['filePath']) {
+                $props['filePath'] = $key;
+            }
+            array_push ($values, $props['filePath']);
+        }
         return $values;
     }
 

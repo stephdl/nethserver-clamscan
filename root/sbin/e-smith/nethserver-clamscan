@@ -198,12 +198,15 @@ foreach my $test (@report)
          my $t1 = $1;
          my $t2 = $2;
          $t1 =~ s/:$//g;
+         my $ID = $t1;
+         $ID =~ s/=//g;
 
          #we don't want injection
          my $protect = "[\'\(\)\<\>\"\|]";
          next if ($t1 =~ /$protect/);
          next if ($t2 =~ /$protect/);
-         $q->set_prop($t1,'ruleMatch',$t2,type => 'found');
+         $q->set_prop($ID,'ruleMatch',$t2,type => 'found');
+         $q->set_prop($ID,'filePath',$t1);
     }
     if ( $test =~ /(.*)(: moved to )(.*)/)
     {
@@ -211,6 +214,8 @@ foreach my $test (@report)
          my $t1 = $1;
          $t3 =~ s/^'//;
          $t3 =~ s/'$//;
+         my $ID = $t1;
+         $ID =~ s/=//g;
 
          #we don't want injection
          my $protect = "[\'\(\)\<\>\"\|]";
@@ -218,12 +223,13 @@ foreach my $test (@report)
          next if ($t3 =~ /$protect/);
          # if we find it inside the db (most probable), we retrieve the matched rule
          # and we store it again with quarantined type
-         if ($q->get($t1)) {
-             my $rule = $q->get_prop_and_delete ($t1, 'ruleMatch');
-             my $key = $q->get($t1);
+         if ($q->get_prop($ID,'filePath')) {
+             my $rule = $q->get_prop_and_delete ($ID, 'ruleMatch');
+             my $key = $q->get($ID);
              $key->delete;
-             $q->set_prop($t1,'quarantine',$t3,type => 'quarantined');
-             $q->set_prop($t1,'ruleMatch',$rule);
+             $q->set_prop($ID,'quarantine',$t3,type => 'quarantined');
+             $q->set_prop($ID,'ruleMatch',$rule);
+             $q->set_prop($ID,'filePath',$t1);
          }
     }
 }

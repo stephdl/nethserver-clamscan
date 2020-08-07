@@ -185,7 +185,7 @@ export default {
             ["nethserver-clamscan/update"],
             settingsObj,
             function(stream) {
-              console.info("fail2ban", stream);
+              console.info("Clamscan", stream);
             },
             function(success) {
               context.getQuarantined();
