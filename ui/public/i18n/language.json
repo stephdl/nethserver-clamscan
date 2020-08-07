@@ -107,7 +107,7 @@
     },
     "quarantine":{
         "RecoverAll__ok": "The recover all action is started",
-        "RecoverAll_error": "Error...The recover all action is not started",
+        "RecoverAll_error": "Error...There is an error for the recover all action",
         "title": "Quarantine",
         "list_suspicious_files": "List of suspicious files",
         "list_files_moved_to_quarantine":"List of moved files to quarantine",
@@ -119,7 +119,10 @@
         "See_files_moved_in_Quarantine":"View moved files to quarantine",
         "See_suspicious_files":"View suspicious files",
         "no_quarantined_desc":"It seems you have never run a scan or you are free of malwares",
-        "No_quarantined_files": "No infected/suspicious files"
+        "No_quarantined_files": "No infected/suspicious files",
+        "Recover": "Recover",
+        "File_restored": "The file has been restored",
+        "File_restoration_Error": "There is a file restoration error"
     },
     "signatures":{
         "settings_updated_error": "Errors...The settings have not been updated",
