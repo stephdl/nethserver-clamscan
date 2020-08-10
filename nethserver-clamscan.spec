@@ -1,6 +1,6 @@
 Summary: NethServer clamav scanning tools
 %define name nethserver-clamscan
-%define version 1.0.1
+%define version 1.0.2
 %define release 1
 Name: %{name}
 Version: %{version}
@@ -63,6 +63,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0440,root,root) /etc/sudoers.d/50_nsapi_nethserver_clamscan
 
 %changelog
+* Mon Aug 10 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> 1.0.2-1.ns7
+- Split restore array with ,;,;
+
 * Fri Aug 7 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> 1.0.1-1.ns7
 - Forbid the use of `=` in esmith key
 
