@@ -30,7 +30,7 @@ if ($event eq 'nethserver-clamscan-restore-all') {
 
 elsif ($event eq 'nethserver-clamscan-restore') {
     exit 0 unless $restore;
-    my @restore = split(',',$restore);
+    my @restore = split(',;,;',$restore);
     my @quarantine = $q->get_all_by_prop(type => 'quarantined');
     foreach my $resto (@restore) {
         foreach my $r (@quarantine) {

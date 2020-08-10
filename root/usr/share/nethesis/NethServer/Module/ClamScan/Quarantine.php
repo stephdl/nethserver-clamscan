@@ -16,7 +16,7 @@ class Quarantine extends \Nethgui\Controller\AbstractController
     {
         parent::initialize();
 //        $this->declareParameter('restoreAll', Validate::SERVICESTATUS, array('configuration', 'clamscan', 'restoreAll'));
-        $this->declareParameter('restore', Validate::ANYTHING, array('configuration', 'clamscan', 'restore', ','));
+        $this->declareParameter('restore', Validate::ANYTHING, array('configuration', 'clamscan', 'restore', ',;,;'));
     }
 
     private function readModules()
