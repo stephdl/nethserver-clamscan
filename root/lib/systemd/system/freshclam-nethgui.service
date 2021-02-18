@@ -1,7 +1,0 @@
-[Unit]
-Description=Freshclam Update  in nethgui
-Requisite=httpd-admin.service
-
-[Service]
-Type=simple
-ExecStart=/usr/share/clamav/freshclam-sleep xnow;/usr/bin/clamav-unofficial-sigs.sh

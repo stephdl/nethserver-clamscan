@@ -1,7 +1,0 @@
-[Unit]
-Description=Start a scan in nethgui
-Requisite=httpd-admin.service
-
-[Service]
-Type=simple
-ExecStart=/sbin/e-smith/nethserver-clamscan

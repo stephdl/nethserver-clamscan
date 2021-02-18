@@ -1,1 +1,1 @@
-/usr/bin/systemctl start clamscan-nethgui.service
+/sbin/e-smith/nethserver-clamscan
