@@ -16,6 +16,10 @@ $event = 'nethserver-clamscan-restore';
 event_actions($event,
 'nethserver-clamscan-restore' => '10');
 
+$event = 'nethserver-clamscan-restore-and-exclude';
+event_actions($event,
+'nethserver-clamscan-restore' => '10');
+
 $event = 'nethserver-clamscan-restore-all';
 event_actions($event,
 'nethserver-clamscan-restore' => '10');
