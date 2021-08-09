@@ -121,8 +121,12 @@
         "no_quarantined_desc":"It seems you have never run a scan or you are free of malwares",
         "No_quarantined_files": "No infected/suspicious files",
         "Recover": "Recover",
+        "Exclude":"Exclude",
+        "ExcludeTheseFiles":"Restore and exclude files",
         "File_restored": "The file has been restored",
-        "File_restoration_Error": "There is a file restoration error"
+        "File_restoration_Error": "There is a file restoration error",
+        "File_restored_and_excluded": "The file has been restored and added to the exclusion list",
+        "File_restoration_and_exclusion_Error": "There is a file restoration and exclusion error"
     },
     "signatures":{
         "settings_updated_error": "Errors...The settings have not been updated",
