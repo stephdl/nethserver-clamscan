@@ -206,7 +206,7 @@
           <textarea rows="5" v-model="configuration.FilesystemScanExclude" class="form-control"></textarea>
           <span v-if="errors.FilesystemScanExclude.hasError" class="help-block">
             {{$t('validation.validation_failed')}}:
-            {{$t('validation.'+errors.FilesystemScanExclude.message)}}
+            {{$t('validation.'+errors.FilesystemScanExclude.message)}}: {{errors.FilesystemScanExclude.value}}
           </span>
         </div>
       </div>
@@ -356,7 +356,8 @@ methods: {
       },
       FilesystemScanExclude:{
         hasError: false,
-        message: ""
+        message: "",
+        value:""
       },
       Quarantine:{
         hasError: false,

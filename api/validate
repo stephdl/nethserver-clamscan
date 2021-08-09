@@ -43,8 +43,8 @@ if (($cmd === 'clamscan')|| ($cmd === 'scanFileSystemNow')) {
         if ($path === '') {
             continue;
         }
-        if (! is_dir ($path)) {
-            $v->addValidationError('FilesystemScanExclude','Bad_Path_To_Folders');
+        if (! file_exists ($path)) {
+            $v->addValidationError('FilesystemScanExclude','Bad_Path_To_Folders', $path);
         }
     }
     if ($cmd === 'scanFileSystemNow') {
