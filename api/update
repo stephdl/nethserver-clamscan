@@ -154,17 +154,28 @@ if ($action eq 'clamscan') {
     } else {
        NethServer::ApiTools::error("EventError", "pua_update_failed", 15545655562);
     }
-  } elsif ($action eq 'restore') {
+} elsif ($action eq 'restore') {
 
-          $cdb->set_prop('clamscan', 'restore', $data->{'restore'});
+    $cdb->set_prop('clamscan', 'restore', $data->{'restore'});
 
-        esmith::event::set_json_log(1);
-      my $success = esmith::event::event_signal('nethserver-clamscan-restore');
-      if($success) {
-          NethServer::ApiTools::success();
-      } else {
-         NethServer::ApiTools::error("EventError", "restore_update_failed", 15545655562);
-      }
+    esmith::event::set_json_log(1);
+    my $success = esmith::event::event_signal('nethserver-clamscan-restore');
+    if($success) {
+        NethServer::ApiTools::success();
+    } else {
+        NethServer::ApiTools::error("EventError", "restore_update_failed", 15545655562);
+    }
+} elsif ($action eq 'exclude') {
+
+    $cdb->set_prop('clamscan', 'restore', $data->{'restore'});
+
+    esmith::event::set_json_log(1);
+    my $success = esmith::event::event_signal('nethserver-clamscan-restore-and-exclude');
+    if($success) {
+        NethServer::ApiTools::success();
+    } else {
+        NethServer::ApiTools::error("EventError", "restore_and_exclusion_update_failed", 15545655562);
+    }
 
 } elsif ($action eq 'RestoreAll') {
       esmith::event::set_json_log(1);

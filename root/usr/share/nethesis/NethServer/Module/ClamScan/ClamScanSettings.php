@@ -113,6 +113,33 @@ class ClamScanSettings extends \Nethgui\Controller\AbstractController
                 '23h' => $view->translate('${0} Hour', array(23)),
         ));
     }
+
+    public static function splitLines($text)
+    {
+        return array_filter(preg_split("/[,;\s]+/", $text));
+    }
+
+    public function readFilesystemScanExclude($dbList)
+    {
+        return implode("\r\n", explode(',' ,$dbList));
+    }
+
+    public function writeFilesystemScanExclude($viewText)
+    {
+        return array(implode(',', self::splitLines($viewText)));
+    }
+
+    public function validate(\Nethgui\Controller\ValidationReportInterface $report)
+    {
+        parent::validate($report);
+        foreach (self::splitLines($this->parameters['FilesystemScanExclude']) as $path) {
+            if ( ! file_exists ($path)) {
+                $report->addValidationErrorMessage($this, 'FilesystemScanExclude', 'Not a good path', array($v));
+                break;
+            }
+        }
+    }
+
     public function process()
     {
         parent::process();

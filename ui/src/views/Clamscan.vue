@@ -206,7 +206,7 @@
           <textarea rows="5" v-model="configuration.FilesystemScanExclude" class="form-control"></textarea>
           <span v-if="errors.FilesystemScanExclude.hasError" class="help-block">
             {{$t('validation.validation_failed')}}:
-            {{$t('validation.'+errors.FilesystemScanExclude.message)}}
+            {{$t('validation.'+errors.FilesystemScanExclude.message)}}: {{errors.FilesystemScanExclude.value}}
           </span>
         </div>
       </div>
@@ -356,7 +356,8 @@ methods: {
       },
       FilesystemScanExclude:{
         hasError: false,
-        message: ""
+        message: "",
+        value:""
       },
       Quarantine:{
         hasError: false,
@@ -384,6 +385,7 @@ methods: {
         context.configuration = success.configuration;
         context.configuration.status = success.configuration.status == "enabled";
         context.configuration.Quarantine = success.configuration.Quarantine == "enabled";
+        context.configuration.FilesystemScanExclude = success.configuration.FilesystemScanExclude.split(",").join("\n")
 
         context.view.isLoaded = true;
       },
@@ -415,7 +417,7 @@ methods: {
       JobHour: context.configuration.JobHour,
       JobDay: context.configuration.JobDay,
       MaxScanFile: context.configuration.MaxScanFile,
-      FilesystemScanExclude: context.configuration.FilesystemScanExclude
+      FilesystemScanExclude: context.configuration.FilesystemScanExclude.split("\n").join(",")
     //  Users: context.configuration.Users.split("\n").join(","),
     };
     context.loaders = true;
@@ -483,7 +485,7 @@ methods: {
       FilesystemScanFilesystems: context.configuration.FilesystemScanFilesystems,
       FilesystemScan: context.configuration.FilesystemScan,
       MaxScanFile: context.configuration.MaxScanFile,
-      FilesystemScanExclude: context.configuration.FilesystemScanExclude
+      FilesystemScanExclude: context.configuration.FilesystemScanExclude.split("\n").join(",")
     };
     context.loadersScan = true;
     context.errors = context.initErrors();

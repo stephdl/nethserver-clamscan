@@ -48,3 +48,26 @@ elsif ($event eq 'nethserver-clamscan-restore') {
     }
     $db->get('clamscan')->delete_prop('restore');
 }
+elsif ($event eq 'nethserver-clamscan-restore-and-exclude') {
+    exit 0 unless $restore;
+    my @restore = split(',;,;',$restore);
+    my @quarantine = $q->get_all_by_prop(type => 'quarantined');
+    my $exclusionList = $db->get_prop('clamscan','FilesystemScanExclude') || '';
+    foreach my $resto (@restore) {
+        foreach my $r (@quarantine) {
+            my $key= $r->key;
+            my $pathquarantine = $q->get_prop($key,'quarantine');
+            my $filePath = $q->get_prop($key,'filePath') || '';
+            if ($filePath eq '') {
+                $filePath = $key;
+            }
+            if ($resto eq $filePath) {
+                move("$pathquarantine","$resto");
+                $q->get($key)->delete if ($q->get($key) && (-f $resto));
+                $exclusionList .= ",$resto";
+                $db->set_prop('clamscan','FilesystemScanExclude',$exclusionList);
+            }
+        }
+    }
+    $db->get('clamscan')->delete_prop('restore');
+}

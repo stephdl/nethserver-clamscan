@@ -38,13 +38,13 @@ if (($cmd === 'clamscan')|| ($cmd === 'scanFileSystemNow')) {
     $v->declareParameter('JobDay', $weekday);
     $v->declareParameter('MaxScanFile', $v->createValidator()->integer()->greatThan(0));
 
-    $explode = explode("\n", $data['FilesystemScanExclude']);
+    $explode = explode(",", $data['FilesystemScanExclude']);
     foreach ($explode as $path) {
         if ($path === '') {
             continue;
         }
-        if (! is_dir ($path)) {
-            $v->addValidationError('FilesystemScanExclude','Bad_Path_To_Folders');
+        if (! file_exists ($path)) {
+            $v->addValidationError('FilesystemScanExclude','Bad_Path_To_Folders', $path);
         }
     }
     if ($cmd === 'scanFileSystemNow') {

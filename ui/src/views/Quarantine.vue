@@ -58,6 +58,17 @@
               {{$t('quarantine.Recover') }}
             </button>
           </td>
+          <td>
+            <button v-if="!view.Found"
+              @click="exclude( props.row.path )"
+              class="btn btn-default button-minimum"
+              >
+              <span
+              :class="['fa', 'fa-unlock', 'span-right-margin']"
+              ></span>
+              {{$t('quarantine.Exclude') }}
+            </button>
+          </td>
         </template>
         </vue-good-table>
       </div>
@@ -95,6 +106,12 @@ export default {
       },
       {
           label: this.$i18n.t("quarantine.RecoverTheseFiles"),
+          field: "",
+          filterable: true,
+          sortable: false
+      },
+      {
+          label: this.$i18n.t("quarantine.ExcludeTheseFiles"),
           field: "",
           filterable: true,
           sortable: false
@@ -178,6 +195,65 @@ export default {
           );
           nethserver.notifications.error = context.$i18n.t(
             "quarantine.File_restoration_Error"
+          );
+    
+          // update values
+          nethserver.exec(
+            ["nethserver-clamscan/update"],
+            settingsObj,
+            function(stream) {
+              console.info("Clamscan", stream);
+            },
+            function(success) {
+              context.getQuarantined();
+            },
+            function(error, data) {
+              console.error(error, data);
+            },
+            true //sudo
+          );
+        },
+        function(error, data) {
+          var errorData = {};
+          context.loaders = false;
+          context.errors = context.initErrors();
+    
+          try {
+            errorData = JSON.parse(data);
+            for (var e in errorData.attributes) {
+              var attr = errorData.attributes[e];
+              context.errors[attr.parameter].hasError = true;
+              context.errors[attr.parameter].message = attr.error;
+            }
+          } catch (e) {
+            console.error(e);
+          }
+      },
+        true //sudo
+    );
+  },
+  exclude(type) {
+      var context = this;
+      var settingsObj = {
+        action: "exclude",
+         restore: type
+      };
+      console.log(type);
+      context.loaders = true;
+     context.errors = context.initErrors();
+      nethserver.exec(
+        ["nethserver-clamscan/validate"],
+        settingsObj,
+        null,
+        function(success) {
+          context.loaders = false;
+    
+          // notification
+          nethserver.notifications.success = context.$i18n.t(
+            "quarantine.File_restored_and_excluded"
+          );
+          nethserver.notifications.error = context.$i18n.t(
+            "quarantine.File_restoration_and_exclusion_Error"
           );
     
           // update values
