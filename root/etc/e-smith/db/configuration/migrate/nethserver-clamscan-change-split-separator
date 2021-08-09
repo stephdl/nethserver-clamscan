@@ -1,0 +1,10 @@
+{
+    use esmith::ConfigDB;
+    my $db = esmith::ConfigDB->open();
+    my $FilesystemScanExclude = $db->get_prop('clamscan','FilesystemScanExclude') || '';
+    if ($FilesystemScanExclude =~ /\n/g ) {
+        $FilesystemScanExclude =~ s/\n/,/g;
+        $db->set_prop('clamscan','FilesystemScanExclude',$FilesystemScanExclude);
+    }
+    '';
+}
