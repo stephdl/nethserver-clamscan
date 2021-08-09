@@ -59,7 +59,7 @@ my $quarantine_dir = $db->get_prop("clamscan", "QuarantineDirectory") ||
 		"/var/spool/clamav/quarantine";
 
 #exclusion
-my @exclude = split /\s+/, ($db->get_prop("clamscan", "FilesystemScanExclude") || "");
+my @exclude = split /,/, ($db->get_prop("clamscan", "FilesystemScanExclude") || "");
 push @exclude, $quarantine_dir;
 foreach my $exclude (@exclude) {
     if ( -d $exclude ) {

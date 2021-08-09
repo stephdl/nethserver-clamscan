@@ -38,7 +38,7 @@ if (($cmd === 'clamscan')|| ($cmd === 'scanFileSystemNow')) {
     $v->declareParameter('JobDay', $weekday);
     $v->declareParameter('MaxScanFile', $v->createValidator()->integer()->greatThan(0));
 
-    $explode = explode("\n", $data['FilesystemScanExclude']);
+    $explode = explode(",", $data['FilesystemScanExclude']);
     foreach ($explode as $path) {
         if ($path === '') {
             continue;

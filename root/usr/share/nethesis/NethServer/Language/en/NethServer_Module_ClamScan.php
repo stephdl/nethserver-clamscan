@@ -87,3 +87,4 @@ $L['NotRunning'] = 'Stopped';
 $L['Running'] = 'Running';
 $L['FilesystemScan_now_label'] = 'Perform a scan now';
 $L['FilesystemScanFilesystems_label'] = 'Folder to scan';
+$L['Not a good path'] = 'Not a good file or folder path';
